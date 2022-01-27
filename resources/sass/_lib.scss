@@ -1,0 +1,18 @@
+$primary-color:#Fdff83;
+$self_color:#d4cced;
+$future_color:#30e3df;
+
+.primary_color{
+    background-color: $primary-color;
+}
+.future_color{
+    background-color: $future_color;
+}
+.self_color{
+    background-color: $self_color;
+}
+
+a:hover{
+    color: #000;
+    text-decoration: none;
+}

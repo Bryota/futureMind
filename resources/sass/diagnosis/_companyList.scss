@@ -1,0 +1,66 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+
+.companyList_wrap {
+    margin-top: 13vh;
+    .companyList_title {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .future_title {
+        text-shadow: 2px 2px 1px $future_color;
+    }
+    .self_title {
+        text-shadow: 2px 2px 1px $self_color;
+    }
+    .primary_title {
+        text-shadow: 2px 2px 1px $primary-color;
+    }
+    .companies {
+        margin-top: 30px;
+        .col-md-4 {
+            text-align: center;
+        }
+        .company_logo {
+            display: block;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .future_border {
+            border: 1px solid $future_color;
+        }
+        .self_border {
+            border: 1px solid $self_color;
+        }
+        .primary_border {
+            border: 1px solid $primary-color;
+        }
+        .company_name {
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+        .future_btn {
+            background-color: $future_color;
+            box-shadow: 0px 8px 4px #27e9d1;
+        }
+        .pagination {
+            display: block !important;
+        }
+        .page-item {
+            display: inline-block;
+        }
+        .page-link {
+            color: #000 !important;
+        }
+        .page-item.active .page-link {
+            background-color: $primary-color;
+            border-color: $primary-color;
+        }
+    }
+}

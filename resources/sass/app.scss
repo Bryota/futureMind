@@ -1,0 +1,38 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+$fa-font-path: "../webfonts";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+//pages
+@import "reset";
+@import "lib";
+@import "responsive";
+@import "header";
+@import "diagnosis/top";
+@import "diagnosis/diagnosis";
+@import "diagnosis/result";
+@import "diagnosis/companyList";
+@import "diagnosis/singleCompany";
+@import "register";
+@import "login";
+@import "user/profile";
+@import "user/about";
+@import "company/login";
+@import "company/register";
+@import "company/profile";
+@import "company/diagnosis";
+@import "search/search";
+@import "search/result";
+@import "chat/chat";
+@import "error";

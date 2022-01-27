@@ -1,0 +1,61 @@
+.companyProfile_title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.companyProfile_text {
+    text-align: center;
+    font-size: 15px;
+    @include sp {
+        margin-bottom: 30px;
+    }
+}
+
+.singleCompany_content {
+    .company_chart {
+        background-color: #fff;
+        padding: 40px;
+        @include tab_iPadPro {
+            margin-bottom: 30px;
+        }
+    }
+
+    .toEdit_btn {
+        display: block;
+        width: 20%;
+        text-align: center;
+        border-radius: 30px;
+        border: 1px solid #000;
+        background-color: #fff;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        margin: 10px auto;
+        @include tab_iPadPro {
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        @include sp {
+            width: 70%;
+        }
+    }
+
+    .company_comment {
+        white-space: pre-wrap;
+    }
+
+    .company_details {
+        @include sp {
+            margin-top: 30px;
+        }
+    }
+
+    .toEdit_btn:active {
+        box-shadow: none;
+        transform: translateY(4px);
+    }
+
+    // edit
+    .company_edit {
+        line-height: 25px !important;
+    }
+}

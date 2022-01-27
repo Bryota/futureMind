@@ -1,0 +1,19 @@
+// result page
+$('.self_tab').on('click',function(){
+    $('.result_tab').removeClass('checked')
+    $('.self_tab').addClass('checked')
+    $('.content_wrap').removeClass('active')
+    $('.self_text').addClass('active')
+})
+$('.future_tab').on('click',function(){
+    $('.result_tab').removeClass('checked')
+    $('.future_tab').addClass('checked')
+    $('.content_wrap').removeClass('active')
+    $('.future_text').addClass('active')
+})
+$('.want_tab').on('click',function(){
+    $('.result_tab').removeClass('checked')
+    $('.want_tab').addClass('checked')
+    $('.content_wrap').removeClass('active')
+    $('.gap_text').addClass('active')
+})

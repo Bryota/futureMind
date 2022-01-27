@@ -1,0 +1,112 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+
+.result_wrap {
+    margin-top: 13vh;
+    .diagnosis_title {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .primary_title {
+        text-shadow: 2px 2px 1px $primary-color;
+    }
+
+    .result_content {
+        margin-top: 15px;
+        display: flex;
+
+        .result_chart {
+            background-color: #fff;
+            width: 50%;
+            height: 100%;
+            padding: 50px 30px;
+            @include tab_iPadPro {
+                width: 100%;
+            }
+        }
+        .result_text {
+            background-color: #fff;
+            margin-left: 30px;
+            width: 45%;
+            height: auto;
+            @include tab_iPadPro {
+                width: 100%;
+                margin: 30px 0 0 0;
+            }
+
+            .comment_type {
+                font-weight: bold;
+                margin-top: 20px;
+            }
+        }
+        .result_tabs {
+            display: flex;
+            width: 100%;
+            .result_tab {
+                width: 33.3%;
+                padding: 10px 15px;
+                border: 1px solid #000;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                text-align: center;
+                cursor: pointer;
+            }
+            .self_tab {
+                background-color: $self_color;
+            }
+            .future_tab {
+                background-color: $future_color;
+            }
+            .want_tab {
+                background-color: $primary-color;
+            }
+            .checked {
+                box-shadow: none;
+            }
+        }
+        .text_wrap {
+            padding: 15px 25px;
+            .text_title {
+                font-size: 25px;
+            }
+            .text_content {
+                font-size: 15px;
+                line-height: 30px;
+            }
+        }
+        .content_wrap {
+            display: none;
+        }
+        .self_text.active,
+        .future_text.active,
+        .gap_text.active {
+            display: block;
+        }
+        .result_btn_wrap {
+            text-align: center;
+            .result_btn {
+                width: 50%;
+                padding: 15px 10px;
+                font-size: 18px;
+                margin: 30px auto;
+                display: block;
+                border-radius: 30px;
+                text-align: center;
+            }
+            .result_btn:active {
+                transform: translateY(8px);
+                box-shadow: none;
+            }
+            .future_btn {
+                background-color: $future_color;
+                box-shadow: 0px 8px 4px #27e9d1;
+            }
+            .self_btn {
+                background-color: $self_color;
+                box-shadow: 0px 8px 4px #bbacec;
+            }
+        }
+    }
+}

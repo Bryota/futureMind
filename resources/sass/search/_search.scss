@@ -1,0 +1,108 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+
+.search_wrap {
+    margin-top: 13vh;
+    .search_title {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .primary_title {
+        text-shadow: 2px 2px 1px $primary_color;
+    }
+    .search_form {
+        background-color: #fff;
+        border-radius: 30px;
+        position: fixed;
+        left: 0%;
+        right: 0%;
+        margin: 20px auto 0;
+        padding: 20px 50px;
+        width: 90%;
+        height: 450px;
+        @include tab_iPadPro {
+            height: 750px;
+        }
+        @include sp {
+            height: auto;
+            position: relative;
+            margin-bottom: 30px;
+        }
+    }
+    .form_item_wrap {
+        @include sp {
+            margin-bottom: 20px;
+            text-align: left !important;
+        }
+    }
+    .form_item {
+        font-size: 25px;
+    }
+    select {
+        -moz-appearance: menulist;
+        -webkit-appearance: menulist;
+        padding: 5px 15px;
+        border: 1px solid #000;
+    }
+    .range_label {
+        margin-top: 10px;
+    }
+    .range {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 10px;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            background-color: $primary-color;
+            border: 1px solid #000;
+            cursor: pointer;
+            box-shadow: -320px 0 0 320px $primary-color;
+            width: 15px;
+            height: 15px;
+            color: $primary-color;
+            border-radius: 50%;
+        }
+        &::-ms-fill-lower {
+            background-color: $primary-color;
+        }
+        &::-moz-range-thumb {
+            background-color: $primary-color;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+    }
+    .search_btn_wrap {
+        text-align: center;
+        .search_btn {
+            width: 30%;
+            padding: 15px 10px;
+            font-size: 18px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 30px;
+            text-align: center;
+            background-color: $primary-color;
+            box-shadow: 0px 8px 4px rgba(209, 211, 39, 0.25);
+            @include tab_iPadPro {
+                margin-top: 35px;
+            }
+            @include sp {
+                width: 100%;
+            }
+        }
+        .search_btn:active {
+            transform: translateY(8px);
+            box-shadow: none;
+            outline: none !important;
+        }
+    }
+}

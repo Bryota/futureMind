@@ -1,0 +1,96 @@
+.singleCompany_wrap {
+    margin-top: 14vh;
+    @include tab_iPadPro {
+        margin-top: 10vh;
+    }
+    @include sp {
+        margin-top: 20vh;
+    }
+    .singleCompany_title {
+        align-items: center;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .singleCompany_content {
+        margin-top: 30px;
+        .company_details {
+            @include tab_iPadPro {
+                margin-bottom: 65px;
+            }
+        }
+        .analysis_title {
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+        .analysis_content {
+            padding: 10px 20px;
+            font-size: 18px;
+            line-height: 30px;
+            background-color: #fff;
+        }
+        .company_logo {
+            width: 150px;
+            height: 150px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            background-color: #fff;
+            margin: 0 auto 10px;
+        }
+        .future_logo {
+            border: 1px solid $primary-color;
+        }
+        .self_logo {
+            border: 1px solid $self-color;
+        }
+        .company_info {
+            padding: 20px;
+            line-height: 30px;
+            background-color: #fff;
+        }
+    }
+    .likes_btn_wrap {
+        text-align: center;
+        .likes_btn {
+            width: 15%;
+            padding: 10px 5px;
+            font-size: 18px;
+            margin: 10px auto 0;
+            display: block;
+            border-radius: 30px;
+            text-align: center;
+            background-color: $primary-color;
+            box-shadow: 0px 8px 4px rgba(209, 211, 39, 0.25);
+            @include tab_iPadPro {
+                width: 85%;
+                margin: 80px auto;
+            }
+        }
+        .likes_btn span {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .likes_btn a {
+            display: block;
+        }
+        .liked_btn {
+            background-color: #c5c5a1bb;
+            box-shadow: none !important;
+            cursor: default;
+        }
+        .likes_btn:active {
+            transform: translateY(8px);
+            box-shadow: none;
+            outline: none !important;
+        }
+        .liked_btn:active {
+            transform: translateY(0px);
+            box-shadow: none;
+            outline: none !important;
+        }
+    }
+}

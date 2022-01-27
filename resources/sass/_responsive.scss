@@ -1,0 +1,17 @@
+@mixin tab_iPadPro($width: 1025px) {
+    @media only screen and (max-width: $width) {
+        @content;
+    }
+}
+
+@mixin tab_iPad($width: 768px) {
+    @media only screen and (max-width: $width) {
+        @content;
+    }
+}
+
+@mixin sp($width: 414px) {
+    @media only screen and (max-width: $width) {
+        @content;
+    }
+}

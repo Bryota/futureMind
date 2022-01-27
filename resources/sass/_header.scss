@@ -1,0 +1,99 @@
+header {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px #f3f3f3;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    .container {
+        @include tab_iPadPro {
+            max-width: 100%;
+        }
+    }
+
+    .header_logo {
+        padding: 20px;
+        font-size: 40px;
+        line-height: 40px;
+        h1 {
+            text-shadow: 0px 15px 4px rgba(0, 0, 0, 0.25);
+            @include tab_iPad {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    .header_nav {
+        padding: 20px;
+        ul {
+            display: flex;
+            justify-content: space-between;
+            line-height: 40px;
+            font-size: 20px;
+            @include tab_iPadPro {
+                font-size: 16px;
+            }
+            a:hover {
+                color: $primary-color;
+                text-decoration: none;
+            }
+        }
+        @include tab_iPad {
+            display: none;
+        }
+    }
+
+    .header_icon {
+        padding: 20px;
+        font-size: 40px;
+        line-height: 40px;
+        text-align: center;
+        a:hover {
+            color: $primary-color;
+        }
+        @include tab_iPad {
+            display: none;
+        }
+    }
+
+    .header_ham {
+        display: none;
+        line-height: 80px;
+        text-align: right;
+        @include tab_iPad {
+            display: block;
+        }
+        .hum_close {
+            display: none;
+        }
+        span {
+            display: none;
+            @include tab_iPad {
+                display: inline;
+                text-shadow: none !important;
+                font-size: 35px;
+            }
+        }
+    }
+
+    .hum_wrap {
+        display: none;
+
+        @include tab_iPadPro {
+            background-color: rgba(253, 255, 131, 0.5);
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav {
+            @include tab_iPadPro {
+                width: 55%;
+                margin: 0 auto;
+                text-align: left;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+    }
+}

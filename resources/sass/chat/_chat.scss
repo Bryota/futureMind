@@ -1,0 +1,128 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+
+.chat_wrap {
+    margin-top: 13vh;
+
+    .chat_title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .chat_user {
+        position: fixed;
+        @include tab_iPadPro {
+            position: relative;
+        }
+    }
+    .chat_name {
+        font-size: 23px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+
+    .chat_img {
+        width: 165px;
+        height: 165px;
+        border-radius: 50%;
+        border: 3px solid $primary-color;
+        text-align: center;
+        margin: 20px auto 0;
+        @include tab_iPadPro {
+            width: 65%;
+            height: 140px;
+        }
+        @include sp {
+            height: 225px;
+        }
+    }
+
+    .message_wrap {
+        background-color: #fff;
+        border-radius: 30px;
+        width: 100%;
+        min-height: 100%;
+        margin-top: 30px;
+    }
+
+    .balloon1-right {
+        position: relative;
+        display: inline-block;
+        margin: 1.5em 15px 1.5em 0;
+        padding: 7px 10px;
+        min-width: 120px;
+        max-width: 100%;
+        color: #555;
+        font-size: 16px;
+        text-align: left;
+        word-break: break-word;
+        background: $primary-color;
+    }
+    .balloon1-left {
+        position: relative;
+        display: inline-block;
+        margin: 1.5em 0 1.5em 15px;
+        padding: 7px 10px;
+        min-width: 120px;
+        max-width: 100%;
+        color: #555;
+        font-size: 16px;
+        word-break: break-word;
+        background: $primary-color;
+    }
+
+    .balloon1-right:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        margin-top: -15px;
+        border: 15px solid transparent;
+        border-left: 15px solid $primary-color;
+    }
+
+    .balloon1-left:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -30px;
+        margin-top: -15px;
+        border: 15px solid transparent;
+        border-right: 15px solid $primary-color;
+    }
+
+    .balloon1-right p,
+    .balloon1-left p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .chat_form_wrap {
+        .chat_form {
+            width: 50%;
+            margin: 60px auto 0;
+            @include sp {
+                width: 100%;
+            }
+
+            .chat_input {
+                border: none;
+            }
+            .chat_btn {
+                border: none;
+                background-color: $primary-color;
+            }
+            .chat_btn:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    .auth_profile {
+        @include sp {
+            display: none;
+        }
+    }
+}

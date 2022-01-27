@@ -1,0 +1,187 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+
+.diagnosis_wrap {
+    margin-top: 13vh;
+
+    .diagnosis_title {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .self_title {
+        text-shadow: 2px 2px 1px $self_color;
+    }
+    .future_title {
+        text-shadow: 2px 2px 1px $future_color;
+    }
+
+    .questions_wrap {
+        position: relative;
+    }
+    .question_wrap {
+        position: fixed;
+        width: 90%;
+        left: 5%;
+    }
+
+    .show {
+        display: block;
+    }
+    .hidden {
+        display: none;
+    }
+
+    .diagnosis_num {
+        font-size: 25px;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .diagnosis_content {
+        font-size: 40px;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        @include sp {
+            font-size: 25px;
+        }
+    }
+
+    .diagnosis_selects {
+        .row {
+            @include sp {
+                justify-content: space-between;
+            }
+        }
+        .col-2 {
+            @include sp {
+                padding: 0;
+            }
+        }
+        .circle {
+            border-radius: 50%;
+            background-color: #fff;
+            display: block;
+            margin: 0 auto;
+        }
+        .circle_big {
+            width: 150px;
+            height: 150px;
+            @include tab_iPad {
+                width: 110px;
+                height: 110px;
+                margin-top: 25px;
+            }
+            @include sp {
+                width: 50px;
+                height: 50px;
+                margin-top: 45px;
+                margin-bottom: 45px;
+            }
+        }
+        .circle_middle {
+            width: 100px;
+            height: 100px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            @include sp {
+                width: 50px;
+                height: 50px;
+                margin-top: 45px;
+                margin-bottom: 45px;
+            }
+        }
+        .circle_small {
+            border: 1px solid #000;
+            width: 75px;
+            height: 75px;
+            margin-top: 45px;
+            margin-bottom: 45px;
+            @include sp {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        .circle_no {
+            border: 1px solid #6dcbff;
+        }
+        .circle_no:active {
+            background-color: #6dcbff;
+        }
+        .circle_yes {
+            border: 1px solid #fb8989;
+        }
+        .circle_yes:active {
+            background-color: #fb8989;
+        }
+        .circle_small:active {
+            background-color: #000;
+        }
+    }
+
+    .diagnosis_select_text {
+        p {
+            text-align: center;
+            font-size: 25px;
+            @include tab_iPadPro {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .diagnosis_counts {
+        width: 80%;
+        margin: 50px auto 0;
+        display: flex;
+        justify-content: space-between;
+        @include sp {
+            width: 100%;
+        }
+        .diagnosis_count {
+            background-color: #fff;
+            display: block;
+            width: 25px;
+            height: 25px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .checked {
+            background-color: #000;
+        }
+    }
+
+    .diagnosis_submit {
+        display: block;
+        width: 30%;
+        margin: 22vh auto;
+        padding: 20px;
+        border-radius: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        @include tab_iPadPro {
+            width: 50%;
+            margin: 10vh auto;
+        }
+        @include sp {
+            width: 80%;
+        }
+    }
+    .future_btn {
+        background-color: $future_color;
+        box-shadow: 0px 4px 4px #27e9d1;
+    }
+    .self_btn {
+        background-color: $self_color;
+        box-shadow: 0px 8px 4px #bbacec;
+    }
+    .diagnosis_submit:active {
+        box-shadow: none;
+        transform: translateY(4px);
+    }
+}

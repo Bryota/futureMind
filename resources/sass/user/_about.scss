@@ -1,0 +1,17 @@
+.about_wrap {
+    margin-top: 14vh;
+
+    .about_title {
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        @include sp {
+            font-size: 35px;
+        }
+    }
+    .about_text {
+        font-size: 20px;
+        margin: 30px auto 50px;
+        width: 80%;
+    }
+}

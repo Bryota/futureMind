@@ -1,0 +1,21 @@
+.company_color{
+    background-color: #f8fab0;
+}
+
+.company_title{
+    text-shadow: 2px 2px 1px #f8fab0,
+}
+
+.company_admin{
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.company_btn{
+    background-color: #f8fab0;
+    box-shadow: 0px 4px 4px #f6f7d6;
+}
+.self_btn{
+    background-color: $self_color;
+    box-shadow: 0px 8px 4px #bbacec;
+}

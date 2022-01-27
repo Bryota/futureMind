@@ -1,0 +1,26 @@
+$primary-color: #fdff83;
+$self_color: #d4cced;
+$future_color: #30e3df;
+.companyList_wrap {
+    .search_btn {
+        width: 30%;
+        padding: 15px 10px;
+        font-size: 18px;
+        margin: 30px auto 0;
+        display: block;
+        border-radius: 30px;
+        text-align: center;
+        @include sp {
+            width: 80%;
+        }
+    }
+    .primary_btn {
+        background-color: $primary-color;
+        box-shadow: 0px 8px 4px rgba(209, 211, 39, 0.25);
+    }
+    .search_btn:active {
+        transform: translateY(8px);
+        box-shadow: none;
+        outline: none !important;
+    }
+}
