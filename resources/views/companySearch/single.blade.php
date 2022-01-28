@@ -49,6 +49,6 @@
             </div>
         </div>
     </main>
-    <script src="{{ asset('js/companyChart.js')}}"></script>
+    <script src="{{ secure_asset('js/companyChart.js')}}"></script>
 
 @endsection

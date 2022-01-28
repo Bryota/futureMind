@@ -8,7 +8,7 @@
                     <div class="col-md-3">
                         <div class="text-center chat_user">
                             <p class="chat_name">{{$company_user->name}}</p>
-                            <img class="chat_img" src="{{asset('storage/images/' . $company_user->company_icon)}}" alt="画像">
+                            <img class="chat_img" src="{{secure_asset('storage/images/' . $company_user->company_icon)}}" alt="画像">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -18,7 +18,7 @@
                     <div class="col-md-3 auth_profile">
                         <div class="text-center chat_user">
                             <p class="chat_name">あなた</p>
-                            <img class="chat_img" src="{{asset('storage/images/' . $student_user->img_name)}}" alt="画像">
+                            <img class="chat_img" src="{{secure_asset('storage/images/' . $student_user->img_name)}}" alt="画像">
                         </div>
                     </div>
                 </div>

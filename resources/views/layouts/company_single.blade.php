@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FutureMind</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ asset('/futureMindfavicon.ico') }}">
+    <link rel="shortcut icon" href="{{ secure_asset('/futureMindfavicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 </head>
 <body>
@@ -52,7 +52,7 @@
     </div>
     </header>
     @yield('content')
-    <script src="{{ asset('js/app.js')}}"></script>
-    <script src="{{ asset('js/companyChart.js')}}"></script>
+    <script src="{{ secure_asset('js/app.js')}}"></script>
+    <script src="{{ secure_asset('js/companyChart.js')}}"></script>
 </body>
 </html>
