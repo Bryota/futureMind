@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div>
-                        <a href="{{route('diagnosis.self')}}"><h2 class="self_color">自己分析</h2></a>
+                        <a href="{{route('diagnosis.self')}}"><h2 class="self_color">自己分</h2></a>
                     </div>
                 </div>
                 <div class="col-md-6">
