@@ -40,10 +40,20 @@
                     </div>
                     <div class="col-md-3 info_wrap">
                         <div>
-                            <img class="info_img" src="{{Storage::disk('s3')->url($user->img_name)}}" alt="画像">
+                            @if($user->img_name)
+                                <img class="info_img" src="{{Storage::disk('s3')->url($user->img_name)}}" alt="画像">
+                            @endif
                         </div>
                         <div class="toEdit_btn">
-                            <a href="{{route('company.chat',['student_id'=>$user->id,'id'=>$Room_id])}}"><p>チャット</p></a>
+                            @if($chat)
+                            <a href="{{route('company.chat',['student_id'=>$user->id,'id'=>$room_id])}}"><p>チャット</p></a>
+                            @else
+                            <form method="POST" action="{{ route('company.createChatRoom')}}" class="likes_btn_wrap text-center">
+                            @csrf
+                                <input type="hidden" name="student_id" value="{{$user->id}}"/>
+                                <button type="submit" class="likes_btn future_btn"><span>チャット開始</span></button>
+                            </form>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-3 info_wrap">

@@ -39,6 +39,19 @@ class ChatService
     }
 
     /**
+     * チャットルーム作成
+     * 
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @return int チャットルームID
+     */
+    public function createChatRoom(int $student_id, int $company_id): int
+    {
+        $room_id = $this->chat->createChatRoom($student_id, $company_id);
+        return $room_id;
+    }
+
+    /**
      * チャットルームの学生データの取得
      *
      * @param int $id チャットルームID
@@ -98,9 +111,9 @@ class ChatService
      * チャットメッセージ一覧の取得
      *
      * @param int $room_id
-     * @return object メッセージ一覧
+     * @return object|null メッセージ一覧
      */
-    public function getMessages (int $room_id): object
+    public function getMessages (int $room_id): mixed
     {
         $messages = $this->chat->getMessages($room_id);
         return $messages;

@@ -98,6 +98,22 @@ class ChatRepository implements ChatRepositoryInterface
     }
 
     /**
+     * チャットルーム作成
+     * 
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @return int チャットルームID
+     */
+    public function createChatRoom(int $student_id, int $company_id): int
+    {
+        $chat_room_data = $this->eloquentChatRoom::create([
+            'user_id' => $student_id,
+            'company_id' => $company_id
+        ]);
+        return $chat_room_data->id;
+    }
+
+    /**
      * チャットルームがあるかどうかの確認
      *
      * @param int $student_id 学生ID

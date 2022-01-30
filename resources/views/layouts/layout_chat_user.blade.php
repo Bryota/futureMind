@@ -64,10 +64,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     @if(app('env')=='local')
         <script src="{{ asset('js/app.js')}}"></script>
-        <script src="{{ asset('js/companyChart.js')}}"></script>
+        <script src="{{ asset('js/chat_user.js')}}"></script>
     @else
         <script src="{{ secure_asset('js/app.js')}}"></script>
-        <script src="{{ secure_asset('js/companyChart.js')}}"></script>
+        <script src="{{ secure_asset('js/chat_user.js')}}"></script>
     @endif
 </body>
 </html>

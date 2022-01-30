@@ -126,8 +126,21 @@ class CompanyController extends Controller
      */
     public function singleStudent($id){
         $user = $this->user->getUserData($id);
-        $Room_id = $this->chat->getChatRoomId($id, Auth::user()->id);
-        return view('company.single',compact('user','Room_id'));
+        $chatRoomData = $this->chat->existsChatRoom($id, Auth::user()->id);
+        $chat = $chatRoomData[0];
+        $room_id = $chatRoomData[1];
+        return view('company.single',compact('user', 'chat', 'room_id'));
+    }
+
+    /**
+     * チャットルーム作成
+     * 
+     * @param Request $request リクエスト
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createChatRoom(Request $request) {
+        $room_id = $this->chat->createChatRoom($request->input('student_id'), Auth::user()->id);
+        return back();
     }
 
     /**

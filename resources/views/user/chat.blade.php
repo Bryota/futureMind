@@ -8,11 +8,8 @@
                     <div class="col-md-3">
                         <div class="text-center chat_user">
                             <p class="chat_name">{{$company_user->name}}</p>
-                            @if(app('env')=='local')
-                                <img class="chat_img" src="{{asset('storage/images/' . $company_user->company_icon)}}" alt="画像">
-                            @else
-                                <img class="chat_img" src="{{secure_asset('storage/images/' . $company_user->company_icon)}}" alt="画像">
-                            @endif
+                            <img class="chat_img" src="{{Storage::disk('s3')->url($company_user->company_icon)}}" alt="画像">
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -22,10 +19,8 @@
                     <div class="col-md-3 auth_profile">
                         <div class="text-center chat_user">
                             <p class="chat_name">あなた</p>
-                            @if(app('env')=='local')
-                                <img class="chat_img" src="{{asset('storage/images/' . $student_user->img_name)}}" alt="画像">
-                            @else
-                                <img class="chat_img" src="{{secure_asset('storage/images/' . $student_user->img_name)}}" alt="画像">
+                            @if($student_user->img_name)
+                                <img class="chat_img" src="{{Storage::disk('s3')->url($student_user->img_name)}}" alt="画像">
                             @endif
                         </div>
                     </div>

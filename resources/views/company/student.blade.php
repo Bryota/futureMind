@@ -9,8 +9,12 @@
                 @if(!$likeUsers->isEmpty())
                     @foreach($likeUsers as $user)
                     <div class="col-md-4">
-                        <a  href="{{route('company.singleStudent',['id'=>$user->id])}}"><img class="company_logo primary_border" src="{{Storage::disk('s3')->url($user->img_name)}}" alt=""></a>
-                        <p class="company_name">{{$user->name}}</p>
+                        @if($user->img_name)
+                            <a href="{{route('company.singleStudent',['id'=>$user->id])}}"><img class="company_logo primary_border" src="{{Storage::disk('s3')->url($user->img_name)}}" alt="{{$user->name}}"></a>
+                            <p class="company_name">{{$user->name}}</p>
+                        @else
+                            <a href="{{route('company.singleStudent',['id'=>$user->id])}}">{{$user->name}}</a>
+                        @endif
                     </div>
                     @endforeach
                 @else
