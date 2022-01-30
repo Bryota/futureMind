@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>futureMind</title>
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @if(app('env')=='local')
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 </head>
 <body>
@@ -39,6 +43,10 @@
             </form>
         </div>
     </main>
-    <script src="{{ secure_asset('js/app.js')}}"></script>
+    @if(app('env')=='local')
+        <script src="{{ asset('js/app.js')}}"></script>
+    @else
+        <script src="{{ secure_asset('js/app.js')}}"></script>
+    @endif
 </body>
 </html>

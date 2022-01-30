@@ -49,6 +49,10 @@
             </div>
         </div>
     </main>
+    @if(app('env')=='local')
+    <script src="{{ asset('js/companyChart.js')}}"></script>
+    @else
     <script src="{{ secure_asset('js/companyChart.js')}}"></script>
+    @endif
 
 @endsection

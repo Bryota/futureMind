@@ -9,7 +9,11 @@
                 @if(!$likeCompanies->isEmpty())
                     @foreach($likeCompanies as $company)
                     <div class="col-md-4">
+                    @if(app('env')=='local')
+                        <a  href="{{route('search.single',['id'=>$company->id])}}"><img class="company_logo primary_border" src="{{asset('storage/images/' . $company->company_icon)}}" alt=""></a>
+                    @else
                         <a  href="{{route('search.single',['id'=>$company->id])}}"><img class="company_logo primary_border" src="{{secure_asset('storage/images/' . $company->company_icon)}}" alt=""></a>
+                    @endif
                         <p class="company_name">{{$company->name}}</p>
                     </div>
                     @endforeach

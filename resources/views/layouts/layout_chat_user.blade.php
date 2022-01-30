@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>FutureMind</title>
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ secure_asset('/futureMindfavicon.ico') }}">
+    @if(app('env')=='local')
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @endif
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    @if(app('env')=='local')
+        <link rel="shortcut icon" href="{{ asset('/futureMindfavicon.ico') }}">
+    @else
+        <link rel="shortcut icon" href="{{ secure_asset('/futureMindfavicon.ico') }}">
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 </head>
 <body>
@@ -54,7 +62,12 @@
     </header>
     @yield('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{ secure_asset('js/app.js')}}"></script>
-    <script src="{{ secure_asset('js/chat_user.js')}}"></script>
+    @if(app('env')=='local')
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/companyChart.js')}}"></script>
+    @else
+        <script src="{{ secure_asset('js/app.js')}}"></script>
+        <script src="{{ secure_asset('js/companyChart.js')}}"></script>
+    @endif
 </body>
 </html>
