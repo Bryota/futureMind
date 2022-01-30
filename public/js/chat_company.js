@@ -4,7 +4,6 @@
 $(function() {
     get_chat_messages();
 });
-console.log('test')
 
 /**
  * @type {number} 現在のメッセージ数 初期値

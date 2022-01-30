@@ -126,7 +126,6 @@ class CompanyController extends Controller
      */
     public function singleStudent($id){
         $user = $this->user->getUserData($id);
-        // $Room_id = $this->chat->getChatRoomId($id, Auth::user()->id);
         $chatRoomData = $this->chat->existsChatRoom($id, Auth::user()->id);
         $chat = $chatRoomData[0];
         $room_id = $chatRoomData[1];
