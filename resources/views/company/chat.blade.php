@@ -8,7 +8,9 @@
                     <div class="col-md-3">
                         <div class="text-center chat_user">
                             <p class="chat_name">{{$student_user->name}}</p>
+                            @if($student_user->img_name)
                             <img class="chat_img" src="{{Storage::disk('s3')->url($student_user->img_name)}}" alt="画像">
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">

@@ -58,6 +58,7 @@ Route::group(['namespace'=>'company', 'prefix'=>'company', 'middleware'=>'auth:c
     Route::post('diagnosis',[App\Http\Controllers\company\CompanyController::class, 'diagnosisPost'])->name('company.diagnosisPost');
     Route::get('student',[App\Http\Controllers\company\CompanyController::class, 'student'])->name('company.student');
     Route::get('student/{id}',[App\Http\Controllers\company\CompanyController::class, 'singleStudent'])->name('company.singleStudent');
+    Route::post('chat',[App\Http\Controllers\company\CompanyController::class, 'createChatRoom'])->name('company.createChatRoom');
     Route::get('chat/{id}',[App\Http\Controllers\company\CompanyController::class, 'chat'])->name('company.chat');
     Route::get('chat/ajax/{id}',[App\Http\Controllers\company\CompanyController::class, 'getMessages'])->name('company.getMessage');
     Route::post('chat/{id}',[App\Http\Controllers\company\CompanyController::class, 'postMessage'])->name('company.postMessage');
