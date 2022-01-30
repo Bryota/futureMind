@@ -116,6 +116,9 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
             'company_icon' => $img_name
         ]);
-        return redirect()->intended('/company');
+        if(Auth::guard('company')->attempt(['email' => $request->email,'password'=>$request->password],$request->get('remember'))){
+            return redirect('/company');
+        }
+        return redirect('/company/login');
     }
 }

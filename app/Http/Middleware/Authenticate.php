@@ -17,11 +17,13 @@ class Authenticate extends Middleware
     {
         $user_route = 'login';
         $company_route = 'company.login';
-        if (! $request->expectsJson()) {
-            if(Route::is('user.*') || Route::is('diagnosis.*')) {
+        if (!$request->expectsJson()) {
+            if(Route::is('company.*')) {
+                return route($company_route);
+            } 
+            else
+            {
                 return route($user_route);
-            } elseif (Route::is('company.*')) {
-                return redirect('/');
             }
         }
     }

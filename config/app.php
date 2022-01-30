@@ -230,6 +230,13 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Consts Aliases
+         */
+        'GraduateYearsConst' => App\Consts\GraduateYearsConst::class,
+        'IndustryConst' => App\Consts\IndustryConst::class,
+        'PrefectureConst' => App\Consts\PrefectureConst::class,
+
     ],
 
 ];
