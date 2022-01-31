@@ -24,15 +24,15 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{route('company.postMessage',['id'=>$room_id, 'student_id' => $student_user->id])}}" method="POST" class="chat_form_wrap">
-                    @csrf
-                <div class="input-group mb-3 chat_form">
-                    <input type="text" class="form-control chat_input" name="message" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append chat_btn_wrap">
-                        <button class="btn btn-outline-secondary chat_btn" type="submit" >送信</button>
+                <div class="chat_form_wrap">
+                    <div class="input-group mb-3 chat_form">
+                        <input type="text" class="form-control chat_input" name="message" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="hidden" name="room_id" value="{{ $room_id }}" >
+                        <div class="input-group-append chat_btn_wrap">
+                            <button class="btn btn-outline-secondary chat_btn" type="submit" >送信</button>
+                        </div>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </main>

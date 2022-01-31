@@ -77,20 +77,20 @@ class UserController extends Controller
      * @param UserUpdate $request ユーザー更新用リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-     public function update(UserUpdate $request){
+    public function update(UserUpdate $request){
         $this->user->updateUserData($request, Auth::user()->id, $request->file('img_name'));
-         return redirect('/user');
-     }
+        return redirect('/user');
+    }
 
     /**
      * お気に入り企業表示用
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-     public function likesCompany(){
-         $likeCompanies = $this->user->getLikeCompanies(Auth::user()->id);
-         return view('user.likes',compact('likeCompanies'));
-     }
+    public function likesCompany(){
+        $likeCompanies = $this->user->getLikeCompanies(Auth::user()->id);
+        return view('user.likes',compact('likeCompanies'));
+    }
 
     /**
      * チャット画面表示用
@@ -98,13 +98,13 @@ class UserController extends Controller
      * @param $id チャットルームID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-     public function chat($id){
-         $room_id = $id;
-         $student_user = $this->chat->getStudentData(Auth::user()->id);
-         $company_user = $this->chat->getCompanyData($room_id);
-         $messages = $this->chat->getMessages($room_id);
-         return view('user.chat',compact('room_id','messages','student_user','company_user'));
-     }
+    public function chat($id){
+        $room_id = $id;
+        $student_user = $this->chat->getStudentData(Auth::user()->id);
+        $company_user = $this->chat->getCompanyData($room_id);
+        $messages = $this->chat->getMessages($room_id);
+        return view('user.chat',compact('room_id','messages','student_user','company_user'));
+    }
 
     /**
      * メッセージ一覧の取得
@@ -112,22 +112,20 @@ class UserController extends Controller
      * @param $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-     public function getMessages($id){
-         $messages = $this->chat->getMessages($id);
-         $messagesJsonData = ["messages" => $messages];
-         return response()->json($messagesJsonData);
-     }
+    public function getMessages($id){
+        $messages = $this->chat->getMessages($id);
+        $messagesJsonData = ["messages" => $messages];
+        return response()->json($messagesJsonData);
+    }
 
     /**
      * チャットメッセージ送信用
      *
      * @param Request $request リクエスト
-     * @param $id チャットルームID
      * @return void
      * @todo 送信側の画面も非同期でコメントを更新するようにする
      */
-     public function postMessage(Request $request, $id){
-         $this->chat->postMessage($id, Auth::user()->id, 0, $request->message);
-         return redirect()->back();
-     }
+    public function postMessage(Request $request){
+        $this->chat->postMessage($request->room_id, Auth::user()->id, 0, $request->message);
+    }
 }
