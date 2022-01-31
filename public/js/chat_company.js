@@ -18,6 +18,9 @@ const path = location.pathname.split('/');
  */
 const room_id = path[3];
 
+/**
+ * メッセージ・ルームID取得＆メッセージ送信＆フォームクリア
+ */
 $('.chat_btn').on('click', function() {
     let message = $('input[name="message"]').val();
     let room_id = $('input[name="room_id"]').val();
