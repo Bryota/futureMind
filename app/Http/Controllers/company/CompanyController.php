@@ -173,13 +173,11 @@ class CompanyController extends Controller
      * チャットメッセージ送信用
      *
      * @param Request $request リクエスト
-     * @param $id チャットルームID
      * @return void
      * @todo 送信側の画面も非同期でコメントを更新するようにする
      */
-    public function postMessage(Request $request, $id){
-        $this->chat->postMessage($id, 0, Auth::user()->id, $request->message);
-        return redirect()->back();
+    public function postMessage(Request $request){
+        $this->chat->postMessage($request->room_id, 0, Auth::user()->id, $request->message);
     }
 
     /**;.

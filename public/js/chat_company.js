@@ -19,6 +19,41 @@ const path = location.pathname.split('/');
 const room_id = path[3];
 
 /**
+ * メッセージ・ルームID取得＆メッセージ送信＆フォームクリア
+ */
+$('.chat_btn').on('click', function() {
+    let message = $('input[name="message"]').val();
+    let room_id = $('input[name="room_id"]').val();
+    post_chat_messages(message, room_id);
+    $('input[name="message"]').val("");
+})
+
+/**
+ * メッセージ送信関数
+ *
+ * メッセージを非同期で送信する
+ */
+
+function post_chat_messages(message, room_id) {
+    $.ajax({
+        urt:'{{route("company.postMessage")}}',
+        type:'post',
+        headers: {'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+        dataType:'text',
+        async: true,
+        cache: false,
+        data: {
+            message,
+            room_id
+        }
+    }).done(function() {
+        get_chat_messages();
+    }).fail(function(){
+        alert('メッセージの送信に失敗しました。');
+    })
+}
+
+/**
  * メッセージ取得関数
  *
  * チャットルームのメッセージを取得する
@@ -46,7 +81,7 @@ function get_chat_messages() {
                                                 <div class="balloon1-left">
                                                     <p>${data.messages[i].message}</p>
                                                 </div>
-                                             </div>`;
+                                            </div>`;
                         $("#message_wrap").append(message_html);
                     }
                 }
