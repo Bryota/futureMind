@@ -21,7 +21,7 @@
                                 <div class="text-center">
                                     <img class="company_logo company_admin" src="{{$company->profilePath}}" alt="">
                                 </div>
-                                <div class="text-center mb-10"><input type="file" name="company_icon"></div>
+                                <div class="text-center mb-10"><input type="file" name="company_icon" accept="image/*" ></div>
                                 <div class="company_info company_edit">
                                     <ul>
                                         <li><label for="company">企業名</label>：<input type="text" id="company" name="name" value="{{$company->name}}"></li>
