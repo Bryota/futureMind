@@ -69,7 +69,7 @@
                             <div >
                                 <img class="info_img" src="{{$userData->profilePath}}" alt="画像">
                             </div>
-                            <input type="file" name="img_name">
+                            <input type="file" name="img_name" accept="image/*" >
                             <input type="submit" value="更新" class="toEdit_btn">
                         </div>
                         <div class="col-md-3 info_wrap text-center">

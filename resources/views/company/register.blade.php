@@ -31,7 +31,7 @@
                     @if($errors->has('company_icon'))
                     <p class="error-text">{{$errors->first('company_icon')}}</p>
                     @endif
-                    <input type="file" class="file_wrap" id="exampleInputPassword1" name="company_icon">
+                    <input type="file" class="file_wrap" id="exampleInputPassword1" name="company_icon" accept="image/*" >
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">メールアドレス</label>
