@@ -32,7 +32,6 @@ $('.chat_btn').on('click', function() {
  *
  * メッセージを非同期で送信する
  */
-
 function post_chat_messages(message, room_id) {
     $.ajax({
         urt:'{{route("user.postMessage")}}',

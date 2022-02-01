@@ -52,7 +52,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index()
+    {
         return view('diagnosis.index');
     }
 
@@ -70,7 +71,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function future(){
+    public function future()
+    {
         return view('diagnosis.future');
     }
 
@@ -80,7 +82,8 @@ class DiagnosisController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function futurePost(Request $request){
+    public function futurePost(Request $request)
+    {
         $this->diagnosis->setFutureDiagnosisForStudent(
             Auth::user()->id,
             $request->developmentvalue,
@@ -97,7 +100,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function self(){
+    public function self()
+    {
         return view('diagnosis.self');
     }
 
@@ -107,7 +111,8 @@ class DiagnosisController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function selfPost(Request $request){
+    public function selfPost(Request $request)
+    {
         $this->diagnosis->setSelfDiagnosisForStudent(
             Auth::user()->id,
             $request->developmentvalue,
@@ -124,7 +129,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function result(){
+    public function result()
+    {
         if ($this->diagnosis->checkFutureDiagnosisDataExist(Auth::user()->id) <= 0) {
             return redirect('/diagnosis/future');
         }
@@ -144,7 +150,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function futureCompany(){
+    public function futureCompany()
+    {
         $companies = $this->diagnosis->getCompaniesRelatedToFutureDiagnosisData(Auth::user()->id);
         return view('diagnosis.futureCompany',compact('companies'));
     }
@@ -154,7 +161,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function selfCompany(){
+    public function selfCompany()
+    {
         $companies = $this->diagnosis->getCompaniesRelatedToSelfDiagnosisData(Auth::user()->id);
         return view('diagnosis.selfCompany',compact('companies'));
     }
@@ -165,7 +173,8 @@ class DiagnosisController extends Controller
      * @param $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function futureSingleCompany($id){
+    public function futureSingleCompany($id)
+    {
         $company = $this->company->getCompanyData($id);
         $companyComments = $this->diagnosis->getCompanyCommentForFuture($id, Auth::user()->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $id);
@@ -178,7 +187,8 @@ class DiagnosisController extends Controller
      * @param $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function selfSingleCompany($id){
+    public function selfSingleCompany($id)
+    {
         $company = $this->company->getCompanyData($id);
         $companyComments = $this->diagnosis->getCompanyCommentForSelf($id, Auth::user()->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $id);
@@ -191,7 +201,8 @@ class DiagnosisController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function futureLikeCompany(Request $request){
+    public function futureLikeCompany(Request $request)
+    {
         // TODO: isliked判定のみの実装にして、企業個別ページにリダイレクトさせる
         $company = $this->company->getCompanyData($request->id);
         $companyComments = $this->diagnosis->getCompanyCommentForFuture($request->id, Auth::user()->id);
@@ -206,7 +217,8 @@ class DiagnosisController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function selfLikeCompany(Request $request){
+    public function selfLikeCompany(Request $request)
+    {
         // TODO: isliked判定のみの実装にして、企業個別ページにリダイレクトさせる
         $company = $this->company->getCompanyData($request->id);
         $companyComments = $this->diagnosis->getCompanyCommentForSelf($request->id, Auth::user()->id);
