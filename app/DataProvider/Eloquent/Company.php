@@ -10,7 +10,8 @@ class Company extends Authenticatable
 {
     use Notifiable;
 
-    public function diagnosis(){
+    public function diagnosis()
+    {
         return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData','user_id');
     }
 
@@ -43,7 +44,8 @@ class Company extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function likesStudent(){
+    public function likesStudent()
+    {
         return $this->belongsToMany('App\DataProvider\Eloquent\User','likes','company_id','user_id');
     }
     }

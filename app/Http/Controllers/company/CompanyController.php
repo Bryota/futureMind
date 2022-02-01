@@ -59,7 +59,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index()
+    {
         $company = $this->company->getCompanyData(Auth::user()->id);
         if (!isset($company->diagnosis)) {
             return redirect('company/diagnosis');
@@ -72,7 +73,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(){
+    public function edit()
+    {
         $company = $this->company->getCompanyData(Auth::user()->id);
         return view('company.edit',compact('company'));
     }
@@ -83,7 +85,8 @@ class CompanyController extends Controller
      * @param CompanyUpdate $request 企業リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(CompanyUpdate $request){
+    public function update(CompanyUpdate $request)
+    {
         $this->company->updateCompanyData($request, Auth::user()->id);
         return redirect('/company');
     }
@@ -93,7 +96,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function diagnosis(){
+    public function diagnosis()
+    {
         return view('company.diagnosis');
     }
 
@@ -103,7 +107,8 @@ class CompanyController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function diagnosisPost(Request $request){
+    public function diagnosisPost(Request $request)
+    {
         $this->company->setCompanyDiagnosisData($request, Auth::user()->id);
         return redirect('/company');
     }
@@ -113,7 +118,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function student(){
+    public function student()
+    {
         $likeUsers = $this->company->getLikedStudents(Auth::user()->id);
         return view('company.student',compact('likeUsers'));
     }
@@ -124,7 +130,8 @@ class CompanyController extends Controller
      * @param $id 学生ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function singleStudent($id){
+    public function singleStudent($id)
+    {
         $user = $this->user->getUserData($id);
         $chatRoomData = $this->chat->existsChatRoom($id, Auth::user()->id);
         $chat = $chatRoomData[0];
@@ -138,7 +145,8 @@ class CompanyController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function createChatRoom(Request $request) {
+    public function createChatRoom(Request $request)
+    {
         $room_id = $this->chat->createChatRoom($request->input('student_id'), Auth::user()->id);
         return back();
     }
@@ -149,7 +157,8 @@ class CompanyController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function chat(Request $request){
+    public function chat(Request $request)
+    {
         $room_id = $this->chat->getChatRoomId($request->input('student_id'), Auth::user()->id);
         $company_user = $this->company->getCompanyData(Auth::user()->id);
         $student_user = $this->user->getUserData($request->input('student_id'));
@@ -163,7 +172,8 @@ class CompanyController extends Controller
      * @param $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMessages($id){
+    public function getMessages($id)
+    {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];
         return response()->json($messagesJsonData);
@@ -176,7 +186,8 @@ class CompanyController extends Controller
      * @return void
      * @todo 送信側の画面も非同期でコメントを更新するようにする
      */
-    public function postMessage(Request $request){
+    public function postMessage(Request $request)
+    {
         $this->chat->postMessage($request->room_id, 0, Auth::user()->id, $request->message);
     }
 
@@ -185,7 +196,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/company/login');
     }

@@ -89,7 +89,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function companyValidator(array $data){
+    protected function companyValidator(array $data)
+    {
         return Validator::make($data,[
             'name' => ['required', 'string', 'max:255'],
             'company_icon' => ['required'],

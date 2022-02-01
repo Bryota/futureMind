@@ -41,15 +41,18 @@ class LoginController extends Controller
         $this->middleware('guest:company')->except('logout');
     }
 
-    public function showCompanyLoginForm(){
+    public function showCompanyLoginForm()
+    {
         return view('company.login',['authgroup'=> 'company']);
     }
-    public function CompanyLogin(Request $request){
+
+    public function CompanyLogin(Request $request)
+    {
         $this->validate($request,[
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-        if(Auth::guard('company')->attempt(['email' => $request->email,'password'=>$request->password],$request->get('remember'))){
+        if (Auth::guard('company')->attempt(['email' => $request->email,'password'=>$request->password],$request->get('remember'))) {
             return redirect('/company');
         }
         return back()->withInput($request->only('email','remember'));

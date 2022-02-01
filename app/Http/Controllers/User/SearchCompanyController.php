@@ -66,7 +66,8 @@ class SearchCompanyController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search(){
+    public function search()
+    {
         return view('companySearch.search');
     }
 
@@ -76,7 +77,8 @@ class SearchCompanyController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function searchPost(Request $request){
+    public function searchPost(Request $request)
+    {
         $companies = $this->company->getSearchedCompanies(
             $request->employee,
             $request->industry,
@@ -96,7 +98,8 @@ class SearchCompanyController extends Controller
      * @param $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function single($id){
+    public function single($id)
+    {
         $company = $this->company->getCompanyData($id);
         $isLiked = $this->user->isLiked(Auth::user()->id, $id);
         $chatRoomData = $this->chat->existsChatRoom(Auth::user()->id, $id);
@@ -112,7 +115,8 @@ class SearchCompanyController extends Controller
      * @param Request $request リクエスト
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function likeCompany(Request $request){
+    public function likeCompany(Request $request)
+    {
         // TODO: isliked判定のみの実装にして、企業個別ページにリダイレクトさせる
         $company = $this->company->getCompanyData($request->id);
         $this->diagnosis->addLikedCompany(Auth::user()->id, $request->id);
