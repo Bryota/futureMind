@@ -17155,6 +17155,11 @@ main .main_wrap .future_color:active {
   margin-top: 10px;
   margin-bottom: 25px;
 }
+.companyList_wrap .companies .company_name span {
+  background-color: #fdff83;
+  border-radius: 50%;
+  padding: 10px 15px;
+}
 .companyList_wrap .companies .future_btn {
   background-color: #30e3df;
   box-shadow: 0px 8px 4px #27e9d1;

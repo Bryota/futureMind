@@ -132,4 +132,10 @@ class ChatService
     {
         $eloquent = $this->chat->postMessage(new Chat($room_id, $student_id, $company_id, $message));
     }
+
+    public function setMessageNum(int $room_id, int $student_id, int $company_id)
+    {
+        $message_num = $this->chat->getMessageNum($room_id);
+        $this->chat->setMessageNum($room_id, $student_id, $company_id, $message_num);
+    }
 }

@@ -87,4 +87,10 @@ interface ChatRepositoryInterface
      * @return EloquentMessage MessageEloquentModel
      */
     public function postMessage(Chat $chat): EloquentMessage;
+
+    public function getMessageNum(int $room_id): int;
+
+    public function setMessageNum(int $room_id, int $student_id, int $company_id, int $message_num): void;
+
+    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int;
 }

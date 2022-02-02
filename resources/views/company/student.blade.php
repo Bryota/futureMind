@@ -11,9 +11,10 @@
                     <div class="col-md-4">
                         @if($user->img_name)
                             <a href="{{route('company.singleStudent',['id'=>$user->id])}}"><img class="company_logo primary_border" src="{{Storage::disk('s3')->url($user->img_name)}}" alt="{{$user->name}}"></a>
-                            <p class="company_name">{{$user->name}}</p>
+                            <p class="company_name">{{$user->name}}@if ($user->unCheckedMessageNum) <span>{{ $user->unCheckedMessageNum }}</span> @endif</p>
                         @else
                             <a href="{{route('company.singleStudent',['id'=>$user->id])}}">{{$user->name}}</a>
+                            <span class="company_name">@if ($user->unCheckedMessageNum) <span>{{ $user->unCheckedMessageNum }}</span> @endif</span>
                         @endif
                     </div>
                     @endforeach
