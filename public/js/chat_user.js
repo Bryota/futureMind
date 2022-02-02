@@ -47,7 +47,6 @@ function post_chat_messages(message, room_id) {
     }).done(function() {
         get_chat_messages();
     }).fail(function(error){
-        console.log(error)
         alert('メッセージの送信に失敗しました。');
     })
 }
