@@ -11,6 +11,7 @@
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\CompanyRepositoryInterface;
+use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
@@ -30,6 +31,11 @@ class CompanyService
     private $company;
 
     /**
+     * @var ChatRepositoryInterface $chat ChatRepositoryInterfaceインスタンス
+     */
+    private $chat;
+
+    /**
      * @var S3Interface $storage S3Interfaceインスタンス
      */
     private $storage;
@@ -40,9 +46,10 @@ class CompanyService
      * @param CompanyRepositoryInterface $company 企業リポジトリインターフェース
      * @return void
      */
-    public function __construct(CompanyRepositoryInterface $company, S3Interface $storage)
+    public function __construct(CompanyRepositoryInterface $company, ChatRepositoryInterface $chat, S3Interface $storage)
     {
         $this->company = $company;
+        $this->chat = $chat;
         $this->storage = $storage;
     }
 
@@ -151,6 +158,15 @@ class CompanyService
     public function getLikedStudents($company_id): object
     {
         $students = $this->company->getLikedStudents($company_id);
+        foreach ($students as $student) {
+            if ($this->chat->checkChatRoom($student->id, $company_id)) {
+                $room_id = $this->chat->getChatRoomId($student->id, $company_id);
+                $messageNum = $this->chat->getMessageNum($room_id);
+                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, 0, $company_id);
+                $unCheckedMessageNum = $messageNum - $checkedMessageNum;
+                $student->unCheckedMessageNum = $unCheckedMessageNum;
+            }
+        }
         return $students;
     }
 

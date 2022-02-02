@@ -44,6 +44,12 @@ $future_color: #30e3df;
         .company_name {
             margin-top: 10px;
             margin-bottom: 25px;
+
+            span {
+                background-color: $primary-color;
+                border-radius: 50%;
+                padding: 10px 15px;
+            }
         }
         .future_btn {
             background-color: $future_color;

@@ -107,7 +107,8 @@ class UserController extends Controller
         $student_user = $this->chat->getStudentData(Auth::user()->id);
         $company_user = $this->chat->getCompanyData($room_id);
         $messages = $this->chat->getMessages($room_id);
-        return view('user.chat',compact('room_id','messages','student_user','company_user'));
+        $this->chat->setMessageNum($room_id, Auth::user()->id, 0);
+        return view('user.chat', compact('room_id','messages','student_user','company_user'));
     }
 
     /**
@@ -133,5 +134,6 @@ class UserController extends Controller
     public function postMessage(Request $request)
     {
         $this->chat->postMessage($request->room_id, Auth::user()->id, 0, $request->message);
+        $this->chat->setMessageNum($request->room_id, Auth::user()->id, 0);
     }
 }

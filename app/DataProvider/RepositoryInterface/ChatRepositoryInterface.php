@@ -87,4 +87,33 @@ interface ChatRepositoryInterface
      * @return EloquentMessage MessageEloquentModel
      */
     public function postMessage(Chat $chat): EloquentMessage;
+
+    /**
+     * メッセージ数取得
+     *
+     * @param int $room_id チャットルームID
+     * @return int メッセージ数
+     */
+    public function getMessageNum(int $room_id): int;
+
+    /**
+     * メッセージ数設定
+     *
+     * @param int $room_id チャットルームID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @param int $message_num メッセージ数
+     * @return void
+     */
+    public function setMessageNum(int $room_id, int $student_id, int $company_id, int $message_num): void;
+
+    /**
+     * 確認済みメッセージ数取得
+     *
+     * @param int $room_id チャットルームID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @return int 確認済みメッセージ数
+     */
+    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int;
 }

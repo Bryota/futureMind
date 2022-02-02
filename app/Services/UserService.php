@@ -11,6 +11,7 @@
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
+use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
 use App\Domain\Entity\User;
 use Storage;
@@ -29,6 +30,11 @@ class UserService
     private $user;
 
     /**
+     * @var ChatRepositoryInterface $chat ChatRepositoryInterfaceインスタンス
+     */
+    private $chat;
+
+    /**
      * @var S3Interface $storage S3Interfaceインスタンス
      */
     private $storage;
@@ -38,9 +44,10 @@ class UserService
      *
      * @param UserRepositoryInterface $user ユーザーリポジトリインターフェース
      */
-    public function __construct(UserRepositoryInterface $user, S3Interface $storage)
+    public function __construct(UserRepositoryInterface $user, ChatRepositoryInterface $chat, S3Interface $storage)
     {
         $this->user = $user;
+        $this->chat = $chat;
         $this->storage = $storage;
     }
 
@@ -96,6 +103,15 @@ class UserService
     public function getLikeCompanies(int $id): object
     {
         $likeCompanies = $this->user->getLikeCompanies($id);
+        foreach ($likeCompanies as $company) {
+            if ($this->chat->checkChatRoom($id, $company->id)) {
+                $room_id = $this->chat->getChatRoomId($id, $company->id);
+                $messageNum = $this->chat->getMessageNum($room_id);
+                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, $id, 0);
+                $unCheckedMessageNum = $messageNum - $checkedMessageNum;
+                $company->unCheckedMessageNum = $unCheckedMessageNum;
+            }
+        }
         return $likeCompanies;
     }
 

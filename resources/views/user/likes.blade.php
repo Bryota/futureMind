@@ -9,8 +9,8 @@
                 @if(!$likeCompanies->isEmpty())
                     @foreach($likeCompanies as $company)
                     <div class="col-md-4">
-                        <a  href="{{route('search.single',['id'=>$company->id])}}"><img class="company_logo primary_border" src="{{Storage::disk('s3')->url($company->company_icon)}}" alt=""></a>
-                        <p class="company_name">{{$company->name}}</p>
+                        <a href="{{route('search.single',['id'=>$company->id])}}"><img class="company_logo primary_border" src="{{Storage::disk('s3')->url($company->company_icon)}}" alt=""></a>
+                        <p class="company_name">{{$company->name}}@if ($company->unCheckedMessageNum) <span>{{ $company->unCheckedMessageNum }}</span>@endif</p>
                     </div>
                     @endforeach
                 @else

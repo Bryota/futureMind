@@ -15,6 +15,7 @@ use App\DataProvider\Eloquent\ChatRoom as EloquentChatRoom;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\DataProvider\Eloquent\Company as EloquentCompany;
 use App\DataProvider\Eloquent\Message as EloquentMessage;
+use App\DataProvider\Eloquent\MessageNum as EloquentMessageNum;
 use App\Domain\Entity\Chat;
 
 /**
@@ -41,6 +42,10 @@ class ChatRepository implements ChatRepositoryInterface
      * @var EloquentMessage MessageEloquentModel
      */
     private $eloquentMessage;
+    /**
+     * @var EloquentMessageNum MessageNumEloquentModel
+     */
+    private $eloquentMessageNum;
 
     /**
      * コンストラクタ
@@ -51,12 +56,13 @@ class ChatRepository implements ChatRepositoryInterface
      * @param EloquentMessage $message MessageEloquentModel
      * @return void
      */
-    public function __construct(EloquentChatRoom $chatRoom, EloquentUser $user, EloquentCompany $company, EloquentMessage $message)
+    public function __construct(EloquentChatRoom $chatRoom, EloquentUser $user, EloquentCompany $company, EloquentMessage $message, EloquentMessageNum $messageNum)
     {
         $this->eloquentChatRoom = $chatRoom;
         $this->eloquentUser = $user;
         $this->eloquentCompany = $company;
         $this->eloquentMessage = $message;
+        $this->eloquentMessageNum = $messageNum;
     }
 
     /**
@@ -139,13 +145,12 @@ class ChatRepository implements ChatRepositoryInterface
     public function getChatRoomId(int $student_id, int $company_id): int
     {
         $room_ids = $this->eloquentChatRoom::where('user_id', $student_id)
-                                             ->where('company_id', $company_id)
-                                             ->get(['id'])
-                                             ->pluck('id');
+                                            ->where('company_id', $company_id)
+                                            ->get(['id'])
+                                            ->pluck('id');
         $room_id = $room_ids[0];
         return $room_id;
     }
-
 
     /**
      * メッセージ一覧の取得
@@ -178,5 +183,66 @@ class ChatRepository implements ChatRepositoryInterface
         $eloquent->message = $chat->getMessage();
         $eloquent->save();
         return $eloquent;
+    }
+
+    /**
+     * メッセージ数取得
+     *
+     * @param int $room_id チャットルームID
+     * @return int メッセージ数
+     */
+    public function getMessageNum(int $room_id): int
+    {
+        $message_num = $this->eloquentMessage::where('room_id', $room_id)->count();
+        return $message_num;
+    }
+
+    /**
+     * メッセージ数設定
+     *
+     * @param int $room_id チャットルームID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @param int $message_num メッセージ数
+     * @return void
+     */
+    public function setMessageNum(int $room_id, int $student_id, int $company_id, int $message_num): void
+    {
+        $this->eloquentMessageNum::updateOrCreate(
+            [
+                "room_id" => $room_id,
+                "student_user" => $student_id,
+                "company_user" => $company_id,
+            ],
+            [
+                "room_id" => $room_id,
+                "student_user" => $student_id,
+                "company_user" => $company_id,
+                "message_num" => $message_num
+            ]
+        );
+    }
+
+    /**
+     * 確認済みメッセージ数取得
+     *
+     * @param int $room_id チャットルームID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @return int 確認済みメッセージ数
+     */
+    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int
+    {
+        $message_num_data = $this->eloquentMessageNum::where([
+                                            ['room_id', $room_id],
+                                            ['student_user', $student_id],
+                                            ['company_user', $company_id]
+                                        ])
+                                        ->first();
+        if (is_null($message_num_data)) {
+            return 0;
+        } else {
+            return $message_num_data->message_num;
+        }
     }
 }

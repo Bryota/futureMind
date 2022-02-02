@@ -163,6 +163,7 @@ class CompanyController extends Controller
         $company_user = $this->company->getCompanyData(Auth::user()->id);
         $student_user = $this->user->getUserData($request->input('student_id'));
         $messages = $this->chat->getMessages($room_id);
+        $this->chat->setMessageNum($room_id, 0, Auth::user()->id);
         return view('company.chat',compact('room_id','messages','company_user','student_user'));
     }
 
@@ -189,6 +190,7 @@ class CompanyController extends Controller
     public function postMessage(Request $request)
     {
         $this->chat->postMessage($request->room_id, 0, Auth::user()->id, $request->message);
+        $this->chat->setMessageNum($request->room_id, 0, Auth::user()->id);
     }
 
     /**;.

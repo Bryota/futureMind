@@ -46,7 +46,7 @@ function post_chat_messages(message, room_id) {
         }
     }).done(function() {
         get_chat_messages();
-    }).fail(function(){
+    }).fail(function(error){
         alert('メッセージの送信に失敗しました。');
     })
 }
@@ -80,7 +80,7 @@ function get_chat_messages() {
                                                 <div class="balloon1-right">
                                                     <p>${data.messages[i].message}</p>
                                                 </div>
-                                             </div>`;
+                                            </div>`;
                         $("#message_wrap").append(message_html);
                     }
                 }
