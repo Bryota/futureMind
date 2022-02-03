@@ -51,7 +51,7 @@
                             <form method="POST" action="{{ route('company.createChatRoom')}}" class="likes_btn_wrap text-center">
                             @csrf
                                 <input type="hidden" name="student_id" value="{{$user->id}}"/>
-                                <button type="submit" class="likes_btn future_btn"><span>チャット開始</span></button>
+                                <button type="submit" class="likes_btn future_btn"><span>チャット作成</span></button>
                             </form>
                             @endif
                         </div>

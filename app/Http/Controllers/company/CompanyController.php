@@ -148,7 +148,7 @@ class CompanyController extends Controller
     public function createChatRoom(Request $request)
     {
         $room_id = $this->chat->createChatRoom($request->input('student_id'), Auth::user()->id);
-        return back();
+        return redirect()->route('company.singleStudent', ['id' => $request->input('student_id')]);
     }
 
     /**
