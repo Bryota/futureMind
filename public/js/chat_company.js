@@ -17,6 +17,10 @@ const path = location.pathname.split('/');
  * @type {string} チャットルームID
  */
 const room_id = path[3];
+/**
+ * @type {integer} 企業ID
+ */
+ const company_id = $('.company_name').data('company_id');
 
 /**
  * メッセージ・ルームID取得＆メッセージ送信＆フォームクリア
@@ -63,6 +67,9 @@ function get_chat_messages() {
     $.ajax({
         url: `ajax/${room_id}`,
         dataType: "json",
+        data: {
+            company_id: company_id
+        },
         success: data => {
             if (current_messages_num !== data.messages.length) {
                 $("#message_wrap").find(".message_text").remove();

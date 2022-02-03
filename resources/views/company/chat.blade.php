@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-3 auth_profile">
                         <div class="text-center chat_user">
-                            <p class="chat_name">あなた</p>
+                            <p class="chat_name company_name" data-company_id="{{ $company_user->id }}">あなた</p>
                             <img class="chat_img" src="{{Storage::disk('s3')->url($company_user->company_icon)}}" alt="画像">
                         </div>
                     </div>
