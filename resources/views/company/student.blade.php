@@ -24,6 +24,9 @@
                 </div>
                 @endif
                 </div>
+                <div class="text-center" style="margin:0 auto; display: table;">
+                    {{$likeUsers->links()}}
+                </div>
             </div>
             </div>
         </div>
