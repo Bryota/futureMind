@@ -117,10 +117,11 @@ class UserController extends Controller
      * @param $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMessages($id)
+    public function getMessages($id, Request $request)
     {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];
+        $this->chat->setMessageNum($id, $request->input('student_id'), 0);
         return response()->json($messagesJsonData);
     }
 

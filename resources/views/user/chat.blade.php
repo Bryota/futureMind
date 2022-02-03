@@ -9,7 +9,6 @@
                         <div class="text-center chat_user">
                             <p class="chat_name">{{$company_user->name}}</p>
                             <img class="chat_img" src="{{Storage::disk('s3')->url($company_user->company_icon)}}" alt="画像">
-
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -18,7 +17,7 @@
                     </div>
                     <div class="col-md-3 auth_profile">
                         <div class="text-center chat_user">
-                            <p class="chat_name">あなた</p>
+                            <p class="chat_name student_name" data-student_id="{{ $student_user->id }}">あなた</p>
                             @if($student_user->img_name)
                                 <img class="chat_img" src="{{Storage::disk('s3')->url($student_user->img_name)}}" alt="画像">
                             @endif

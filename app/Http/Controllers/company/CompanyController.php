@@ -173,10 +173,11 @@ class CompanyController extends Controller
      * @param $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMessages($id)
+    public function getMessages($id, Request $request)
     {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];
+        $this->chat->setMessageNum($id, 0, $request->input('company_id'));
         return response()->json($messagesJsonData);
     }
 
