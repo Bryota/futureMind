@@ -32,7 +32,12 @@
                         <li><a href="{{route('diagnosis.about')}}">FutureMindについて</a></li>
                         <li><a href="{{route('diagnosis.result')}}">結果を見る</a></li>
                         <li><a href="{{route('search.search')}}">企業を探す</a></li>
-                        <li><a href="{{route('user.likes')}}">お気に入り企業を見る</a></li>
+                        <li>
+                            <a href="{{route('user.likes')}}">お気に入り企業を見る</a>
+                        @if (session('is_uncheckedMessage_for_user'))
+                            <span></span>
+                        @endif
+                        </li>
                     </ul>
                 </nav>
             </div>

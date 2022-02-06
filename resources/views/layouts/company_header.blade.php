@@ -31,7 +31,12 @@
                     <nav>
                         <ul>
                             <li><a href="{{route('company.diagnosis')}}">診断をする</a></li>
-                            <li><a href="{{route('company.student')}}">学生を見る</a></li>
+                            <li>
+                                <a href="{{route('company.student')}}">学生を見る</a>
+                                @if (session('is_uncheckedMessage_for_company'))
+                                <span></span>
+                                @endif
+                            </li>
                             <li><a href="{{route('company.logout')}}">ログアウト</a></li>
                         </ul>
                     </nav>

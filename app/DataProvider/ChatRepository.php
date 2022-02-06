@@ -15,7 +15,7 @@ use App\DataProvider\Eloquent\ChatRoom as EloquentChatRoom;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\DataProvider\Eloquent\Company as EloquentCompany;
 use App\DataProvider\Eloquent\Message as EloquentMessage;
-use App\DataProvider\Eloquent\MessageNum as EloquentMessageNum;
+use App\DataProvider\Eloquent\MessageInfo as EloquentMessageInfo;
 use App\Domain\Entity\Chat;
 
 /**
@@ -43,9 +43,9 @@ class ChatRepository implements ChatRepositoryInterface
      */
     private $eloquentMessage;
     /**
-     * @var EloquentMessageNum MessageNumEloquentModel
+     * @var EloquentMessageInfo MessageInfoEloquentModel
      */
-    private $eloquentMessageNum;
+    private $eloquentMessageInfo;
 
     /**
      * コンストラクタ
@@ -56,13 +56,13 @@ class ChatRepository implements ChatRepositoryInterface
      * @param EloquentMessage $message MessageEloquentModel
      * @return void
      */
-    public function __construct(EloquentChatRoom $chatRoom, EloquentUser $user, EloquentCompany $company, EloquentMessage $message, EloquentMessageNum $messageNum)
+    public function __construct(EloquentChatRoom $chatRoom, EloquentUser $user, EloquentCompany $company, EloquentMessage $message, EloquentMessageInfo $messageInfo)
     {
         $this->eloquentChatRoom = $chatRoom;
         $this->eloquentUser = $user;
         $this->eloquentCompany = $company;
         $this->eloquentMessage = $message;
-        $this->eloquentMessageNum = $messageNum;
+        $this->eloquentMessageInfo = $messageInfo;
     }
 
     /**
@@ -198,7 +198,7 @@ class ChatRepository implements ChatRepositoryInterface
     }
 
     /**
-     * メッセージ数設定
+     * メッセージ情報設定
      *
      * @param int $room_id チャットルームID
      * @param int $student_id 学生ID
@@ -206,9 +206,9 @@ class ChatRepository implements ChatRepositoryInterface
      * @param int $message_num メッセージ数
      * @return void
      */
-    public function setMessageNum(int $room_id, int $student_id, int $company_id, int $message_num): void
+    public function setMessageInfo(int $room_id, int $student_id, int $company_id, int $message_num): void
     {
-        $this->eloquentMessageNum::updateOrCreate(
+        $this->eloquentMessageInfo::updateOrCreate(
             [
                 "room_id" => $room_id,
                 "student_user" => $student_id,
@@ -218,7 +218,8 @@ class ChatRepository implements ChatRepositoryInterface
                 "room_id" => $room_id,
                 "student_user" => $student_id,
                 "company_user" => $company_id,
-                "message_num" => $message_num
+                "message_num" => $message_num,
+                "checked_status" => true
             ]
         );
     }
@@ -233,7 +234,7 @@ class ChatRepository implements ChatRepositoryInterface
      */
     public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int
     {
-        $message_num_data = $this->eloquentMessageNum::where([
+        $message_num_data = $this->eloquentMessageInfo::where([
                                             ['room_id', $room_id],
                                             ['student_user', $student_id],
                                             ['company_user', $company_id]
@@ -244,5 +245,61 @@ class ChatRepository implements ChatRepositoryInterface
         } else {
             return $message_num_data->message_num;
         }
+    }
+
+    /**
+     * メッセージ確認有無の設定（学生用）
+     * @param int $room_id チャットルームID
+     */
+    public function setCheckedStatusForUser(int $room_id): void
+    {
+        $this->eloquentMessageInfo::where([
+                                ['room_id', $room_id],
+                                ['company_user', 0]
+                            ])
+                            ->update([
+                                'checked_status' => false
+                            ]);
+    }
+
+    /**
+     * メッセージ確認有無の設定（企業用）
+     * @param int $room_id チャットルームID
+     */
+    public function setCheckedStatusForCompany(int $room_id): void
+    {
+        $this->eloquentMessageInfo::where([
+                                ['room_id', $room_id],
+                                ['student_user', 0]
+                            ])
+                            ->update([
+                                'checked_status' => false
+                            ]);
+    }
+
+    /**
+     * 未確認メッセージ取得（学生用）
+     * @param int $student_id 学生ID
+     */
+    public function getUncheckedMessageForUser(int $student_id): int
+    {
+        return $this->eloquentMessageInfo::where([
+                                ['student_user', $student_id],
+                                ['checked_status', false]
+                            ])
+                            ->count();
+    }
+
+    /**
+     * 未確認メッセージ取得（企業用）
+     * @param int $company_id 企業ID
+     */
+    public function getUncheckedMessageForCompany(int $company_id): int
+    {
+        return $this->eloquentMessageInfo::where([
+                                ['company_user', $company_id],
+                                ['checked_status', false]
+                            ])
+                            ->count();
     }
 }

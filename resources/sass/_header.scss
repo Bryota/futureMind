@@ -37,6 +37,11 @@ header {
                 color: $primary-color;
                 text-decoration: none;
             }
+            span {
+                background-color: $primary-color;
+                border-radius: 50%;
+                padding: 0 13px;
+            }
         }
         @include tab_iPad {
             display: none;

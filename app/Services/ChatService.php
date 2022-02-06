@@ -144,6 +144,22 @@ class ChatService
     public function setMessageNum(int $room_id, int $student_id, int $company_id): void
     {
         $message_num = $this->chat->getMessageNum($room_id);
-        $this->chat->setMessageNum($room_id, $student_id, $company_id, $message_num);
+        $this->chat->setMessageInfo($room_id, $student_id, $company_id, $message_num);
+    }
+
+    /**
+     * メッセージ確認有無の設定
+     * @param int $room_id チャットルームID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @return void
+     */
+    public function setCheckedStatus(int $room_id, int $student_id, int $company_id): void
+    {
+        if ($student_id == 0) {
+            $this->chat->setCheckedStatusForUser($room_id);
+        } else {
+            $this->chat->setCheckedStatusForCompany($room_id);
+        }
     }
 }

@@ -192,6 +192,7 @@ class CompanyController extends Controller
     {
         $this->chat->postMessage($request->room_id, 0, Auth::user()->id, $request->message);
         $this->chat->setMessageNum($request->room_id, 0, Auth::user()->id);
+        $this->chat->setCheckedStatus($request->room_id, 0, Auth::user()->id);
     }
 
     /**;.

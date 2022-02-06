@@ -103,6 +103,7 @@ class UserService
     public function getLikeCompanies(int $id): object
     {
         $likeCompanies = $this->user->getLikeCompanies($id);
+        $existUncheckedMessage = false;
         foreach ($likeCompanies as $company) {
             if ($this->chat->checkChatRoom($id, $company->id)) {
                 $room_id = $this->chat->getChatRoomId($id, $company->id);
