@@ -97,7 +97,7 @@ interface ChatRepositoryInterface
     public function getMessageNum(int $room_id): int;
 
     /**
-     * メッセージ数設定
+     * メッセージ情報設定
      *
      * @param int $room_id チャットルームID
      * @param int $student_id 学生ID
@@ -105,7 +105,7 @@ interface ChatRepositoryInterface
      * @param int $message_num メッセージ数
      * @return void
      */
-    public function setMessageNum(int $room_id, int $student_id, int $company_id, int $message_num): void;
+    public function setMessageInfo(int $room_id, int $student_id, int $company_id, int $message_num): void;
 
     /**
      * 確認済みメッセージ数取得
@@ -116,4 +116,28 @@ interface ChatRepositoryInterface
      * @return int 確認済みメッセージ数
      */
     public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int;
+
+    /**
+     * メッセージ確認有無の設定（学生用）
+     * @param int $room_id チャットルームID
+     */
+    public function setCheckedStatusForUser(int $room_id): void;
+
+    /**
+     * メッセージ確認有無の設定（企業用）
+     * @param int $room_id チャットルームID
+     */
+    public function setCheckedStatusForCompany(int $room_id): void;
+
+    /**
+     * 未確認メッセージ取得（学生用）
+     * @param int $student_id 学生ID
+     */
+    public function getUncheckedMessageForUser(int $student_id): int;
+
+    /**
+     * 未確認メッセージ取得（企業用）
+     * @param int $company_id 企業ID
+     */
+    public function getUncheckedMessageForCompany(int $company_id): int;
 }

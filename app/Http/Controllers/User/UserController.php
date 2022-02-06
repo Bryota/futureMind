@@ -136,5 +136,6 @@ class UserController extends Controller
     {
         $this->chat->postMessage($request->room_id, Auth::user()->id, 0, $request->message);
         $this->chat->setMessageNum($request->room_id, Auth::user()->id, 0);
+        $this->chat->setCheckedStatus($request->room_id, Auth::user()->id, 0);
     }
 }

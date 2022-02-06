@@ -16670,6 +16670,11 @@ header .header_nav ul a:hover {
   color: #Fdff83;
   text-decoration: none;
 }
+header .header_nav ul span {
+  background-color: #Fdff83;
+  border-radius: 50%;
+  padding: 0 13px;
+}
 @media only screen and (max-width: 768px) {
   header .header_nav {
     display: none;
