@@ -71,10 +71,24 @@ class ChatRepository implements ChatRepositoryInterface
      * @param int $id 学生ID
      * @return object 学生データ
      */
+    // TODO: 定義の場所がおかしい
     public function getStudentData(int $id): object
     {
         $studentData = $this->eloquentUser::where('id', $id)->first();
         return $studentData;
+    }
+
+    /**
+     * 学生IDの取得
+     *
+     * @param int $room_id チャットルームID
+     * @return int 学生ID
+     */
+    public function getStudentId(int $room_id): int
+    {
+        $student_ids = $this->eloquentChatRoom::where('id', $room_id)->pluck('user_id');
+        $student_id = $student_ids[0];
+        return $student_id;
     }
 
     /**
@@ -230,9 +244,9 @@ class ChatRepository implements ChatRepositoryInterface
      * @param int $room_id チャットルームID
      * @param int $student_id 学生ID
      * @param int $company_id 企業ID
-     * @return int 確認済みメッセージ数
+     * @return int|null 確認済みメッセージ数
      */
-    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int
+    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): mixed
     {
         $message_num_data = $this->eloquentMessageInfo::where([
                                             ['room_id', $room_id],
@@ -251,30 +265,40 @@ class ChatRepository implements ChatRepositoryInterface
      * メッセージ確認有無の設定（学生用）
      * @param int $room_id チャットルームID
      */
-    public function setCheckedStatusForUser(int $room_id): void
+    public function setCheckedStatusForUser(int $room_id, int $student_id): void
     {
-        $this->eloquentMessageInfo::where([
-                                ['room_id', $room_id],
-                                ['company_user', 0]
-                            ])
-                            ->update([
+        $this->eloquentMessageInfo::updateOrCreate(
+                            [
+                                'room_id' => $room_id,
+                                'company_user' => 0
+                            ],
+                            [
+                                "room_id" => $room_id,
+                                "student_user" => $student_id,
+                                "company_user" => 0,
                                 'checked_status' => false
-                            ]);
+                            ]
+                        );
     }
 
     /**
      * メッセージ確認有無の設定（企業用）
      * @param int $room_id チャットルームID
      */
-    public function setCheckedStatusForCompany(int $room_id): void
+    public function setCheckedStatusForCompany(int $room_id, int $company_id): void
     {
-        $this->eloquentMessageInfo::where([
-                                ['room_id', $room_id],
-                                ['student_user', 0]
-                            ])
-                            ->update([
+        $this->eloquentMessageInfo::updateOrCreate(
+                            [
+                                'room_id' => $room_id,
+                                'student_user' => 0
+                            ],
+                            [
+                                "room_id" => $room_id,
+                                "student_user" => 0,
+                                "company_user" => $company_id,
                                 'checked_status' => false
-                            ]);
+                            ]
+                        );
     }
 
     /**
