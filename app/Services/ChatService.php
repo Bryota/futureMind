@@ -154,12 +154,15 @@ class ChatService
      * @param int $company_id 企業ID
      * @return void
      */
-    public function setCheckedStatus(int $room_id, int $student_id, int $company_id): void
+    // TODO: 変数名考える
+    public function setCheckedStatus(int $room_id, int $student_data, int $company_data): void
     {
-        if ($student_id == 0) {
-            $this->chat->setCheckedStatusForUser($room_id);
+        if ($student_data == 0) {
+            $student_id = $this->chat->getStudentId($room_id);
+            $this->chat->setCheckedStatusForUser($room_id, $student_id);
         } else {
-            $this->chat->setCheckedStatusForCompany($room_id);
+            $company_id = $this->chat->getCompanyId($room_id);
+            $this->chat->setCheckedStatusForCompany($room_id, $company_id);
         }
     }
 }

@@ -108,6 +108,9 @@ class UserService
                 $room_id = $this->chat->getChatRoomId($id, $company->id);
                 $messageNum = $this->chat->getMessageNum($room_id);
                 $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, $id, 0);
+                if (is_null($checkedMessageNum)) {
+                    $checkedMessageNum = 0;
+                }
                 $unCheckedMessageNum = $messageNum - $checkedMessageNum;
                 $company->unCheckedMessageNum = $unCheckedMessageNum;
             }

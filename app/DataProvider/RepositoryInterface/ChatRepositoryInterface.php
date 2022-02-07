@@ -30,6 +30,14 @@ interface ChatRepositoryInterface
     public function getStudentData(int $id): object;
 
     /**
+     * 学生IDの取得
+     *
+     * @param int $room_id チャットルームID
+     * @return int 学生ID
+     */
+    public function getStudentId(int $room_id): int;
+
+    /**
      * 企業IDの取得
      *
      * @param int $id チャットルームID
@@ -113,21 +121,21 @@ interface ChatRepositoryInterface
      * @param int $room_id チャットルームID
      * @param int $student_id 学生ID
      * @param int $company_id 企業ID
-     * @return int 確認済みメッセージ数
+     * @return int|null 確認済みメッセージ数
      */
-    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): int;
+    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): mixed;
 
     /**
      * メッセージ確認有無の設定（学生用）
      * @param int $room_id チャットルームID
      */
-    public function setCheckedStatusForUser(int $room_id): void;
+    public function setCheckedStatusForUser(int $room_id, int $student_id): void;
 
     /**
      * メッセージ確認有無の設定（企業用）
      * @param int $room_id チャットルームID
      */
-    public function setCheckedStatusForCompany(int $room_id): void;
+    public function setCheckedStatusForCompany(int $room_id, int $company_id): void;
 
     /**
      * 未確認メッセージ取得（学生用）
