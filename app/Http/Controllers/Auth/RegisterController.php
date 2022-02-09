@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\DataProvider\Eloquent\Company;
 use Intervention\Image\Facades\Image;
 use App\Services\ImgToDatabase;
+use App\Http\Requests\CompanyRegisterRequest;
 
 
 class RegisterController extends Controller
@@ -89,28 +90,25 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function companyValidator(array $data)
-    {
-        return Validator::make($data,[
-            'name' => ['required', 'string', 'max:255'],
-            'company_icon' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:companies'],
-            'password' => ['required', 'string', 'min:8'],
-        ]);
-    }
-
+    /**
+     * 企業新規登録ページ用
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showCompanyRegisterForm(){
         return view('company.register',['authgroup'=>'company']);
     }
 
-    protected function createCompany(Request $request)
+    /**
+     * 企業新規登録用
+     *
+     * @param CompanyRegisterRequest $request 企業新規登録リクエスト
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function createCompany(CompanyRegisterRequest $request)
     {
-        $img_name = null;
-        if(isset($request->company_icon)){
-            $this->storage->putFileToCompany($request->company_icon);
-            $img_name = 'companies/' . $request->company_icon->getClientOriginalName();
-        }
-        $this->companyValidator($request->all())->validate();
+        $this->storage->putFileToCompany($request->company_icon);
+        $img_name = 'companies/' . $request->company_icon->getClientOriginalName();
         $company = Company::create([
             'name' => $request['name'],
             'email' => $request['email'],
