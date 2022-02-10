@@ -126,6 +126,7 @@ return [
         'industry' => '志望業界',
         'university' => '在籍学校',
         'hobby' => '趣味',
+        'club' => '部活動・サークル',
         'hometown' => '出身',
         'office' => '場所',
         'employee' => '社員数',

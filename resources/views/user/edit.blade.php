@@ -60,6 +60,9 @@
                         <div class="col-md-3 info_wrap">
                             <div class="info_title border_future">
                                 <p><label for="club">部活動・サークル</label></p>
+                                @if($errors->has('club'))
+                                <p class="error-text">{{$errors->first('club')}}</p>
+                                @endif
                             </div>
                             <div class="info_content">
                                 <p><input type="text" id="club" name="club" value="{{$userData->club}}"></p>

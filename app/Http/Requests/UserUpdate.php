@@ -27,6 +27,7 @@ class UserUpdate extends FormRequest
             'industry' => 'required',
             'name' => 'required',
             'year' => 'required',
+            'club' => 'required',
             'university' => 'required',
             'hobby' => 'required',
             'hometown' => 'required',
