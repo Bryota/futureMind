@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\User\DiagnosisController::class, 'index'])->name('diagnosis.index')->middleware(['auth', 'uncheckedMessage.user']);
