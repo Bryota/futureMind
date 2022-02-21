@@ -26,7 +26,7 @@ class CompanyRegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'company_icon' => 'required',
-            'email' => 'required|string|email|max:255|unique:companies',
+            'email' => 'required|string|email:filter|max:255|unique:companies',
             'password' => 'required|string|min:8'
         ];
     }
