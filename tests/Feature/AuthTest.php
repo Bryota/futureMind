@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\DataProvider\Eloquent\User;
 use App\DataProvider\Eloquent\Company;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
