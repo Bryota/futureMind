@@ -45,4 +45,19 @@ class CompanyFactory extends Factory
 
         return array_merge($validData, $overrides);
     }
+
+    public function ValidUpdateData($overrides = [])
+    {
+        $validData = [
+            'name' => 'user_update',
+            'company_icon' => UploadedFile::fake()->image('test_update.jpg'),
+            'industry' => $this->faker->randomElement(['メーカー','商社','マスコミ','物流','不動産','IT','医療','教育','流通','金融','コンサルティング','環境','その他']),
+            'office' => $this->faker->address,
+            'employee' => $this->faker->numberBetween($min=10,$max=10000),
+            'homepage' => $this->faker->url,
+            'comment' => $this->faker->realText(50),
+        ];
+
+        return array_merge($validData, $overrides);
+    }
 }
