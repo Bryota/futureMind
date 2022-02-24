@@ -263,4 +263,17 @@ class AuthTest extends TestCase
         $this->from($url)->post($url, $postData)
             ->assertRedirect($url);
     }
+
+    /**
+     * @test
+     * App\Http\Controllers\Auth\LoginController @logout
+     */
+    public function 企業ログアウトできる()
+    {
+        $this->loginAsCompany();
+
+        $this->delete('company/logout')
+            ->assertRedirect('/company/login');
+    }
+
 }
