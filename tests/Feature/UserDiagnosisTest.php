@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\DataProvider\Eloquent\Company;
 use App\DataProvider\Eloquent\FutureDiagnosisData;
 use App\DataProvider\Eloquent\SelfDiagnosisData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,6 +19,8 @@ class UserDiagnosisTest extends TestCase
         $this->seed('FutureCommentSeeder');
         $this->seed('SelfCommentSeeder');
         $this->seed('ToFutureCommentSeeder');
+        $this->seed('FutureSingleCompanySeeder');
+        $this->seed('SelfSingleCompanySeeder');
     }
     /**
      * @test
@@ -34,6 +37,10 @@ class UserDiagnosisTest extends TestCase
         $this->get('/diagnosis/self')
             ->assertRedirect('/login');
         $this->get('/diagnosis/result')
+            ->assertRedirect('/login');
+        $this->get('/diagnosis/selfCompany')
+            ->assertRedirect('/login');
+        $this->get('/diagnosis/futureCompany')
             ->assertRedirect('/login');
 
         $this->loginAsUser();
@@ -116,5 +123,263 @@ class UserDiagnosisTest extends TestCase
             ->assertSee('安定')
             ->assertSee('仲間')
             ->assertSee('将来性');
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @futureCompany
+     */
+    public function 理想分析から選定された企業一覧該当企業なし()
+    {
+        $user = $this->loginAsUser();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+
+        $this->get('diagnosis/futureCompany')
+            ->assertOk()
+            ->assertSee('オススメの企業は見つかりませんでした。');
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @selfCompany
+     */
+    public function 自己分析から選定された企業一覧該当企業なし()
+    {
+        $user = $this->loginAsUser();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+
+        $this->get('diagnosis/selfCompany')
+            ->assertOk()
+            ->assertSee('オススメの企業は見つかりませんでした。');
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @futureCompany
+     */
+    public function 理想分析から選定された企業一覧該当企業あり()
+    {
+        $user = $this->loginAsUser();
+        $company = $this->loginAsCompany();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 3,
+            'socialvalue' => 3,
+            'stablevalue' => 3,
+            'teammatevalue' => 3,
+            'futurevalue' => 3
+        ];
+
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+        $this->post('/company/diagnosis', $diagnosisPostData);
+
+        $this->get('diagnosis/futureCompany')
+            ->assertOk()
+            ->assertSee($company->title);
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @selfCompany
+     */
+    public function 自己分析から選定された企業一覧該当企業あり()
+    {
+        $user = $this->loginAsUser();
+        $company = $this->loginAsCompany();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 3,
+            'socialvalue' => 3,
+            'stablevalue' => 3,
+            'teammatevalue' => 3,
+            'futurevalue' => 3
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+        $this->post('/company/diagnosis', $diagnosisPostData);
+
+        $this->get('diagnosis/selfCompany')
+            ->assertOk()
+            ->assertSee($company->title);
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @futureCompany
+     */
+    public function 理想分析おすすめ企業()
+    {
+        $user = $this->loginAsUser();
+        $company = $this->loginAsCompany();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 3,
+            'socialvalue' => 3,
+            'stablevalue' => 3,
+            'teammatevalue' => 3,
+            'futurevalue' => 3
+        ];
+
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+        $this->post('/company/diagnosis', $diagnosisPostData);
+
+        $this->get('diagnosis/futureSingleCompany/'.$company->id)
+            ->assertOk()
+            ->assertOk('なし')
+            ->assertOk($company->name)
+            ->assertOk($company->industry)
+            ->assertOk($company->office)
+            ->assertOk($company->employee)
+            ->assertOk($company->homepage)
+            ->assertOk($company->comment);
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\User\DiagnosisController @futureCompany
+     */
+    public function 自己分析おすすめ企業()
+    {
+        $user = $this->loginAsUser();
+        $company = $this->loginAsCompany();
+
+        $futureDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 3,
+            'socialvalue' => 3,
+            'stablevalue' => 3,
+            'teammatevalue' => 3,
+            'futurevalue' => 3
+        ];
+        $selfDiagnosisPostData = [
+            'user_id' => $user->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+
+        $this->post('/diagnosis/future', $futureDiagnosisPostData);
+        $this->post('/diagnosis/self', $selfDiagnosisPostData);
+        $this->post('/company/diagnosis', $diagnosisPostData);
+
+        $this->get('diagnosis/selfSingleCompany/'.$company->id)
+            ->assertOk()
+            ->assertOk('成長意欲')
+            ->assertOk('社会貢献')
+            ->assertOk('安定')
+            ->assertOk('仲間')
+            ->assertOk('将来性')
+            ->assertOk($company->name)
+            ->assertOk($company->industry)
+            ->assertOk($company->office)
+            ->assertOk($company->employee)
+            ->assertOk($company->homepage)
+            ->assertOk($company->comment);
     }
 }

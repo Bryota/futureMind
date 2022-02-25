@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FutureCommentSeeder::class);
         $this->call(SelfCommentSeeder::class);
         $this->call(ToFutureCommentSeeder::class);
-        // $this->call(FutureSingleCompanySeeder::class);
-        // $this->call(SelfSingleCompanySeeder::class);
+        $this->call(FutureSingleCompanySeeder::class);
+        $this->call(SelfSingleCompanySeeder::class);
         // $this->call(LikesSeeder::class);
     }
 }

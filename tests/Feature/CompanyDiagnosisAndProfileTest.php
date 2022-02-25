@@ -18,6 +18,8 @@ class CompanyDiagnosisAndProfileTest extends TestCase
         $this->seed('FutureCommentSeeder');
         $this->seed('SelfCommentSeeder');
         $this->seed('ToFutureCommentSeeder');
+        $this->seed('FutureSingleCompanySeeder');
+        $this->seed('SelfSingleCompanySeeder');
     }
     /**
      * @test
