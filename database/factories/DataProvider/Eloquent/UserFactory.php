@@ -2,12 +2,20 @@
 
 namespace Database\Factories\DataProvider\Eloquent;
 
+use App\DataProvider\Eloquent\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
+    /**
+     * model
+     *
+     * @var string
+     */
+    protected $model = User::class;
+
     private $GraduateYear = [
         '2022年',
         '2023年',

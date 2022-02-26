@@ -7,6 +7,7 @@ use App\DataProvider\Eloquent\FutureDiagnosisData;
 use App\DataProvider\Eloquent\SelfDiagnosisData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class UserDiagnosisTest extends TestCase
@@ -197,9 +198,19 @@ class UserDiagnosisTest extends TestCase
      */
     public function 理想分析から選定された企業一覧該当企業あり()
     {
-        $user = $this->loginAsUser();
         $company = $this->loginAsCompany();
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $this->post('/company/diagnosis', $diagnosisPostData);
+        $this->delete('company/logout');
 
+        $user = $this->loginAsUser();
         $futureDiagnosisPostData = [
             'user_id' => $user->id,
             'developmentvalue' => 15,
@@ -217,18 +228,8 @@ class UserDiagnosisTest extends TestCase
             'futurevalue' => 3
         ];
 
-        $diagnosisPostData = [
-            'user_id' => $company->id,
-            'developmentvalue' => 15,
-            'socialvalue' => 15,
-            'stablevalue' => 15,
-            'teammatevalue' => 15,
-            'futurevalue' => 15
-        ];
-
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('/company/diagnosis', $diagnosisPostData);
 
         $this->get('diagnosis/futureCompany')
             ->assertOk()
@@ -241,8 +242,19 @@ class UserDiagnosisTest extends TestCase
      */
     public function 自己分析から選定された企業一覧該当企業あり()
     {
-        $user = $this->loginAsUser();
         $company = $this->loginAsCompany();
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $this->post('/company/diagnosis', $diagnosisPostData);
+        $this->delete('company/logout');
+
+        $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
             'user_id' => $user->id,
@@ -261,18 +273,8 @@ class UserDiagnosisTest extends TestCase
             'futurevalue' => 15
         ];
 
-        $diagnosisPostData = [
-            'user_id' => $company->id,
-            'developmentvalue' => 15,
-            'socialvalue' => 15,
-            'stablevalue' => 15,
-            'teammatevalue' => 15,
-            'futurevalue' => 15
-        ];
-
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('/company/diagnosis', $diagnosisPostData);
 
         $this->get('diagnosis/selfCompany')
             ->assertOk()
@@ -285,8 +287,19 @@ class UserDiagnosisTest extends TestCase
      */
     public function 理想分析おすすめ企業()
     {
-        $user = $this->loginAsUser();
         $company = $this->loginAsCompany();
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $this->post('/company/diagnosis', $diagnosisPostData);
+        $this->delete('company/logout');
+
+        $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
             'user_id' => $user->id,
@@ -305,18 +318,8 @@ class UserDiagnosisTest extends TestCase
             'futurevalue' => 3
         ];
 
-        $diagnosisPostData = [
-            'user_id' => $company->id,
-            'developmentvalue' => 15,
-            'socialvalue' => 15,
-            'stablevalue' => 15,
-            'teammatevalue' => 15,
-            'futurevalue' => 15
-        ];
-
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('/company/diagnosis', $diagnosisPostData);
 
         $this->get('diagnosis/futureSingleCompany/'.$company->id)
             ->assertOk()
@@ -335,8 +338,19 @@ class UserDiagnosisTest extends TestCase
      */
     public function 自己分析おすすめ企業()
     {
-        $user = $this->loginAsUser();
         $company = $this->loginAsCompany();
+        $diagnosisPostData = [
+            'user_id' => $company->id,
+            'developmentvalue' => 15,
+            'socialvalue' => 15,
+            'stablevalue' => 15,
+            'teammatevalue' => 15,
+            'futurevalue' => 15
+        ];
+        $this->post('/company/diagnosis', $diagnosisPostData);
+        $this->delete('company/logout');
+
+        $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
             'user_id' => $user->id,
@@ -355,18 +369,8 @@ class UserDiagnosisTest extends TestCase
             'futurevalue' => 15
         ];
 
-        $diagnosisPostData = [
-            'user_id' => $company->id,
-            'developmentvalue' => 15,
-            'socialvalue' => 15,
-            'stablevalue' => 15,
-            'teammatevalue' => 15,
-            'futurevalue' => 15
-        ];
-
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('/company/diagnosis', $diagnosisPostData);
 
         $this->get('diagnosis/selfSingleCompany/'.$company->id)
             ->assertOk()
