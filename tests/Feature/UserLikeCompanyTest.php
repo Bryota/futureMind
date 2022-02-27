@@ -105,6 +105,8 @@ class UserLikeCompanyTest extends TestCase
         $this->get('/user/likes')
             ->assertOk()
             ->assertSee($this->company->name);
+
+        $this->assertDatabaseHas('likes', ['user_id' => $user->id, 'company_id' => $this->company->id]);
     }
 
     /**
@@ -142,6 +144,8 @@ class UserLikeCompanyTest extends TestCase
         $this->get('/user/likes')
             ->assertOk()
             ->assertSee($this->company->name);
+
+        $this->assertDatabaseHas('likes', ['user_id' => $this->company->id, 'company_id' => $this->company->id]);
     }
 
     /**
@@ -150,10 +154,12 @@ class UserLikeCompanyTest extends TestCase
      */
     public function 検索結果お気に入り企業追加()
     {
-        $this->loginAsUser();
+        $user = $this->loginAsUser();
 
         $this->post('search/company/'.$this->company->id, ['company_id' => $this->company->id])
             ->assertOk()
             ->assertSee('お気に入りに追加済み');
+
+        $this->assertDatabaseHas('likes', ['user_id' => $user->id, 'company_id' => $this->company->id]);
     }
 }
