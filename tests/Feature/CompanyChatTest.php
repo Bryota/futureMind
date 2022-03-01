@@ -83,7 +83,7 @@ class CompanyChatTest extends TestCase
      * @test
      * App\Http\Controllers\company\CompanyController @postMessage
      */
-    public function チャット送信()
+    public function チャット送信自分から()
     {
         $this->company = $this->loginAsCompany($this->company);
 
@@ -96,7 +96,32 @@ class CompanyChatTest extends TestCase
         $this->assertCount(1, Message::all());
         $this->assertDatabaseHas('messages', [
                                                 'student_user' => 0,
-                                                'company_user' => $this->company->id,
+                                                'company_user' => $chat_room->company_id,
+                                                'room_id' => $chat_room->id,
+                                                'message' => 'テストメッセージ'
+                                            ]
+        );
+    }
+
+    /**
+     * @test
+     * App\Http\Controllers\company\CompanyController @postMessage
+     */
+    public function チャット送信相手から()
+    {
+        $this->company = $this->loginAsCompany($this->company);
+        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->delete('company/logout');
+
+        $chat_room = ChatRoom::first();
+
+        $this->user = $this->loginAsUser($this->user);
+        $this->post('user/chat/'.$chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
+
+        $this->assertCount(1, Message::all());
+        $this->assertDatabaseHas('messages', [
+                                                'student_user' => $chat_room->user_id,
+                                                'company_user' => 0,
                                                 'room_id' => $chat_room->id,
                                                 'message' => 'テストメッセージ'
                                             ]
