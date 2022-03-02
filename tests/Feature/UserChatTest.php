@@ -107,4 +107,34 @@ class UserChatTest extends TestCase
         $this->get('user/chat/ajax/'.$chat_room->id.'?student_id='.$this->user->id)
             ->assertJsonFragment(['company_user' => 0, 'message' => "テストメッセージ", "student_user" => $this->user->id]);
     }
+
+    /**
+     * @test
+     * App\Http\Middleware\CompanyUncheckedMessageMiddleware
+     */
+    public function 新着チャットアラート()
+    {
+        $this->company = $this->loginAsCompany($this->company);
+        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->delete('company/logout');
+
+        $chat_room = ChatRoom::first();
+        $this->company = $this->loginAsCompany($this->company);
+        $this->post('company/chat/'.$chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
+        $this->delete('company/logout');
+
+        $this->loginAsUser($this->user);
+
+        $this->get('/')
+            ->assertSee('<span></span>', false);
+        $this->get('user/likes')
+            ->assertSee('<span>1</span>', false);
+
+        $this->get('user/chat/'.$chat_room->id);
+
+        $this->get('/')
+            ->assertDontSee('<span></span>', false);
+        $this->get('user/likes')
+            ->assertDontSee('<span>1</span>', false);
+    }
 }
