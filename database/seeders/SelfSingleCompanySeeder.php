@@ -35,7 +35,7 @@ class SelfSingleCompanySeeder extends Seeder
             'comment' => 'この企業は、あなたの将来の希望に比べて、将来性の点で弱いようです。将来性を求めているあなたにとっては、少し物足りないかもしれません。'
             ],
             [
-            'comment_type' => '',
+            'comment_type' => 'なし',
             'comment' => '現状、この企業に対してあなたが足りない点はないようです。これからもこの勢いで頑張りましょう。'
             ],
     ]);

@@ -124,7 +124,7 @@ return [
         'password'=>'パスワード',
         'company_icon' => 'アイコン',
         'industry' => '志望業界',
-        'university' => '在籍学校',
+        'university' => '在学大学',
         'hobby' => '趣味',
         'club' => '部活動・サークル',
         'hometown' => '出身',

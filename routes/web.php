@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\User\DiagnosisController::class, 'index'])->name('diagnosis.index')->middleware(['auth', 'uncheckedMessage.user']);
@@ -52,7 +56,7 @@ Route::post('/company/register', [App\Http\Controllers\Auth\RegisterController::
 Route::group(['namespace'=>'company', 'prefix'=>'company', 'middleware'=>['auth:company', 'uncheckedMessage.company']], function() {
     Route::get('/', [App\Http\Controllers\company\CompanyController::class, 'index'])->name('company.home');
     Route::get('edit',[App\Http\Controllers\company\CompanyController::class, 'edit'])->name('company.edit');
-    Route::get('logout',[App\Http\Controllers\company\CompanyController::class, 'logout'])->name('company.logout');
+    Route::delete('logout',[App\Http\Controllers\company\CompanyController::class, 'logout'])->name('company.logout');
     Route::post('edit',[App\Http\Controllers\company\CompanyController::class, 'update'])->name('company.update');
     Route::get('diagnosis',[App\Http\Controllers\company\CompanyController::class, 'diagnosis'])->name('company.diagnosis');
     Route::post('diagnosis',[App\Http\Controllers\company\CompanyController::class, 'diagnosisPost'])->name('company.diagnosisPost');

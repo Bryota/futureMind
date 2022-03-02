@@ -31,7 +31,7 @@ class UserUpdate extends FormRequest
             'university' => 'required',
             'hobby' => 'required',
             'hometown' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email:filter',
         ];
     }
 }
