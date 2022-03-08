@@ -15,7 +15,6 @@ use App\DataProvider\Eloquent\Company as EloquentCompany;
 use App\DataProvider\Eloquent\ChatRoom as EloquentChatRoom;
 use App\DataProvider\Eloquent\CompanyDiagnosisData as EloquentCompanyDiagnosisData;
 use App\Domain\Entity\CompanyDiagnosisData;
-use App\Services\ImgToDatabase;
 use Illuminate\Support\Facades\DB;
 use App\Domain\Entity\Company;
 

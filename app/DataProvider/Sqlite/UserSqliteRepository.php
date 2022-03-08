@@ -13,7 +13,6 @@ namespace App\DataProvider\Sqlite;
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\Domain\Entity\User;
-use App\Services\ImgToDatabase;
 use Illuminate\Support\Facades\DB;
 
 
@@ -66,7 +65,7 @@ class UserSqliteRepository implements UserRepositoryInterface
      * @param int $id 学生ID
      * @return void
      */
-    public function update(User $user, int $id): void
+    public function update(User $user, int $id, $file): void
     {
         $eloquent = $this->eloquentUser::on($this->connection)->find($id);
         $eloquent->name = $user->getName();
@@ -77,10 +76,8 @@ class UserSqliteRepository implements UserRepositoryInterface
         $eloquent->club = $user->GetClub();
         $eloquent->industry = $user->GetIndustry();
         $eloquent->hometown = $user->GetHomeTown();
-        $img_name = $user->GetImgName();
-        if(isset($img_name)){
-            $fileNameToStore = ImgToDatabase::ImgToDatabase($img_name);
-            $eloquent->img_name = $fileNameToStore;
+        if(isset($file)){
+            $eloquent->img_name = 'users/' . $file->getClientOriginalName();
         }
         $eloquent->save();
     }
