@@ -15,7 +15,6 @@ use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
-use Illuminate\Support\Facades\App;
 
 /**
  * 企業用のサービスクラス
