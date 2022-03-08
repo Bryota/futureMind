@@ -42,10 +42,6 @@ class Company
      * @var string|null $comment コメント
      */
     private $comment;
-    /**
-     * @var string|null $img_name プロフィール画像名
-     */
-    private $img_name;
 
     /**
      * コンストラクタ
@@ -59,7 +55,7 @@ class Company
      * @param string|null $img_name プロフィール画像名
      * @return void
      */
-    public function __construct(?string $name, ?string $industry, ?string $office, ?int $employee, ?string $homepage, ?string $comment, ?string $img_name)
+    public function __construct(?string $name, ?string $industry, ?string $office, ?int $employee, ?string $homepage, ?string $comment)
     {
         $this->name = $name;
         $this->industry = $industry;
@@ -67,7 +63,6 @@ class Company
         $this->employee = $employee;
         $this->homepage = $homepage;
         $this->comment = $comment;
-        $this->img_name = $img_name;
     }
 
     /**
@@ -128,15 +123,5 @@ class Company
     public function getComment(): string
     {
         return $this->comment;
-    }
-
-    /**
-     * プロフィール画像名の取得
-     *
-     * @return string|null プロフィール画像名
-     */
-    public function GetImgName(): mixed
-    {
-        return $this->img_name;
     }
 }
