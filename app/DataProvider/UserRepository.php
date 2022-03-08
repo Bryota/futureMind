@@ -13,8 +13,6 @@ namespace App\DataProvider;
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\Domain\Entity\User;
-use App\Services\ImgToDatabase;
-use Faker\Core\File;
 use Illuminate\Support\Facades\DB;
 
 /**
