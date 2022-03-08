@@ -15,7 +15,7 @@ use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
-
+use Illuminate\Support\Facades\App;
 
 /**
  * 企業用のサービスクラス
@@ -115,7 +115,7 @@ class CompanyService
      * @param int $company_id 企業ID
      * @return void
      */
-    public function updateCompanyData($request, int $company_id): void
+    public function updateCompanyData($request, int $company_id, $file): void
     {
         $company = New Company(
             $request->name,
@@ -123,10 +123,12 @@ class CompanyService
             $request->office,
             $request->employee,
             $request->homepage,
-            $request->comment,
-            $request->img_name
+            $request->comment
         );
-        $this->company->updateCompanydata($company, $company_id);
+        if (isset($file)) {
+            $this->storage->putFileToCompany($file);
+        }
+        $this->company->updateCompanydata($company, $company_id, $file);
     }
 
     /**

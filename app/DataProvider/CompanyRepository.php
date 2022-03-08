@@ -105,7 +105,7 @@ class CompanyRepository implements CompanyRepositoryInterface
      * @param int $company_id 企業ID
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id): void
+    public function updateCompanyData(Company $company, int $company_id, $file): void
     {
         $eloquent = $this->eloquentCompany::find($company_id);
         $eloquent->name = $company->getName();
@@ -114,10 +114,8 @@ class CompanyRepository implements CompanyRepositoryInterface
         $eloquent->employee = $company->getEmployee();
         $eloquent->homepage = $company->getHomepage();
         $eloquent->comment = $company->getComment();
-        $img_name = $company->GetImgName();
-        if(isset($img_name)){
-            $fileNameToStore = ImgToDatabase::ImgToDatabase($img_name);
-            $eloquent->img_name = $fileNameToStore;
+        if(isset($file)){
+            $eloquent->company_icon = 'companies/' . $file->getClientOriginalName();
         }
         $eloquent->save();
     }

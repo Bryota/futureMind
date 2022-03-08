@@ -51,7 +51,7 @@ interface CompanyRepositoryInterface
      * @param int $company_id 企業ID
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id): void;
+    public function updateCompanyData(Company $company, int $company_id, $file): void;
 
     /**
      * 企業診断データの追加or更新

@@ -87,7 +87,7 @@ class CompanyController extends Controller
      */
     public function update(CompanyUpdate $request)
     {
-        $this->company->updateCompanyData($request, Auth::user()->id);
+        $this->company->updateCompanyData($request, Auth::user()->id, $request->file('company_icon'));
         return redirect('/company');
     }
 
