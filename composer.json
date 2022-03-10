@@ -53,12 +53,6 @@
     "extra": {
         "laravel": {
             "dont-discover": []
-        },
-        "hooks": {
-            "pre-commit": [
-                "docker exec laravel_sail_container php artisan test",
-                "git add ."
-            ]
         }
     },
     "config": {
