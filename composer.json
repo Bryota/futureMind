@@ -57,7 +57,7 @@
         },
         "hooks": {
             "pre-commit": [
-                "./vendor/bin/sail test .",
+                "docker exec laravel_sail_container php artisan test",
                 "git add ."
             ]
         }
