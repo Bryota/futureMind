@@ -156,7 +156,7 @@ class UserDiagnosisTest extends TestCase
 
         $this->get('diagnosis/futureCompany')
             ->assertOk()
-            ->assertSee('オススメの企業は見つかりませんでした。');
+            ->assertSee('オススメの企業は見つかりませんでし。');
     }
 
     /**
