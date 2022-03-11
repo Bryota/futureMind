@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業用のデータリポジトリ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider;
 
 use App\DataProvider\RepositoryInterface\CompanyRepositoryInterface;
@@ -34,6 +36,10 @@ class CompanyRepository implements CompanyRepositoryInterface
      * @var EloquentChatRoom $eloquentChatRoom ChatRoomEloquentModel
      */
     private $eloquentChatRoom;
+    /**
+     * @var EloquentCompanyDiagnosisData $eloquentCompanyDiagnosisData eloquentCompanyDiagnosisDataModel
+     */
+    private $eloquentCompanyDiagnosisData;
     /**
      * @var \Illuminate\Database\Query\Builder $likesTable likesTableクエリビルダ
      */
@@ -83,15 +89,15 @@ class CompanyRepository implements CompanyRepositoryInterface
     public function getSearchedCompanies($employee, $industry, $area, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): object
     {
         // 業種・地域・規模が当てはまり、詳細条件のどれか1つが当てはまるものを検索
-        $companies = $this->eloquentCompany::where('industry',$industry)
-            ->Where('office','LIKE',"%{$area}%")
-            ->WhereBetween('employee',$employee)
-            ->whereHas('diagnosis',function($query) use($developmentValue,$socialValue,$stableValue,$teammateValue,$futureValue){
-                $query->where('developmentvalue',$developmentValue);
-                $query->orWhere('socialvalue',$socialValue);
-                $query->orWhere('stablevalue',$stableValue);
-                $query->orWhere('teammatevalue',$teammateValue);
-                $query->orWhere('futurevalue',$futureValue);
+        $companies = $this->eloquentCompany::where('industry', $industry)
+            ->Where('office', 'LIKE', "%{$area}%")
+            ->WhereBetween('employee', $employee)
+            ->whereHas('diagnosis', function ($query) use ($developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue) {
+                $query->where('developmentvalue', $developmentValue);
+                $query->orWhere('socialvalue', $socialValue);
+                $query->orWhere('stablevalue', $stableValue);
+                $query->orWhere('teammatevalue', $teammateValue);
+                $query->orWhere('futurevalue', $futureValue);
             })
             ->paginate(6);
         return $companies;
@@ -113,7 +119,7 @@ class CompanyRepository implements CompanyRepositoryInterface
         $eloquent->employee = $company->getEmployee();
         $eloquent->homepage = $company->getHomepage();
         $eloquent->comment = $company->getComment();
-        if(isset($file)){
+        if (isset($file)) {
             $eloquent->company_icon = 'companies/' . $file->getClientOriginalName();
         }
         $eloquent->save();
@@ -128,22 +134,22 @@ class CompanyRepository implements CompanyRepositoryInterface
      */
     public function setCompanyDiagnosisData(CompanyDiagnosisData $companyDiagnosisData, int $company_id): void
     {
-        if ($this->eloquentCompanyDiagnosisData::where('user_id',$company_id)->first() === null) {
+        if ($this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first() === null) {
             $eloquent = $this->eloquentCompanyDiagnosisData->newInstance();
-            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue()/3;
-            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue()/3;
-            $eloquent->stablevalue = $companyDiagnosisData->getStableValue()/3;
-            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue()/3;
-            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue()/3;
+            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue() / 3;
+            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue() / 3;
+            $eloquent->stablevalue = $companyDiagnosisData->getStableValue() / 3;
+            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue() / 3;
+            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue() / 3;
             $eloquent->user_id = $companyDiagnosisData->getCompanyId();
             $eloquent->save();
         } else {
-            $eloquent = $this->eloquentCompanyDiagnosisData::where('user_id',$company_id)->first();
-            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue()/3;
-            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue()/3;
-            $eloquent->stablevalue = $companyDiagnosisData->getStableValue()/3;
-            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue()/3;
-            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue()/3;
+            $eloquent = $this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first();
+            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue() / 3;
+            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue() / 3;
+            $eloquent->stablevalue = $companyDiagnosisData->getStableValue() / 3;
+            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue() / 3;
+            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue() / 3;
             $eloquent->save();
         }
     }

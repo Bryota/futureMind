@@ -1,4 +1,5 @@
 <?php
+
 /**
  * チャット用のデータリポジトリ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider;
 
 use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
@@ -159,10 +161,9 @@ class ChatRepository implements ChatRepositoryInterface
     public function getChatRoomId(int $student_id, int $company_id): int
     {
         $room_ids = $this->eloquentChatRoom::where('user_id', $student_id)
-                                            ->where('company_id', $company_id)
-                                            ->get(['id'])
-                                            ->pluck('id');
-        $room_id = $room_ids[0];
+            ->where('company_id', $company_id)
+            ->get(['id']);
+        $room_id = $room_ids[0]->id;
         return $room_id;
     }
 
@@ -174,8 +175,8 @@ class ChatRepository implements ChatRepositoryInterface
      */
     public function getMessages(int $room_id)
     {
-        if ($this->eloquentMessage::where('room_id',$room_id)->exists()) {
-            $messages = $this->eloquentMessage::where('room_id',$room_id)->get(['message','student_user','company_user']);
+        if ($this->eloquentMessage::where('room_id', $room_id)->exists()) {
+            $messages = $this->eloquentMessage::where('room_id', $room_id)->get(['message', 'student_user', 'company_user']);
         } else {
             $messages = null;
         }
@@ -249,11 +250,11 @@ class ChatRepository implements ChatRepositoryInterface
     public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): mixed
     {
         $message_num_data = $this->eloquentMessageInfo::where([
-                                            ['room_id', $room_id],
-                                            ['student_user', $student_id],
-                                            ['company_user', $company_id]
-                                        ])
-                                        ->first();
+            ['room_id', $room_id],
+            ['student_user', $student_id],
+            ['company_user', $company_id]
+        ])
+            ->first();
         if (is_null($message_num_data)) {
             return 0;
         } else {
@@ -268,17 +269,17 @@ class ChatRepository implements ChatRepositoryInterface
     public function setCheckedStatusForUser(int $room_id, int $student_id): void
     {
         $this->eloquentMessageInfo::updateOrCreate(
-                            [
-                                'room_id' => $room_id,
-                                'company_user' => 0
-                            ],
-                            [
-                                "room_id" => $room_id,
-                                "student_user" => $student_id,
-                                "company_user" => 0,
-                                'checked_status' => false
-                            ]
-                        );
+            [
+                'room_id' => $room_id,
+                'company_user' => 0
+            ],
+            [
+                "room_id" => $room_id,
+                "student_user" => $student_id,
+                "company_user" => 0,
+                'checked_status' => false
+            ]
+        );
     }
 
     /**
@@ -288,17 +289,17 @@ class ChatRepository implements ChatRepositoryInterface
     public function setCheckedStatusForCompany(int $room_id, int $company_id): void
     {
         $this->eloquentMessageInfo::updateOrCreate(
-                            [
-                                'room_id' => $room_id,
-                                'student_user' => 0
-                            ],
-                            [
-                                "room_id" => $room_id,
-                                "student_user" => 0,
-                                "company_user" => $company_id,
-                                'checked_status' => false
-                            ]
-                        );
+            [
+                'room_id' => $room_id,
+                'student_user' => 0
+            ],
+            [
+                "room_id" => $room_id,
+                "student_user" => 0,
+                "company_user" => $company_id,
+                'checked_status' => false
+            ]
+        );
     }
 
     /**
@@ -308,10 +309,10 @@ class ChatRepository implements ChatRepositoryInterface
     public function getUncheckedMessageForUser(int $student_id): int
     {
         return $this->eloquentMessageInfo::where([
-                                ['student_user', $student_id],
-                                ['checked_status', false]
-                            ])
-                            ->count();
+            ['student_user', $student_id],
+            ['checked_status', false]
+        ])
+            ->count();
     }
 
     /**
@@ -321,9 +322,9 @@ class ChatRepository implements ChatRepositoryInterface
     public function getUncheckedMessageForCompany(int $company_id): int
     {
         return $this->eloquentMessageInfo::where([
-                                ['company_user', $company_id],
-                                ['checked_status', false]
-                            ])
-                            ->count();
+            ['company_user', $company_id],
+            ['checked_status', false]
+        ])
+            ->count();
     }
 }

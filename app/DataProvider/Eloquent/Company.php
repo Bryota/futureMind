@@ -6,15 +6,19 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Company extends Authenticatable
 {
     use Notifiable;
     use HasFactory;
 
+    /**
+     * @return HasOne
+     */
     public function diagnosis()
     {
-        return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData','user_id');
+        return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData', 'user_id');
     }
 
     /**
@@ -25,7 +29,7 @@ class Company extends Authenticatable
 
     protected $guard = 'company';
     protected $fillable = [
-        'name', 'email', 'password','company_icon','industry','office','employee','homepage','comment'
+        'name', 'email', 'password', 'company_icon', 'industry', 'office', 'employee', 'homepage', 'comment'
     ];
 
     /**
@@ -48,7 +52,6 @@ class Company extends Authenticatable
 
     public function likesStudent()
     {
-        return $this->belongsToMany('App\DataProvider\Eloquent\User','likes','company_id','user_id');
+        return $this->belongsToMany('App\DataProvider\Eloquent\User', 'likes', 'company_id', 'user_id');
     }
-    }
-
+}
