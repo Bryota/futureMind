@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生診断用の機能関連のビジネスロジック
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\DiagnosisRepositoryInterface;
@@ -158,19 +160,19 @@ class DiagnosisServices
         $futureCommentTypes = [];
         for ($i = 0; $i < count($futureMaxes); $i++) {
             $futureCommentType = '';
-            if($futureMaxes[$i] === 0){
+            if ($futureMaxes[$i] === 0) {
                 $futureCommentType = '成長意欲';
             }
-            if($futureMaxes[$i] === 1){
+            if ($futureMaxes[$i] === 1) {
                 $futureCommentType = '社会貢献';
             }
-            if($futureMaxes[$i] === 2){
+            if ($futureMaxes[$i] === 2) {
                 $futureCommentType = '安定';
             }
-            if($futureMaxes[$i] === 3){
+            if ($futureMaxes[$i] === 3) {
                 $futureCommentType = '仲間';
             }
-            if($futureMaxes[$i] === 4){
+            if ($futureMaxes[$i] === 4) {
                 $futureCommentType = '将来性';
             }
             array_push($futureCommentTypes, $futureCommentType);
@@ -195,19 +197,19 @@ class DiagnosisServices
         $selfCommentTypes = [];
         for ($i = 0; $i < count($selfMaxes); $i++) {
             $selfCommentType = '';
-            if($selfMaxes[$i] === 0){
+            if ($selfMaxes[$i] === 0) {
                 $selfCommentType = '成長意欲';
             }
-            if($selfMaxes[$i] === 1){
+            if ($selfMaxes[$i] === 1) {
                 $selfCommentType = '社会貢献';
             }
-            if($selfMaxes[$i] === 2){
+            if ($selfMaxes[$i] === 2) {
                 $selfCommentType = '安定';
             }
-            if($selfMaxes[$i] === 3){
+            if ($selfMaxes[$i] === 3) {
                 $selfCommentType = '仲間';
             }
-            if($selfMaxes[$i] === 4){
+            if ($selfMaxes[$i] === 4) {
                 $selfCommentType = '将来性';
             }
             array_push($selfCommentTypes, $selfCommentType);
@@ -230,26 +232,26 @@ class DiagnosisServices
     public function getToFutureComments(array $futureDiagnosisDataAsArray, array $selfDiagnosisDataAsArray): array
     {
         $comparedFutureAndSelfData = array();
-        for($i = 0;$i<count($futureDiagnosisDataAsArray);$i++){
+        for ($i = 0; $i < count($futureDiagnosisDataAsArray); $i++) {
             $comparedFutureAndSelfData[$i] = $futureDiagnosisDataAsArray[$i] - $selfDiagnosisDataAsArray[$i];
         }
         $toFutureMaxes   = array_keys($comparedFutureAndSelfData, max($comparedFutureAndSelfData));
         $toFutureCommentTypes = [];
         for ($i = 0; $i < count($toFutureMaxes); $i++) {
             $toFutureCommentType = '';
-            if($toFutureMaxes[$i] === 0){
+            if ($toFutureMaxes[$i] === 0) {
                 $toFutureCommentType = '成長意欲';
             }
-            if($toFutureMaxes[$i] === 1){
+            if ($toFutureMaxes[$i] === 1) {
                 $toFutureCommentType = '社会貢献';
             }
-            if($toFutureMaxes[$i] === 2){
+            if ($toFutureMaxes[$i] === 2) {
                 $toFutureCommentType = '安定';
             }
-            if($toFutureMaxes[$i] === 3){
+            if ($toFutureMaxes[$i] === 3) {
                 $toFutureCommentType = '仲間';
             }
-            if($toFutureMaxes[$i] === 4){
+            if ($toFutureMaxes[$i] === 4) {
                 $toFutureCommentType = '将来性';
             }
             array_push($toFutureCommentTypes, $toFutureCommentType);
@@ -322,12 +324,13 @@ class DiagnosisServices
         $forSelfData[] = $selfData->teammatevalue;
         $forSelfData[] = $selfData->futurevalue;
         $forCompanyValue = array();
-        for ($i = 0; $i < count($forCompanyData) ;$i++) {
+        for ($i = 0; $i < count($forCompanyData); $i++) {
             $forCompanyValue[$i] = $forCompanyData[$i] - $forSelfData[$i];
         }
         $forCompanyMaxes = array_keys($forCompanyValue, max($forCompanyValue));
         $forCompanyCommentTypes = [];
         for ($i = 0; $i < count($forCompanyMaxes); $i++) {
+            $commentType = '';
             if (max($forCompanyValue) <= 0) {
                 $commentType = 'なし';
                 array_push($forCompanyCommentTypes, $commentType);
@@ -382,12 +385,13 @@ class DiagnosisServices
         $forFutureData[] = $futureData->teammatevalue;
         $forFutureData[] = $futureData->futurevalue;
         $forCompanyValue = array();
-        for ($i = 0;$i<count($forCompanyData);$i++) {
+        for ($i = 0; $i < count($forCompanyData); $i++) {
             $forCompanyValue[$i] = $forFutureData[$i] - $forCompanyData[$i];
         }
         $forCompanyMaxes = array_keys($forCompanyValue, max($forCompanyValue));
         $forCompanyCommentTypes = [];
         for ($i = 0; $i < count($forCompanyMaxes); $i++) {
+            $commentType = '';
             if (max($forCompanyValue) <= 0) {
                 $commentType = 'なし';
                 array_push($forCompanyCommentTypes, $commentType);
@@ -442,5 +446,4 @@ class DiagnosisServices
     {
         $this->diagnosis->addLikedCompany($student_id, $company_id);
     }
-
 }
