@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生診断用の機能関連のコントローラー
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
@@ -62,7 +64,8 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function about() {
+    public function about()
+    {
         return view('user.about');
     }
 
@@ -127,7 +130,7 @@ class DiagnosisController extends Controller
     /**
      * 診断結果画面表示用
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function result()
     {
@@ -142,7 +145,7 @@ class DiagnosisController extends Controller
         $selfDiagnosisDataAsArray = $this->diagnosis->getSelfDiagnosisData(Auth::user()->id);
         $selfComments = $this->diagnosis->getSelfDiagnosisComments($selfDiagnosisDataAsArray);
         $toFutureComments = $this->diagnosis->getToFutureComments($futureDiagnosisDataAsArray, $selfDiagnosisDataAsArray);
-        return view('diagnosis.result',compact('futureDiagnosisDataAsArray','selfDiagnosisDataAsArray','futureComments','selfComments','toFutureComments'));
+        return view('diagnosis.result', compact('futureDiagnosisDataAsArray', 'selfDiagnosisDataAsArray', 'futureComments', 'selfComments', 'toFutureComments'));
     }
 
     /**
@@ -153,7 +156,7 @@ class DiagnosisController extends Controller
     public function futureCompany()
     {
         $companies = $this->diagnosis->getCompaniesRelatedToFutureDiagnosisData(Auth::user()->id);
-        return view('diagnosis.futureCompany',compact('companies'));
+        return view('diagnosis.futureCompany', compact('companies'));
     }
 
     /**
@@ -164,35 +167,35 @@ class DiagnosisController extends Controller
     public function selfCompany()
     {
         $companies = $this->diagnosis->getCompaniesRelatedToSelfDiagnosisData(Auth::user()->id);
-        return view('diagnosis.selfCompany',compact('companies'));
+        return view('diagnosis.selfCompany', compact('companies'));
     }
 
     /**
      * 理想分析から選定された企業個別画面表示用
      *
-     * @param $id 企業ID
+     * @param int $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function futureSingleCompany($id)
+    public function futureSingleCompany(int $id)
     {
         $company = $this->company->getCompanyData($id);
         $companyComments = $this->diagnosis->getCompanyCommentForFuture($id, Auth::user()->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $id);
-        return view('diagnosis.futureSingleCompany',compact('company','companyComments','isLiked'));
+        return view('diagnosis.futureSingleCompany', compact('company', 'companyComments', 'isLiked'));
     }
 
     /**
      * 自己分析から選定された企業個別画面表示用
      *
-     * @param $id 企業ID
+     * @param int $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function selfSingleCompany($id)
+    public function selfSingleCompany(int $id)
     {
         $company = $this->company->getCompanyData($id);
         $companyComments = $this->diagnosis->getCompanyCommentForSelf($id, Auth::user()->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $id);
-        return view('diagnosis.selfSingleCompany',compact('company','companyComments','isLiked'));
+        return view('diagnosis.selfSingleCompany', compact('company', 'companyComments', 'isLiked'));
     }
 
     /**
@@ -208,7 +211,7 @@ class DiagnosisController extends Controller
         $companyComments = $this->diagnosis->getCompanyCommentForFuture($request->id, Auth::user()->id);
         $this->diagnosis->addLikedCompany(Auth::user()->id, $request->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $request->id);
-        return view('diagnosis.futureSingleCompany',compact('company','companyComments','isLiked'));
+        return view('diagnosis.futureSingleCompany', compact('company', 'companyComments', 'isLiked'));
     }
 
     /**
@@ -224,6 +227,6 @@ class DiagnosisController extends Controller
         $companyComments = $this->diagnosis->getCompanyCommentForSelf($request->id, Auth::user()->id);
         $this->diagnosis->addLikedCompany(Auth::user()->id, $request->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $request->id);
-        return view('diagnosis.selfSingleCompany',compact('company','companyComments','isLiked'));
+        return view('diagnosis.selfSingleCompany', compact('company', 'companyComments', 'isLiked'));
     }
 }

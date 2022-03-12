@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生ユーザー用のデータリポジトリ
  *
@@ -8,11 +9,13 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider;
 
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\Domain\Entity\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -64,10 +67,10 @@ class UserRepository implements UserRepositoryInterface
      *
      * @param User $user 学生データ
      * @param int $id 学生ID
-     * @param $file プロフィール画像
+     * @param UploadedFile|null $file プロフィール画像
      * @return void
      */
-    public function update(User $user, int $id, $file): void
+    public function update(User $user, int $id, ?UploadedFile $file): void
     {
         $eloquent = $this->eloquentUser::find($id);
         $eloquent->name = $user->getName();
@@ -78,7 +81,7 @@ class UserRepository implements UserRepositoryInterface
         $eloquent->club = $user->GetClub();
         $eloquent->industry = $user->GetIndustry();
         $eloquent->hometown = $user->GetHomeTown();
-        if(isset($file)){
+        if (isset($file)) {
             $eloquent->img_name = 'users/' . $file->getClientOriginalName();
         }
         $eloquent->save();

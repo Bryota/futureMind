@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業用の機能関連のコントローラー
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Http\Controllers\company;
 
 use App\Http\Controllers\Controller;
@@ -57,7 +59,7 @@ class CompanyController extends Controller
     /**
      * 企業indexページ用
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function index()
     {
@@ -65,7 +67,7 @@ class CompanyController extends Controller
         if (!isset($company->diagnosis)) {
             return redirect('company/diagnosis');
         }
-        return view('company.index',compact('company'));
+        return view('company.index', compact('company'));
     }
 
     /**
@@ -76,7 +78,7 @@ class CompanyController extends Controller
     public function edit()
     {
         $company = $this->company->getCompanyData(Auth::user()->id);
-        return view('company.edit',compact('company'));
+        return view('company.edit', compact('company'));
     }
 
     /**
@@ -121,29 +123,29 @@ class CompanyController extends Controller
     public function student()
     {
         $likeUsers = $this->company->getLikedStudents(Auth::user()->id);
-        return view('company.student',compact('likeUsers'));
+        return view('company.student', compact('likeUsers'));
     }
 
     /**
      * 学生個別画面表示用
      *
-     * @param $id 学生ID
+     * @param int $id 学生ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function singleStudent($id)
+    public function singleStudent(int $id)
     {
         $user = $this->user->getUserData($id);
         $chatRoomData = $this->chat->existsChatRoom($id, Auth::user()->id);
         $chat = $chatRoomData[0];
         $room_id = $chatRoomData[1];
-        return view('company.single',compact('user', 'chat', 'room_id'));
+        return view('company.single', compact('user', 'chat', 'room_id'));
     }
 
     /**
      * チャットルーム作成
      * 
      * @param Request $request リクエスト
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function createChatRoom(Request $request)
     {
@@ -164,16 +166,16 @@ class CompanyController extends Controller
         $student_user = $this->user->getUserData($request->input('student_id'));
         $messages = $this->chat->getMessages($room_id);
         $this->chat->setMessageNum($room_id, 0, Auth::user()->id);
-        return view('company.chat',compact('room_id','messages','company_user','student_user'));
+        return view('company.chat', compact('room_id', 'messages', 'company_user', 'student_user'));
     }
 
     /**
      * メッセージ一覧の取得
      *
-     * @param $id チャットルームID
+     * @param int $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMessages($id, Request $request)
+    public function getMessages(int $id, Request $request)
     {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];

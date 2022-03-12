@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生ユーザー用の機能関連のビジネスロジック
  *
@@ -8,12 +9,14 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
 use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
 use App\Domain\Entity\User;
+use Illuminate\Http\Request;
 use Storage;
 
 /**
@@ -62,8 +65,7 @@ class UserService
         $userData = $this->user->getUserById($id);
         if (isset($userData->img_name)) {
             $userData['profilePath'] = $this->storage->getProfilePath($userData->img_name);
-        }
-        else {
+        } else {
             $userData['profilePath'] = null;
         }
         return $userData;
@@ -72,13 +74,13 @@ class UserService
     /**
      * 学生詳細データの更新
      *
-     * @param $request リクエスト
+     * @param Request $request リクエスト
      * @param int $userId 学生ID
      * @return void
      */
-    public function updateUserData($request, int $userId, $file): void
+    public function updateUserData(Request $request, int $userId, $file): void
     {
-        $user = New User(
+        $user = new User(
             $request->name,
             $request->email,
             $request->year,

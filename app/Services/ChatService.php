@@ -1,4 +1,5 @@
 <?php
+
 /**
  * チャット用の機能関連のビジネスロジック
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
@@ -113,7 +115,7 @@ class ChatService
      * @param int $room_id
      * @return object|null メッセージ一覧
      */
-    public function getMessages (int $room_id): mixed
+    public function getMessages(int $room_id): mixed
     {
         $messages = $this->chat->getMessages($room_id);
         return $messages;
@@ -155,9 +157,9 @@ class ChatService
      * @return void
      */
     // TODO: 変数名考える
-    public function setCheckedStatus(int $room_id, int $student_data, int $company_data): void
+    public function setCheckedStatus(int $room_id, int $student_id, int $company_id): void
     {
-        if ($student_data == 0) {
+        if ($student_id == 0) {
             $student_id = $this->chat->getStudentId($room_id);
             $this->chat->setCheckedStatusForUser($room_id, $student_id);
         } else {

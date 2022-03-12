@@ -22,12 +22,12 @@ class Company extends Authenticatable
     }
 
     /**
-     * The attributes that are mass assignable.
+     * guard
      *
-     * @var array
+     * @var string
      */
-
     protected $guard = 'company';
+
     protected $fillable = [
         'name', 'email', 'password', 'company_icon', 'industry', 'office', 'employee', 'homepage', 'comment'
     ];

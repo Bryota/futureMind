@@ -1,4 +1,5 @@
 <?php
+
 /**
  * S3用のストレージクラス
  *
@@ -8,9 +9,11 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\Storage\S3;
 
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
+use Illuminate\Http\UploadedFile;
 use Storage;
 
 /**
@@ -33,10 +36,10 @@ class S3Storage implements S3Interface
     /**
      * 学生プロフィール画像を保存
      *
-     * @param $file 学生プロフィール画像
+     * @param UploadedFile $file 学生プロフィール画像
      * @return void
      */
-    public function putFileToUsers($file): void
+    public function putFileToUsers(UploadedFile $file): void
     {
         Storage::disk('s3')->putFileAs('users', $file, $file->getClientOriginalName());
     }
@@ -55,10 +58,10 @@ class S3Storage implements S3Interface
     /**
      * 企業プロフィール画像を保存
      *
-     * @param $file 企業プロフィール画像
+     * @param UploadedFile $file 企業プロフィール画像
      * @return void
      */
-    public function putFileToCompany($file): void
+    public function putFileToCompany(UploadedFile $file): void
     {
         Storage::disk('s3')->putFileAs('companies', $file, $file->getClientOriginalName());
     }

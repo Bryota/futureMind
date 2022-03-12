@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生ユーザー用のデータリポジトリ(SQlite用）
  *
@@ -8,11 +9,13 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\Sqlite;
 
 use App\DataProvider\RepositoryInterface\UserRepositoryInterface;
 use App\DataProvider\Eloquent\User as EloquentUser;
 use App\Domain\Entity\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 
@@ -40,6 +43,7 @@ class UserSqliteRepository implements UserRepositoryInterface
     public function __construct(EloquentUser $eloquentUser)
     {
         $this->eloquentUser = $eloquentUser;
+        $this->eloquentUser->setConnection($this->connection);
         $this->likesTable = DB::table('likes');
     }
 
@@ -63,11 +67,12 @@ class UserSqliteRepository implements UserRepositoryInterface
      *
      * @param User $user 学生データ
      * @param int $id 学生ID
+     * @param UploadedFile|null $file プロフィール画像
      * @return void
      */
-    public function update(User $user, int $id, $file): void
+    public function update(User $user, int $id, ?UploadedFile $file): void
     {
-        $eloquent = $this->eloquentUser::on($this->connection)->find($id);
+        $eloquent = $this->eloquentUser::find($id);
         $eloquent->name = $user->getName();
         $eloquent->email = $user->getEmail();
         $eloquent->year = $user->getYear();
@@ -76,7 +81,7 @@ class UserSqliteRepository implements UserRepositoryInterface
         $eloquent->club = $user->GetClub();
         $eloquent->industry = $user->GetIndustry();
         $eloquent->hometown = $user->GetHomeTown();
-        if(isset($file)){
+        if (isset($file)) {
             $eloquent->img_name = 'users/' . $file->getClientOriginalName();
         }
         $eloquent->save();
@@ -90,7 +95,7 @@ class UserSqliteRepository implements UserRepositoryInterface
      */
     public function getLikeCompanies(int $id)
     {
-        $likeCompanies = $this->eloquentUser::on($this->connection)->find($id)->likesCompany()->paginate(6);
+        $likeCompanies = $this->eloquentUser::find($id)->likesCompany()->paginate(6);
         if (!isset($likeCompanies)) {
             return null;
         }

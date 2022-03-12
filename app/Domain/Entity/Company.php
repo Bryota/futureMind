@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業のエンティティ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Domain\Entity;
 
 /**
@@ -52,7 +54,6 @@ class Company
      * @param int|null $employee 従業員数
      * @param string|null $homepage ホームページ
      * @param string|null $comment コメント
-     * @param string|null $img_name プロフィール画像名
      * @return void
      */
     public function __construct(?string $name, ?string $industry, ?string $office, ?int $employee, ?string $homepage, ?string $comment)

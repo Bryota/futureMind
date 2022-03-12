@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業検索用の機能関連のコントローラー
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
@@ -89,16 +91,16 @@ class SearchCompanyController extends Controller
             $request->teammate,
             $request->future
         );
-        return view('companySearch.result',compact('companies'));
+        return view('companySearch.result', compact('companies'));
     }
 
     /**
      * 企業個別画面表示用
      *
-     * @param $id 企業ID
+     * @param int $id 企業ID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function single($id)
+    public function single(int $id)
     {
         $company = $this->company->getCompanyData($id);
         $isLiked = $this->user->isLiked(Auth::user()->id, $id);
@@ -106,7 +108,7 @@ class SearchCompanyController extends Controller
         $chat = $chatRoomData[0];
         $room_id = $chatRoomData[1];
         $company_id = $id;
-        return view('companySearch.single',compact('company','isLiked','chat','room_id','company_id'));
+        return view('companySearch.single', compact('company', 'isLiked', 'chat', 'room_id', 'company_id'));
     }
 
     /**
@@ -122,6 +124,6 @@ class SearchCompanyController extends Controller
         $this->diagnosis->addLikedCompany(Auth::user()->id, $request->id);
         $isLiked = $this->diagnosis->checkIsLiked(Auth::user()->id, $request->id);
         $chat = false;
-        return view('companySearch.single',compact('company','isLiked','chat'));
+        return view('companySearch.single', compact('company', 'isLiked', 'chat'));
     }
 }
