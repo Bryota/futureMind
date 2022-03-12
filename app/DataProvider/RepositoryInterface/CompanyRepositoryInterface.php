@@ -34,7 +34,7 @@ interface CompanyRepositoryInterface
     /**
      * 検索企業一覧データの取得
      *
-     * @param int $employee 従業員数データ
+     * @param array $employee 従業員数データ
      * @param string $industry 業界データ
      * @param string $area 住所データ
      * @param int $developmentValue 成長意欲データ
@@ -44,7 +44,7 @@ interface CompanyRepositoryInterface
      * @param int $futureValue 将来性データ
      * @return object 検索企業一覧データ
      */
-    public function getSearchedCompanies(int $employee, string $industry, string $area, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object;
+    public function getSearchedCompanies(array $employee, string $industry, string $area, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object;
 
     /**
      * 企業データの更新
