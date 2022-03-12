@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生診断用のデータリポジトリ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider;
 
 use App\DataProvider\RepositoryInterface\DiagnosisRepositoryInterface;
@@ -94,8 +96,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
         EloquentCompanyDiagnosisData $companyDiagnosisData,
         EloquentFutureSingleCompanyComment $futureSingleCompanyComment,
         EloquentSelfSingleCompanyComment $selfSingleCompanyComment
-    )
-    {
+    ) {
         $this->eloquentFutureDiagnosis = $futureDiagnosis;
         $this->eloquentSelfDiagnosis = $selfDiagnosis;
         $this->eloquentFutureDiagnosisComment = $futureDiagnosisComment;
@@ -110,28 +111,28 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * 理想分析データの追加or更新
      *
-     * @param $student_id 学生ID
+     * @param int $student_id 学生ID
      * @param FutureDiagnosisData $futureDiagnosisData 理想分析データ
      * @return void
      */
-    public function setFutureDiagnosisForStudent($student_id, FutureDiagnosisData $futureDiagnosisData): void
+    public function setFutureDiagnosisForStudent(int $student_id, FutureDiagnosisData $futureDiagnosisData): void
     {
-        if ($this->eloquentFutureDiagnosis::where('user_id',$student_id)->first() === null) {
+        if ($this->eloquentFutureDiagnosis::where('user_id', $student_id)->first() === null) {
             $eloquent = $this->eloquentFutureDiagnosis->newInstance();
-            $eloquent->developmentvalue = $futureDiagnosisData->getDevelopmentValue();
-            $eloquent->socialvalue = $futureDiagnosisData->getSocialValue();
-            $eloquent->stablevalue = $futureDiagnosisData->getStableValue();
-            $eloquent->teammatevalue = $futureDiagnosisData->getTeammateValue();
-            $eloquent->futurevalue = $futureDiagnosisData->getFutureValue();
-            $eloquent->user_id = $futureDiagnosisData->getUserId();
+            $eloquent->developmentvalue = (int)$futureDiagnosisData->getDevelopmentValue();
+            $eloquent->socialvalue = (int)$futureDiagnosisData->getSocialValue();
+            $eloquent->stablevalue = (int)$futureDiagnosisData->getStableValue();
+            $eloquent->teammatevalue = (int)$futureDiagnosisData->getTeammateValue();
+            $eloquent->futurevalue = (int)$futureDiagnosisData->getFutureValue();
+            $eloquent->user_id = (int)$futureDiagnosisData->getUserId();
             $eloquent->save();
         } else {
-            $eloquent = $this->eloquentFutureDiagnosis::where('user_id',$student_id)->first();
-            $eloquent->developmentvalue = $futureDiagnosisData->getDevelopmentValue();
-            $eloquent->socialvalue = $futureDiagnosisData->getSocialValue();
-            $eloquent->stablevalue = $futureDiagnosisData->getStableValue();
-            $eloquent->teammatevalue = $futureDiagnosisData->getTeammateValue();
-            $eloquent->futurevalue = $futureDiagnosisData->getFutureValue();
+            $eloquent = $this->eloquentFutureDiagnosis::where('user_id', $student_id)->first();
+            $eloquent->developmentvalue = (int)$futureDiagnosisData->getDevelopmentValue();
+            $eloquent->socialvalue = (int)$futureDiagnosisData->getSocialValue();
+            $eloquent->stablevalue = (int)$futureDiagnosisData->getStableValue();
+            $eloquent->teammatevalue = (int)$futureDiagnosisData->getTeammateValue();
+            $eloquent->futurevalue = (int)$futureDiagnosisData->getFutureValue();
             $eloquent->save();
         }
     }
@@ -139,28 +140,28 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * 自己分析データの追加or更新
      *
-     * @param $student_id 学生ID
+     * @param int $student_id 学生ID
      * @param SelfDiagnosisData $selfDiagnosisData 自己分析データ
      * @return void
      */
-    public function setSelfDiagnosisForStudent($student_id, SelfDiagnosisData $selfDiagnosisData): void
+    public function setSelfDiagnosisForStudent(int $student_id, SelfDiagnosisData $selfDiagnosisData): void
     {
-        if ($this->eloquentSelfDiagnosis::where('user_id',$student_id)->first() === null) {
+        if ($this->eloquentSelfDiagnosis::where('user_id', $student_id)->first() === null) {
             $eloquent = $this->eloquentSelfDiagnosis->newInstance();
-            $eloquent->developmentvalue = $selfDiagnosisData->getDevelopmentValue();
-            $eloquent->socialvalue = $selfDiagnosisData->getSocialValue();
-            $eloquent->stablevalue = $selfDiagnosisData->getStableValue();
-            $eloquent->teammatevalue = $selfDiagnosisData->getTeammateValue();
-            $eloquent->futurevalue = $selfDiagnosisData->getFutureValue();
-            $eloquent->user_id = $selfDiagnosisData->getUserId();
+            $eloquent->developmentvalue = (int)$selfDiagnosisData->getDevelopmentValue();
+            $eloquent->socialvalue = (int)$selfDiagnosisData->getSocialValue();
+            $eloquent->stablevalue = (int)$selfDiagnosisData->getStableValue();
+            $eloquent->teammatevalue = (int)$selfDiagnosisData->getTeammateValue();
+            $eloquent->futurevalue = (int)$selfDiagnosisData->getFutureValue();
+            $eloquent->user_id = (int)$selfDiagnosisData->getUserId();
             $eloquent->save();
         } else {
-            $eloquent = $this->eloquentSelfDiagnosis::where('user_id',$student_id)->first();
-            $eloquent->developmentvalue = $selfDiagnosisData->getDevelopmentValue();
-            $eloquent->socialvalue = $selfDiagnosisData->getSocialValue();
-            $eloquent->stablevalue = $selfDiagnosisData->getStableValue();
-            $eloquent->teammatevalue = $selfDiagnosisData->getTeammateValue();
-            $eloquent->futurevalue = $selfDiagnosisData->getFutureValue();
+            $eloquent = $this->eloquentSelfDiagnosis::where('user_id', $student_id)->first();
+            $eloquent->developmentvalue = (int)$selfDiagnosisData->getDevelopmentValue();
+            $eloquent->socialvalue = (int)$selfDiagnosisData->getSocialValue();
+            $eloquent->stablevalue = (int)$selfDiagnosisData->getStableValue();
+            $eloquent->teammatevalue = (int)$selfDiagnosisData->getTeammateValue();
+            $eloquent->futurevalue = (int)$selfDiagnosisData->getFutureValue();
             $eloquent->save();
         }
     }
@@ -171,9 +172,9 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      * @param int $user_id 学生ID
      * @return int
      */
-    public function checkFutureDiagnosisDataExist($user_id): int
+    public function checkFutureDiagnosisDataExist(int $user_id): int
     {
-        $futureDiagnosisDataCount= $this->eloquentFutureDiagnosis::where('user_id', $user_id)->count();
+        $futureDiagnosisDataCount = $this->eloquentFutureDiagnosis::where('user_id', $user_id)->count();
         return $futureDiagnosisDataCount;
     }
 
@@ -183,19 +184,19 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      * @param int $user_id 学生ID
      * @return int
      */
-    public function checkSelfDiagnosisDataExist($user_id): int
+    public function checkSelfDiagnosisDataExist(int $user_id): int
     {
-        $selfDiagnosisDataCount= $this->eloquentSelfDiagnosis::where('user_id', $user_id)->count();
+        $selfDiagnosisDataCount = $this->eloquentSelfDiagnosis::where('user_id', $user_id)->count();
         return $selfDiagnosisDataCount;
     }
 
     /**
      * 理想分析データの取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return object | null 理想分析データ
      */
-    public function getFutureDiagnosisData($user_id): mixed
+    public function getFutureDiagnosisData(int $user_id): mixed
     {
         $futureDiagnosisData = $this->eloquentFutureDiagnosis::where('user_id', $user_id)->first();
         return $futureDiagnosisData;
@@ -204,10 +205,10 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * 自己分析データの取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return object | null 自己分析データ
      */
-    public function getSelfDiagnosisData($user_id): mixed
+    public function getSelfDiagnosisData(int $user_id): mixed
     {
         $selfDiagnosisData = $this->eloquentSelfDiagnosis::where('user_id', $user_id)->first();
         return $selfDiagnosisData;
@@ -216,10 +217,10 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * 理想分析コメントの取得
      *
-     * @param $futureCommentType 理想分析コメントタイプ
+     * @param string $futureCommentType 理想分析コメントタイプ
      * @return object 理想分析用のコメント
      */
-    public function getFutureDiagnosisComment($futureCommentType): object
+    public function getFutureDiagnosisComment(string $futureCommentType): object
     {
         $futureComment = $this->eloquentFutureDiagnosisComment::where('comment_type', $futureCommentType)->first();
         return $futureComment;
@@ -228,10 +229,10 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * 自己分析コメントの取得
      *
-     * @param $selfCommentType 自己分析コメントタイプ
+     * @param string $selfCommentType 自己分析コメントタイプ
      * @return object 自己分析用のコメント
      */
-    public function getSelfDiagnosisComment($selfCommentType): object
+    public function getSelfDiagnosisComment(string $selfCommentType): object
     {
         $selfComment = $this->eloquentSelfDiagnosisComment::where('comment_type', $selfCommentType)->first();
         return $selfComment;
@@ -240,12 +241,12 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     /**
      * なりたい自分へコメントの取得
      *
-     * @param $toFutureCommentType なりたい自分へコメントタイプ
+     * @param string $toFutureCommentType なりたい自分へコメントタイプ
      * @return object なりたい自分へ用のコメント
      */
-    public function getToFutureComment($toFutureCommentType): object
+    public function getToFutureComment(string $toFutureCommentType): object
     {
-        $toFutureComment = $this->eloquentToFutureComment::where('comment_type',$toFutureCommentType)->first();
+        $toFutureComment = $this->eloquentToFutureComment::where('comment_type', $toFutureCommentType)->first();
         return $toFutureComment;
     }
 
@@ -261,14 +262,14 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getCompaniesFromDiagnosisData(int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object
     {
-        $companies = $this->eloquentCompany::whereHas('diagnosis',function($query) use($developmentValue,$socialValue,$stableValue,$teammateValue,$futureValue) {
-                                            $query->where('developmentvalue',$developmentValue);
-                                            $query->Where('socialvalue',$socialValue);
-                                            $query->Where('stablevalue',$stableValue);
-                                            $query->orWhere('teammatevalue',$teammateValue);
-                                            $query->orWhere('futurevalue',$futureValue);
-                                            })
-                                            ->paginate(6);
+        $companies = $this->eloquentCompany::whereHas('diagnosis', function ($query) use ($developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue) {
+            $query->where('developmentvalue', $developmentValue);
+            $query->Where('socialvalue', $socialValue);
+            $query->Where('stablevalue', $stableValue);
+            $query->orWhere('teammatevalue', $teammateValue);
+            $query->orWhere('futurevalue', $futureValue);
+        })
+            ->paginate(6);
         return $companies;
     }
 
@@ -280,7 +281,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getCompanyDiagnosisData(int $company_id): object
     {
-        $companyDiagnosisData = $this->eloquentCompanyDiagnosisData::where('user_id',$company_id)->first();
+        $companyDiagnosisData = $this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first();
         return $companyDiagnosisData;
     }
 
@@ -292,7 +293,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getFutureCompanyCommentComparedWithSelfDiagnosisData(string $forCompanyCommentType): object
     {
-        $forCompanyComment = $this->eloquentFutureSingleCompanyComment::where('comment_type',$forCompanyCommentType)->first();
+        $forCompanyComment = $this->eloquentFutureSingleCompanyComment::where('comment_type', $forCompanyCommentType)->first();
         return $forCompanyComment;
     }
 
@@ -304,7 +305,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getSelfCompanyCommentComparedWithFutureDiagnosisData(string $forCompanyCommentType): object
     {
-        $forCompanyComment = $this->eloquentSelfDiagnosisComment::where('comment_type',$forCompanyCommentType)->first();
+        $forCompanyComment = $this->eloquentSelfDiagnosisComment::where('comment_type', $forCompanyCommentType)->first();
         return $forCompanyComment;
     }
 
@@ -317,7 +318,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function checkIsLiked(int $user_id, int $company_id): bool
     {
-        if (DB::table('likes')->where('user_id',$user_id)->where('company_id',$company_id)->exists()) {
+        if (DB::table('likes')->where('user_id', $user_id)->where('company_id', $company_id)->exists()) {
             $isLiked = true;
         } else {
             $isLiked = false;
@@ -335,7 +336,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     public function addLikedCompany(int $student_id, int $company_id): void
     {
         DB::table('likes')->insert(
-            ['user_id'=>$student_id,'company_id'=>$company_id]
+            ['user_id' => $student_id, 'company_id' => $company_id]
         );
     }
 }

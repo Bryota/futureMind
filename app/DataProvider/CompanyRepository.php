@@ -76,17 +76,17 @@ class CompanyRepository implements CompanyRepositoryInterface
     /**
      * 検索企業一覧データの取得
      *
-     * @param $employee 従業員数データ
-     * @param $industry 業界データ
-     * @param $area 住所データ
-     * @param $developmentValue 成長意欲データ
-     * @param $socialValue 社会貢献データ
-     * @param $stableValue 安定データ
-     * @param $teammateValue 仲間データ
-     * @param $futureValue 将来性データ
+     * @param array $employee 従業員数データ
+     * @param string $industry 業界データ
+     * @param string $area 住所データ
+     * @param int $developmentValue 成長意欲データ
+     * @param int $socialValue 社会貢献データ
+     * @param int $stableValue 安定データ
+     * @param int $teammateValue 仲間データ
+     * @param int $futureValue 将来性データ
      * @return object 検索企業一覧データ
      */
-    public function getSearchedCompanies($employee, $industry, $area, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): object
+    public function getSearchedCompanies(array $employee, string $industry, string $area, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object
     {
         // 業種・地域・規模が当てはまり、詳細条件のどれか1つが当てはまるものを検索
         $companies = $this->eloquentCompany::where('industry', $industry)
@@ -136,20 +136,20 @@ class CompanyRepository implements CompanyRepositoryInterface
     {
         if ($this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first() === null) {
             $eloquent = $this->eloquentCompanyDiagnosisData->newInstance();
-            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue() / 3;
-            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue() / 3;
-            $eloquent->stablevalue = $companyDiagnosisData->getStableValue() / 3;
-            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue() / 3;
-            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue() / 3;
+            $eloquent->developmentvalue = (int)$companyDiagnosisData->getDevelopmentValue() / 3;
+            $eloquent->socialvalue = (int)$companyDiagnosisData->getSocialValue() / 3;
+            $eloquent->stablevalue = (int)$companyDiagnosisData->getStableValue() / 3;
+            $eloquent->teammatevalue = (int)$companyDiagnosisData->getTeammateValue() / 3;
+            $eloquent->futurevalue = (int)$companyDiagnosisData->getFutureValue() / 3;
             $eloquent->user_id = $companyDiagnosisData->getCompanyId();
             $eloquent->save();
         } else {
             $eloquent = $this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first();
-            $eloquent->developmentvalue = $companyDiagnosisData->getDevelopmentValue() / 3;
-            $eloquent->socialvalue = $companyDiagnosisData->getSocialValue() / 3;
-            $eloquent->stablevalue = $companyDiagnosisData->getStableValue() / 3;
-            $eloquent->teammatevalue = $companyDiagnosisData->getTeammateValue() / 3;
-            $eloquent->futurevalue = $companyDiagnosisData->getFutureValue() / 3;
+            $eloquent->developmentvalue = (int)$companyDiagnosisData->getDevelopmentValue() / 3;
+            $eloquent->socialvalue = (int)$companyDiagnosisData->getSocialValue() / 3;
+            $eloquent->stablevalue = (int)$companyDiagnosisData->getStableValue() / 3;
+            $eloquent->teammatevalue = (int)$companyDiagnosisData->getTeammateValue() / 3;
+            $eloquent->futurevalue = (int)$companyDiagnosisData->getFutureValue() / 3;
             $eloquent->save();
         }
     }

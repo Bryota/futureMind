@@ -1,4 +1,5 @@
 <?php
+
 /**
  * S3用のストレージインターフェース
  *
@@ -8,7 +9,10 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\Storage\S3\S3Interface;
+
+use Illuminate\Http\UploadedFile;
 
 /**
  * S3ストレージ用のインターフェース
@@ -21,10 +25,10 @@ interface S3Interface
     /**
      * 学生プロフィール画像を保存
      *
-     * @param $file プロフィール画像
+     * @param UploadedFile $file プロフィール画像
      * @return void
      */
-    public function putFileToUsers($file): void;
+    public function putFileToUsers(UploadedFile $file): void;
 
     /**
      * プロフィール画像を取得
@@ -37,8 +41,8 @@ interface S3Interface
     /**
      * 企業プロフィール画像を保存
      *
-     * @param $file プロフィール画像
+     * @param UploadedFile $file プロフィール画像
      * @return void
      */
-    public function putFileToCompany($file): void;
+    public function putFileToCompany(UploadedFile $file): void;
 }

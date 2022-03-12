@@ -45,15 +45,15 @@ class DiagnosisServices
     /**
      * 理想分析のデータ追加or更新
      *
-     * @param $student_id 学生ID
-     * @param $developmentValue 成長意欲データ
-     * @param $socialValue 社会貢献データ
-     * @param $stableValue 安定データ
-     * @param $teammateValue 仲間データ
-     * @param $futureValue 将来性データ
+     * @param int $student_id 学生ID
+     * @param int $developmentValue 成長意欲データ
+     * @param int $socialValue 社会貢献データ
+     * @param int $stableValue 安定データ
+     * @param int $teammateValue 仲間データ
+     * @param int $futureValue 将来性データ
      * @return void
      */
-    public function setFutureDiagnosisForStudent($student_id, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): void
+    public function setFutureDiagnosisForStudent(int $student_id, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): void
     {
         $this->diagnosis->setFutureDiagnosisForStudent($student_id, new FutureDiagnosisData(
             $developmentValue,
@@ -68,15 +68,15 @@ class DiagnosisServices
     /**
      * 自己分析のデータ追加or更新
      *
-     * @param $student_id 学生ID
-     * @param $developmentValue 成長意欲データ
-     * @param $socialValue 社会貢献データ
-     * @param $stableValue 安定データ
-     * @param $teammateValue 仲間データ
-     * @param $futureValue 将来性データ
+     * @param int $student_id 学生ID
+     * @param int $developmentValue 成長意欲データ
+     * @param int $socialValue 社会貢献データ
+     * @param int $stableValue 安定データ
+     * @param int $teammateValue 仲間データ
+     * @param int $futureValue 将来性データ
      * @return void
      */
-    public function setSelfDiagnosisForStudent($student_id, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): void
+    public function setSelfDiagnosisForStudent(int $student_id, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): void
     {
         $this->diagnosis->setSelfDiagnosisForStudent($student_id, new SelfDiagnosisData(
             $developmentValue,
@@ -91,10 +91,10 @@ class DiagnosisServices
     /**
      * 理想分析があるかどうかの確認
      *
-     * @param $user_id 学生ID
-     * @return
+     * @param int $user_id 学生ID
+     * @return int
      */
-    public function checkFutureDiagnosisDataExist($user_id)
+    public function checkFutureDiagnosisDataExist(int $user_id): int
     {
         return $this->diagnosis->checkFutureDiagnosisDataExist($user_id);
     }
@@ -102,10 +102,10 @@ class DiagnosisServices
     /**
      * 自己分析があるかどうかの確認
      *
-     * @param $user_id 学生ID
-     * @return
+     * @param int $user_id 学生ID
+     * @return int
      */
-    public function checkSelfDiagnosisDataExist($user_id)
+    public function checkSelfDiagnosisDataExist(int $user_id): int
     {
         return $this->diagnosis->checkSelfDiagnosisDataExist($user_id);
     }
@@ -113,10 +113,10 @@ class DiagnosisServices
     /**
      * 理想分析データの取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return array 理想分析データ
      */
-    public function getFutureDiagnosisData($user_id): array
+    public function getFutureDiagnosisData(int $user_id): array
     {
         // HACK: 配列にする必要があるのか考える
         $futureDiagnosisData = $this->diagnosis->getFutureDiagnosisData($user_id);
@@ -132,10 +132,10 @@ class DiagnosisServices
     /**
      * 自己分析データの取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return array
      */
-    public function getSelfDiagnosisData($user_id): array
+    public function getSelfDiagnosisData(int $user_id): array
     {
         // HACK: 配列にする必要があるのか考える
         $selfDiagnosisData = $this->diagnosis->getSelfDiagnosisData($user_id);
@@ -267,10 +267,10 @@ class DiagnosisServices
     /**
      * 理想分析に関連した企業一覧の取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return object 理想分析に関連した企業一覧
      */
-    public function getCompaniesRelatedToFutureDiagnosisData($user_id): object
+    public function getCompaniesRelatedToFutureDiagnosisData(int $user_id): object
     {
         $futureDiagnosisData = $this->getFutureDiagnosisData($user_id);
         $developmentValue = $futureDiagnosisData[0];
@@ -285,10 +285,10 @@ class DiagnosisServices
     /**
      * 自己分析に関連した企業一覧の取得
      *
-     * @param $user_id 学生ID
+     * @param int $user_id 学生ID
      * @return object 自己分析に関連した企業一覧
      */
-    public function getCompaniesRelatedToSelfDiagnosisData($user_id): object
+    public function getCompaniesRelatedToSelfDiagnosisData(int $user_id): object
     {
         $selfDiagnosisData = $this->getSelfDiagnosisData($user_id);
         $developmentValue = $selfDiagnosisData[0];
@@ -303,11 +303,11 @@ class DiagnosisServices
     /**
      * 理想分析に関連した企業のコメントの所得
      *
-     * @param $company_id 企業ID
-     * @param $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @param int $student_id 学生ID
      * @return array 理想分析に関連した企業用のコメント
      */
-    public function getCompanyCommentForFuture($company_id, $student_id): array
+    public function getCompanyCommentForFuture(int $company_id, int $student_id): array
     {
         $companyData = $this->diagnosis->getCompanyDiagnosisData($company_id);
         $selfData = $this->diagnosis->getSelfDiagnosisData($student_id);
@@ -364,11 +364,11 @@ class DiagnosisServices
     /**
      * 自己分析に関連した企業のコメントの所得
      *
-     * @param $company_id 企業ID
-     * @param $student_id 学生ID
+     * @param int $company_id 企業ID
+     * @param int $student_id 学生ID
      * @return array 自己分析に関連した企業用のコメント
      */
-    public function getCompanyCommentForSelf($company_id, $student_id): array
+    public function getCompanyCommentForSelf(int $company_id, int $student_id): array
     {
         $companyData = $this->diagnosis->getCompanyDiagnosisData($company_id);
         $futureData = $this->diagnosis->getFutureDiagnosisData($student_id);
@@ -438,11 +438,11 @@ class DiagnosisServices
     /**
      * お気に入り企業の追加
      *
-     * @param $student_id 学生ID
-     * @param $company_id 企業ID
+     * @param int $student_id 学生ID
+     * @param int $company_id 企業ID
      * @return void
      */
-    public function addLikedCompany($student_id, $company_id): void
+    public function addLikedCompany(int $student_id, int $company_id): void
     {
         $this->diagnosis->addLikedCompany($student_id, $company_id);
     }

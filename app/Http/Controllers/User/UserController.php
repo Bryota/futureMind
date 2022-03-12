@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生ユーザー用の機能関連のコントローラー
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
@@ -56,9 +58,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index()
+    {
         $userData = $this->user->getUserData(Auth::user()->id);
-        return view('user.index',compact('userData'));
+        return view('user.index', compact('userData'));
     }
 
     /**
@@ -69,7 +72,7 @@ class UserController extends Controller
     public function edit()
     {
         $userData = $this->user->getUserData(Auth::user()->id);
-        return view('user.edit',compact('userData'));
+        return view('user.edit', compact('userData'));
     }
 
     /**
@@ -92,32 +95,32 @@ class UserController extends Controller
     public function likesCompany()
     {
         $likeCompanies = $this->user->getLikeCompanies(Auth::user()->id);
-        return view('user.likes',compact('likeCompanies'));
+        return view('user.likes', compact('likeCompanies'));
     }
 
     /**
      * チャット画面表示用
      *
-     * @param $id チャットルームID
+     * @param int $id チャットルームID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function chat($id)
+    public function chat(int $id)
     {
         $room_id = $id;
         $student_user = $this->chat->getStudentData(Auth::user()->id);
         $company_user = $this->chat->getCompanyData($room_id);
         $messages = $this->chat->getMessages($room_id);
         $this->chat->setMessageNum($room_id, Auth::user()->id, 0);
-        return view('user.chat', compact('room_id','messages','student_user','company_user'));
+        return view('user.chat', compact('room_id', 'messages', 'student_user', 'company_user'));
     }
 
     /**
      * メッセージ一覧の取得
      *
-     * @param $id チャットルームID
+     * @param int $id チャットルームID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMessages($id, Request $request)
+    public function getMessages(int $id, Request $request)
     {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];

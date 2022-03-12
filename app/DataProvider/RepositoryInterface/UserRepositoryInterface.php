@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生用のデータリポジトリインターフェース
  *
@@ -8,10 +9,11 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\RepositoryInterface;
 
 use App\Domain\Entity\User;
-use phpDocumentor\Reflection\File;
+use Illuminate\Http\UploadedFile;
 
 /**
  * 学生データリポジトリ用のインターフェース
@@ -34,10 +36,10 @@ interface UserRepositoryInterface
      *
      * @param User $user 学生データ
      * @param int $id 学生ID
-     * @param $file プロフィール画像
+     * @param UploadedFile $file プロフィール画像
      * @return void
      */
-    public function update(User $user, int $id, $file): void;
+    public function update(User $user, int $id, UploadedFile $file): void;
 
     /**
      * お気に入り企業一覧取得

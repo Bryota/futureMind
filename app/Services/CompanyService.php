@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業用の機能関連のビジネスロジック
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Services;
 
 use App\DataProvider\RepositoryInterface\CompanyRepositoryInterface;
@@ -15,6 +17,7 @@ use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
+use Illuminate\Http\Request;
 
 /**
  * 企業用のサービスクラス
@@ -63,8 +66,7 @@ class CompanyService
         $companyData = $this->company->getCompanyDataById($id);
         if (isset($companyData->company_icon)) {
             $companyData['profilePath'] = $this->storage->getProfilePath($companyData->company_icon);
-        }
-        else {
+        } else {
             $companyData['profilePath'] = null;
         }
         return $companyData;
@@ -73,35 +75,35 @@ class CompanyService
     /**
      * 検索企業一覧データの取得
      *
-     * @param $employee 従業員数データ
-     * @param $industry 業界データ
-     * @param $area 住所データ
-     * @param $developmentValue 成長意欲データ
-     * @param $socialValue 社会貢献データ
-     * @param $stableValue 安定データ
-     * @param $teammateValue 仲間データ
-     * @param $futureValue 将来性データ
+     * @param string $employee 従業員数データ
+     * @param string $industry 業界データ
+     * @param string $area 住所データ
+     * @param int $developmentValue 成長意欲データ
+     * @param int $socialValue 社会貢献データ
+     * @param int $stableValue 安定データ
+     * @param int $teammateValue 仲間データ
+     * @param int $futureValue 将来性データ
      * @return object 検索後の企業一覧データ
      */
-    public function getSearchedCompanies($employee, $industry, $area, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): object
+    public function getSearchedCompanies(string $employee, string $industry, string $area, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object
     {
-        if($employee === '~50'){
-            $employee = [0,50];
+        if ($employee === '~50') {
+            $employee = [0, 50];
         }
-        if($employee === '51~100'){
-            $employee = [51,100];
+        if ($employee === '51~100') {
+            $employee = [51, 100];
         }
-        if($employee === '101~300'){
-            $employee = [101,300];
+        if ($employee === '101~300') {
+            $employee = [101, 300];
         }
-        if($employee === '301~500'){
-            $employee = [301,500];
+        if ($employee === '301~500') {
+            $employee = [301, 500];
         }
-        if($employee === '501~1000'){
-            $employee = [501,1000];
+        if ($employee === '501~1000') {
+            $employee = [501, 1000];
         }
-        if($employee === '1000~'){
-            $employee = [1001,1000000000];
+        if ($employee === '1000~') {
+            $employee = [1001, 1000000000];
         }
         $companies = $this->company->getSearchedCompanies($employee, $industry, $area, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue);
         return $companies;
@@ -110,13 +112,13 @@ class CompanyService
     /**
      * 企業データの更新
      *
-     * @param $request リクエスト
+     * @param Request $request リクエスト
      * @param int $company_id 企業ID
      * @return void
      */
-    public function updateCompanyData($request, int $company_id, $file): void
+    public function updateCompanyData(Request $request, int $company_id, $file): void
     {
-        $company = New Company(
+        $company = new Company(
             $request->name,
             $request->industry,
             $request->office,
@@ -133,13 +135,13 @@ class CompanyService
     /**
      * 企業診断データの追加or更新
      *
-     * @param $request リクエスト
+     * @param Request $request リクエスト
      * @param int $company_id 企業ID
      * @return void
      */
-    public function setCompanyDiagnosisData($request, int $company_id): void
+    public function setCompanyDiagnosisData(Request $request, int $company_id): void
     {
-        $companyDiagnosisData = New CompanyDiagnosisData(
+        $companyDiagnosisData = new CompanyDiagnosisData(
             $request->developmentvalue,
             $request->socialvalue,
             $request->stablevalue,
@@ -153,10 +155,10 @@ class CompanyService
     /**
      * お気に入りされた学生一覧の取得
      *
-     * @param $company_id 企業ID
+     * @param int $company_id 企業ID
      * @return object お気に入りされた学生一覧
      */
-    public function getLikedStudents($company_id): object
+    public function getLikedStudents(int $company_id): object
     {
         $students = $this->company->getLikedStudents($company_id);
         foreach ($students as $student) {
@@ -173,5 +175,4 @@ class CompanyService
         }
         return $students;
     }
-
 }

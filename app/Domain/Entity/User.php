@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生のエンティティ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Domain\Entity;
 
 /**
@@ -19,39 +21,39 @@ namespace App\Domain\Entity;
 class User
 {
     /**
-     * @var string|null $name 学生名
+     * string|null $name 学生名
      */
     protected $name;
     /**
-     * @var string|null $email メールアドレス
+     * string|null $email メールアドレス
      */
     protected $email;
     /**
-     * @var string|null $year 卒業年度
+     * string|null $year 卒業年度
      */
     protected $year;
     /**
-     * @var string|null $university 大学
+     * string|null $university 大学
      */
     protected $university;
     /**
-     * @var string|null $hobby 趣味
+     * string|null $hobby 趣味
      */
     protected $hobby;
     /**
-     * @var string|null $club 部活・サークル
+     * string|null $club 部活・サークル
      */
     protected $club;
     /**
-     * @var string|null $industry 希望業界
+     * string|null $industry 希望業界
      */
     protected $industry;
     /**
-     * @var string|null $hometown 出身
+     * string|null $hometown 出身
      */
     protected $hometown;
     /**
-     * @var string|null $img_name プロフィール画像名
+     * string|null $img_name プロフィール画像名
      */
 
     /**

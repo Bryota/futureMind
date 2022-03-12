@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 企業用のデータリポジトリインターフェース
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\RepositoryInterface;
 
 use App\Domain\Entity\Company;
@@ -32,17 +34,17 @@ interface CompanyRepositoryInterface
     /**
      * 検索企業一覧データの取得
      *
-     * @param $employee 従業員数データ
-     * @param $industry 業界データ
-     * @param $area 住所データ
-     * @param $developmentValue 成長意欲データ
-     * @param $socialValue 社会貢献データ
-     * @param $stableValue 安定データ
-     * @param $teammateValue 仲間データ
-     * @param $futureValue 将来性データ
+     * @param array $employee 従業員数データ
+     * @param string $industry 業界データ
+     * @param string $area 住所データ
+     * @param int $developmentValue 成長意欲データ
+     * @param int $socialValue 社会貢献データ
+     * @param int $stableValue 安定データ
+     * @param int $teammateValue 仲間データ
+     * @param int $futureValue 将来性データ
      * @return object 検索企業一覧データ
      */
-    public function getSearchedCompanies($employee, $industry, $area, $developmentValue, $socialValue, $stableValue, $teammateValue, $futureValue): object;
+    public function getSearchedCompanies(array $employee, string $industry, string $area, int $developmentValue, int $socialValue, int $stableValue, int $teammateValue, int $futureValue): object;
 
     /**
      * 企業データの更新
