@@ -21,40 +21,37 @@ namespace App\Domain\Entity;
 class User
 {
     /**
-     * string|null $name 学生名
+     * @var string|null $name 学生名
      */
     protected $name;
     /**
-     * string|null $email メールアドレス
+     * @var string|null $email メールアドレス
      */
     protected $email;
     /**
-     * string|null $year 卒業年度
+     * @var string|null $year 卒業年度
      */
     protected $year;
     /**
-     * string|null $university 大学
+     * @var string|null $university 大学
      */
     protected $university;
     /**
-     * string|null $hobby 趣味
+     * @var string|null $hobby 趣味
      */
     protected $hobby;
     /**
-     * string|null $club 部活・サークル
+     * @var string|null $club 部活・サークル
      */
     protected $club;
     /**
-     * string|null $industry 希望業界
+     * @var string|null $industry 希望業界
      */
     protected $industry;
     /**
-     * string|null $hometown 出身
+     * @var string|null $hometown 出身
      */
     protected $hometown;
-    /**
-     * string|null $img_name プロフィール画像名
-     */
 
     /**
      * コンストラクタ

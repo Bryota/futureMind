@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 学生自己分析データのエンティティ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Domain\Entity;
 
 /**
@@ -19,23 +21,23 @@ namespace App\Domain\Entity;
 class SelfDiagnosisData
 {
     /**
-     * @var string $developmentvalue 成長意欲データ
+     * @var int $developmentvalue 成長意欲データ
      */
     private $developmentvalue;
     /**
-     * @var string $socialvalue 社会貢献データ
+     * @var int $socialvalue 社会貢献データ
      */
     private $socialvalue;
     /**
-     * @var string $stablevalue 安定データ
+     * @var int $stablevalue 安定データ
      */
     private $stablevalue;
     /**
-     * @var string $teammatevalue 仲間データ
+     * @var int $teammatevalue 仲間データ
      */
     private $teammatevalue;
     /**
-     * @var string $fururevalue 将来性データ
+     * @var int $fururevalue 将来性データ
      */
     private $fururevalue;
     /**
@@ -46,15 +48,15 @@ class SelfDiagnosisData
     /**
      * コンストラクタ
      *
-     * @param string $developmentvalue 成長意欲データ
-     * @param string $socialvalue 社会貢献データ
-     * @param string $stablevalue 安定データ
-     * @param string $teammatevalue 仲間データ
-     * @param string $fururevalue 将来性データ
+     * @param int $developmentvalue 成長意欲データ
+     * @param int $socialvalue 社会貢献データ
+     * @param int $stablevalue 安定データ
+     * @param int $teammatevalue 仲間データ
+     * @param int $fururevalue 将来性データ
      * @param int $user_id 学生ID
      * @return void
      */
-    public function __construct(string $developmentvalue, string $socialvalue, string $stablevalue, string $teammatevalue, string $fururevalue, int $user_id)
+    public function __construct(int $developmentvalue, int $socialvalue, int $stablevalue, int $teammatevalue, int $fururevalue, int $user_id)
     {
         $this->developmentvalue = $developmentvalue;
         $this->socialvalue = $socialvalue;
@@ -68,9 +70,9 @@ class SelfDiagnosisData
     /**
      * 成長意欲データの取得
      *
-     * @return string 成長意欲データ
+     * @return int 成長意欲データ
      */
-    public function getDevelopmentValue(): string
+    public function getDevelopmentValue(): int
     {
         return $this->developmentvalue;
     }
@@ -78,9 +80,9 @@ class SelfDiagnosisData
     /**
      * 社会貢献データの取得
      *
-     * @return string 社会貢献データ
+     * @return int 社会貢献データ
      */
-    public function getSocialValue(): string
+    public function getSocialValue(): int
     {
         return $this->socialvalue;
     }
@@ -88,9 +90,9 @@ class SelfDiagnosisData
     /**
      * 安定データの取得
      *
-     * @return string 安定データ
+     * @return int 安定データ
      */
-    public function getStableValue(): string
+    public function getStableValue(): int
     {
         return $this->stablevalue;
     }
@@ -98,9 +100,9 @@ class SelfDiagnosisData
     /**
      * 仲間データの取得
      *
-     * @return string 仲間データ
+     * @return int 仲間データ
      */
-    public function getTeammateValue(): string
+    public function getTeammateValue(): int
     {
         return $this->teammatevalue;
     }
@@ -108,9 +110,9 @@ class SelfDiagnosisData
     /**
      * 将来性データの取得
      *
-     * @return string 将来性データ
+     * @return int 将来性データ
      */
-    public function getFutureValue(): string
+    public function getFutureValue(): int
     {
         return $this->fururevalue;
     }

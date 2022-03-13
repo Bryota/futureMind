@@ -17,6 +17,7 @@ use App\DataProvider\RepositoryInterface\ChatRepositoryInterface;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
 use App\Domain\Entity\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Storage;
 
 /**
@@ -76,9 +77,10 @@ class UserService
      *
      * @param Request $request リクエスト
      * @param int $userId 学生ID
+     * @param UploadedFile $file 画像データ
      * @return void
      */
-    public function updateUserData(Request $request, int $userId, $file): void
+    public function updateUserData(Request $request, int $userId, ?UploadedFile $file): void
     {
         $user = new User(
             $request->name,

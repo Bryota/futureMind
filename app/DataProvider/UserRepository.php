@@ -91,15 +91,11 @@ class UserRepository implements UserRepositoryInterface
      * お気に入り企業一覧取得
      *
      * @param int $id 学生ID
-     * @return object | null
+     * @return object
      */
     public function getLikeCompanies(int $id)
     {
-        $likeCompanies = $this->eloquentUser::find($id)->likesCompany()->paginate(6);
-        if (!isset($likeCompanies)) {
-            return null;
-        }
-        return $likeCompanies;
+        return $this->eloquentUser::find($id)->likesCompany()->paginate(6);
     }
 
     /**

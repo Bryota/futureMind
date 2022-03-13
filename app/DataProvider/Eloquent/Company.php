@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Company extends Authenticatable
 {
@@ -16,7 +17,7 @@ class Company extends Authenticatable
     /**
      * @return HasOne
      */
-    public function diagnosis()
+    public function diagnosis(): HasOne
     {
         return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData', 'user_id');
     }
@@ -50,7 +51,10 @@ class Company extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function likesStudent()
+    /**
+     * @return BelongsToMany
+     */
+    public function likesStudent(): BelongsToMany
     {
         return $this->belongsToMany('App\DataProvider\Eloquent\User', 'likes', 'company_id', 'user_id');
     }

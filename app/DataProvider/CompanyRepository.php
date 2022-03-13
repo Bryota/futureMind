@@ -14,11 +14,10 @@ namespace App\DataProvider;
 
 use App\DataProvider\RepositoryInterface\CompanyRepositoryInterface;
 use App\DataProvider\Eloquent\Company as EloquentCompany;
-use App\DataProvider\Eloquent\ChatRoom as EloquentChatRoom;
 use App\DataProvider\Eloquent\CompanyDiagnosisData as EloquentCompanyDiagnosisData;
 use App\Domain\Entity\CompanyDiagnosisData;
-use Illuminate\Support\Facades\DB;
 use App\Domain\Entity\Company;
+use Illuminate\Http\UploadedFile;
 
 /**
  * 企業リポジトリクラス
@@ -33,32 +32,21 @@ class CompanyRepository implements CompanyRepositoryInterface
      */
     private $eloquentCompany;
     /**
-     * @var EloquentChatRoom $eloquentChatRoom ChatRoomEloquentModel
-     */
-    private $eloquentChatRoom;
-    /**
      * @var EloquentCompanyDiagnosisData $eloquentCompanyDiagnosisData eloquentCompanyDiagnosisDataModel
      */
     private $eloquentCompanyDiagnosisData;
-    /**
-     * @var \Illuminate\Database\Query\Builder $likesTable likesTableクエリビルダ
-     */
-    private $likesTable;
 
     /**
      * コンストラクタ
      *
      * @param EloquentCompany $company CompanyEloquentModel
-     * @param EloquentChatRoom $chatRoom ChatRoomEloquentModel
      * @param EloquentCompanyDiagnosisData $companyDiagnosisData CompanyDiagnosisDataEloquentModel
      * @return void
      */
-    public function __construct(EloquentCompany $company, EloquentChatRoom $chatRoom, EloquentCompanyDiagnosisData $companyDiagnosisData)
+    public function __construct(EloquentCompany $company, EloquentCompanyDiagnosisData $companyDiagnosisData)
     {
         $this->eloquentCompany = $company;
-        $this->eloquentChatRoom = $chatRoom;
         $this->eloquentCompanyDiagnosisData = $companyDiagnosisData;
-        $this->likesTable = DB::table('likes');
     }
 
     /**
@@ -108,9 +96,10 @@ class CompanyRepository implements CompanyRepositoryInterface
      *
      * @param Company $company 企業データ
      * @param int $company_id 企業ID
+     * @param UploadedFile $file 画像データ
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id, $file): void
+    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file): void
     {
         $eloquent = $this->eloquentCompany::find($company_id);
         $eloquent->name = $company->getName();
