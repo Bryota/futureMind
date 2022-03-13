@@ -45,7 +45,7 @@ interface UserRepositoryInterface
      * お気に入り企業一覧取得
      *
      * @param int $id 学生ID
-     * @return object | null
+     * @return object
      */
     public function getLikeCompanies(int $id);
 

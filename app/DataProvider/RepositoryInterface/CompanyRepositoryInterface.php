@@ -14,6 +14,7 @@ namespace App\DataProvider\RepositoryInterface;
 
 use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
+use Illuminate\Http\UploadedFile;
 
 /**
  * 企業データリポジトリ用のインターフェース
@@ -51,9 +52,10 @@ interface CompanyRepositoryInterface
      *
      * @param Company $company 企業データ
      * @param int $company_id 企業ID
+     * @param UploadedFile $file 画像データ
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id, $file): void;
+    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file): void;
 
     /**
      * 企業診断データの追加or更新

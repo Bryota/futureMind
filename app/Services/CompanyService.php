@@ -18,6 +18,7 @@ use App\Domain\Entity\Company;
 use App\Domain\Entity\CompanyDiagnosisData;
 use App\DataProvider\Storage\S3\S3Interface\S3Interface;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 /**
  * 企業用のサービスクラス
@@ -114,9 +115,10 @@ class CompanyService
      *
      * @param Request $request リクエスト
      * @param int $company_id 企業ID
+     * @param UploadedFile $file 画像データ
      * @return void
      */
-    public function updateCompanyData(Request $request, int $company_id, $file): void
+    public function updateCompanyData(Request $request, int $company_id, ?UploadedFile $file): void
     {
         $company = new Company(
             $request->name,

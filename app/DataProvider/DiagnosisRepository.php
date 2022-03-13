@@ -305,7 +305,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getSelfCompanyCommentComparedWithFutureDiagnosisData(string $forCompanyCommentType): object
     {
-        $forCompanyComment = $this->eloquentSelfDiagnosisComment::where('comment_type', $forCompanyCommentType)->first();
+        $forCompanyComment = $this->eloquentSelfSingleCompanyComment::where('comment_type', $forCompanyCommentType)->first();
         return $forCompanyComment;
     }
 

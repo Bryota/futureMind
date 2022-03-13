@@ -197,10 +197,9 @@ class CompanyController extends Controller
         $this->chat->setCheckedStatus($request->room_id, 0, Auth::user()->id);
     }
 
-    /**;.
+    /**
      * ログアウト用
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
