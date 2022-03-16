@@ -111,7 +111,7 @@ class UserService
             if ($this->chat->checkChatRoom($id, $company->id)) {
                 $room_id = $this->chat->getChatRoomId($id, $company->id);
                 $messageNum = $this->chat->getMessageNum($room_id);
-                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, $id, 0);
+                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, $id, null);
                 if (is_null($checkedMessageNum)) {
                     $checkedMessageNum = 0;
                 }

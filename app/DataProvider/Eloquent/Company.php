@@ -19,7 +19,7 @@ class Company extends Authenticatable
      */
     public function diagnosis(): HasOne
     {
-        return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData', 'user_id');
+        return $this->hasOne('App\DataProvider\Eloquent\CompanyDiagnosisData', 'company_id');
     }
 
     /**

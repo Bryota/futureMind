@@ -1,4 +1,5 @@
 <?php
+
 /**
  * チャットのエンティティ
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\Domain\Entity;
 
 /**
@@ -39,12 +41,12 @@ class Chat
      * コンストラクタ
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @param string $message メッセージ
      * @return void
      */
-    public function __construct(int $room_id, int $student_id, int $company_id, string $message)
+    public function __construct(int $room_id, mixed $student_id, mixed $company_id, string $message)
     {
         $this->room_id = $room_id;
         $this->student_id = $student_id;
@@ -65,9 +67,9 @@ class Chat
     /**
      * 学生IDの取得
      *
-     * @return int 学生ID
+     * @return int|null 学生ID
      */
-    public function getStudentId(): int
+    public function getStudentId(): mixed
     {
         return $this->student_id;
     }
@@ -75,9 +77,9 @@ class Chat
     /**
      * 企業IDの取得
      *
-     * @return int 企業ID
+     * @return int|null 企業ID
      */
-    public function getCompanyId(): int
+    public function getCompanyId(): mixed
     {
         return $this->company_id;
     }

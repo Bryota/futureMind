@@ -125,12 +125,12 @@ class ChatService
      * メッセージ投稿
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @param string $message 投稿メッセージ
      * @return void
      */
-    public function postMessage(int $room_id, int $student_id, int $company_id, string $message): void
+    public function postMessage(int $room_id, mixed $student_id, mixed $company_id, string $message): void
     {
         $eloquent = $this->chat->postMessage(new Chat($room_id, $student_id, $company_id, $message));
     }
@@ -139,11 +139,11 @@ class ChatService
      * メッセージ数設定
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @return void
      */
-    public function setMessageNum(int $room_id, int $student_id, int $company_id): void
+    public function setMessageNum(int $room_id, mixed $student_id, mixed $company_id): void
     {
         $message_num = $this->chat->getMessageNum($room_id);
         $this->chat->setMessageInfo($room_id, $student_id, $company_id, $message_num);
@@ -152,12 +152,12 @@ class ChatService
     /**
      * メッセージ確認有無の設定
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @return void
      */
     // TODO: 変数名考える
-    public function setCheckedStatus(int $room_id, int $student_id, int $company_id): void
+    public function setCheckedStatus(int $room_id, mixed $student_id, mixed $company_id): void
     {
         if ($student_id == 0) {
             $student_id = $this->chat->getStudentId($room_id);

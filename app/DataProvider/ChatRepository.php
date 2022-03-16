@@ -176,7 +176,7 @@ class ChatRepository implements ChatRepositoryInterface
     public function getMessages(int $room_id)
     {
         if ($this->eloquentMessage::where('room_id', $room_id)->exists()) {
-            $messages = $this->eloquentMessage::where('room_id', $room_id)->get(['message', 'student_user', 'company_user']);
+            $messages = $this->eloquentMessage::where('room_id', $room_id)->get(['message', 'user_id', 'company_id']);
         } else {
             $messages = null;
         }
@@ -193,8 +193,8 @@ class ChatRepository implements ChatRepositoryInterface
     {
         $eloquent = $this->eloquentMessage->newInstance();
         $eloquent->room_id = $chat->getRoomId();
-        $eloquent->student_user = $chat->getStudentId();
-        $eloquent->company_user = $chat->getCompanyId();
+        $eloquent->user_id = $chat->getStudentId();
+        $eloquent->company_id = $chat->getCompanyId();
         $eloquent->message = $chat->getMessage();
         $eloquent->save();
         return $eloquent;
@@ -216,43 +216,58 @@ class ChatRepository implements ChatRepositoryInterface
      * メッセージ情報設定
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @param int $message_num メッセージ数
      * @return void
      */
-    public function setMessageInfo(int $room_id, int $student_id, int $company_id, int $message_num): void
+    public function setMessageInfo(int $room_id, mixed $student_id, mixed $company_id, int $message_num): void
     {
-        $this->eloquentMessageInfo::updateOrCreate(
-            [
-                "room_id" => $room_id,
-                "student_user" => $student_id,
-                "company_user" => $company_id,
-            ],
-            [
-                "room_id" => $room_id,
-                "student_user" => $student_id,
-                "company_user" => $company_id,
-                "message_num" => $message_num,
-                "checked_status" => true
-            ]
-        );
+        if (is_null($student_id)) {
+            $this->eloquentMessageInfo::updateOrCreate(
+                [
+                    "room_id" => $room_id,
+                    "user_id" => $student_id,
+                    "company_id" => $company_id,
+                ],
+                [
+                    "room_id" => $room_id,
+                    "company_id" => $company_id,
+                    "message_num" => $message_num,
+                    "checked_status" => true
+                ]
+            );
+        } else {
+            $this->eloquentMessageInfo::updateOrCreate(
+                [
+                    "room_id" => $room_id,
+                    "user_id" => $student_id,
+                    "company_id" => $company_id,
+                ],
+                [
+                    "room_id" => $room_id,
+                    "user_id" => $student_id,
+                    "message_num" => $message_num,
+                    "checked_status" => true
+                ]
+            );
+        }
     }
 
     /**
      * 確認済みメッセージ数取得
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @return int|null 確認済みメッセージ数
      */
-    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): mixed
+    public function getCheckedMessageNum(int $room_id, mixed $student_id, mixed $company_id): mixed
     {
         $message_num_data = $this->eloquentMessageInfo::where([
             ['room_id', $room_id],
-            ['student_user', $student_id],
-            ['company_user', $company_id]
+            ['user_id', $student_id],
+            ['company_id', $company_id]
         ])
             ->first();
         if (is_null($message_num_data)) {
@@ -271,12 +286,12 @@ class ChatRepository implements ChatRepositoryInterface
         $this->eloquentMessageInfo::updateOrCreate(
             [
                 'room_id' => $room_id,
-                'company_user' => 0
+                'company_id' => null
             ],
             [
                 "room_id" => $room_id,
-                "student_user" => $student_id,
-                "company_user" => 0,
+                "user_id" => $student_id,
+                "company_id" => null,
                 'checked_status' => false
             ]
         );
@@ -291,12 +306,12 @@ class ChatRepository implements ChatRepositoryInterface
         $this->eloquentMessageInfo::updateOrCreate(
             [
                 'room_id' => $room_id,
-                'student_user' => 0
+                'user_id' => null
             ],
             [
                 "room_id" => $room_id,
-                "student_user" => 0,
-                "company_user" => $company_id,
+                "user_id" => null,
+                "company_id" => $company_id,
                 'checked_status' => false
             ]
         );
@@ -309,7 +324,7 @@ class ChatRepository implements ChatRepositoryInterface
     public function getUncheckedMessageForUser(int $student_id): int
     {
         return $this->eloquentMessageInfo::where([
-            ['student_user', $student_id],
+            ['user_id', $student_id],
             ['checked_status', false]
         ])
             ->count();
@@ -322,7 +337,7 @@ class ChatRepository implements ChatRepositoryInterface
     public function getUncheckedMessageForCompany(int $company_id): int
     {
         return $this->eloquentMessageInfo::where([
-            ['company_user', $company_id],
+            ['company_id', $company_id],
             ['checked_status', false]
         ])
             ->count();

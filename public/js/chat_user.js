@@ -1,7 +1,7 @@
 /**
  * ロード時にメッセージ一覧の取得
  */
-$(function() {
+$(function () {
     get_chat_messages();
 });
 /**
@@ -24,7 +24,7 @@ const student_id = $('.student_name').data('student_id');
 /**
  * メッセージ・ルームID取得＆メッセージ送信＆フォームクリア
  */
-$('.chat_btn').on('click', function() {
+$('.chat_btn').on('click', function () {
     let message = $('input[name="message"]').val();
     let room_id = $('input[name="room_id"]').val();
     post_chat_messages(message, room_id);
@@ -38,19 +38,19 @@ $('.chat_btn').on('click', function() {
  */
 function post_chat_messages(message, room_id) {
     $.ajax({
-        urt:'{{route("user.postMessage")}}',
-        type:'post',
-        headers: {'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-        dataType:'text',
+        urt: '{{route("user.postMessage")}}',
+        type: 'post',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        dataType: 'text',
         async: true,
         cache: false,
         data: {
             message,
             room_id
         }
-    }).done(function() {
+    }).done(function () {
         get_chat_messages();
-    }).fail(function(){
+    }).fail(function () {
         alert('メッセージの送信に失敗しました。');
     })
 }
@@ -74,7 +74,7 @@ function get_chat_messages() {
                 $("#message_wrap").find(".message_text").remove();
                 for (let i = 0; i < data.messages.length; i++) {
                     current_messages_num = data.messages.length;
-                    if (data.messages[i].student_user === 0) {
+                    if (data.messages[i].user_id === null) {
                         let message_html = `<div class="message_text">
                                                 <div class="balloon1-left">
                                                     <p>${data.messages[i].message}</p>
@@ -90,7 +90,7 @@ function get_chat_messages() {
                         $("#message_wrap").append(message_html);
                     }
                 }
-                $('html').animate({scrollTop: $('.chat_input').offset().top},'slow');
+                $('html').animate({ scrollTop: $('.chat_input').offset().top }, 'slow');
             }
         },
         error: () => {
