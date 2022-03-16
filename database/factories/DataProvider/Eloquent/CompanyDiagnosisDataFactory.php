@@ -23,20 +23,20 @@ class CompanyDiagnosisDataFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => Company::factory(),
-            'developmentvalue' => $this->faker->numberBetween($min=3,$max=15),
-            'socialvalue' => $this->faker->numberBetween($min=3,$max=15),
-            'stablevalue' => $this->faker->numberBetween($min=3,$max=15),
-            'teammatevalue' => $this->faker->numberBetween($min=3,$max=15),
-            'futurevalue' => $this->faker->numberBetween($min=3,$max=15)
+            'company_id' => Company::factory(),
+            'developmentvalue' => $this->faker->numberBetween($min = 3, $max = 15),
+            'socialvalue' => $this->faker->numberBetween($min = 3, $max = 15),
+            'stablevalue' => $this->faker->numberBetween($min = 3, $max = 15),
+            'teammatevalue' => $this->faker->numberBetween($min = 3, $max = 15),
+            'futurevalue' => $this->faker->numberBetween($min = 3, $max = 15)
         ];
     }
 
-    public function userAs($user)
+    public function userAs($company)
     {
-        return $this->state(function (array $attributes) use($user) {
+        return $this->state(function (array $attributes) use ($company) {
             return [
-                'user_id' => $user->id
+                'company_id' => $company->id
             ];
         });
     }

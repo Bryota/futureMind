@@ -165,7 +165,7 @@ class CompanyController extends Controller
         $company_user = $this->company->getCompanyData(Auth::user()->id);
         $student_user = $this->user->getUserData($request->input('student_id'));
         $messages = $this->chat->getMessages($room_id);
-        $this->chat->setMessageNum($room_id, 0, Auth::user()->id);
+        $this->chat->setMessageNum($room_id, null, Auth::user()->id);
         return view('company.chat', compact('room_id', 'messages', 'company_user', 'student_user'));
     }
 
@@ -179,7 +179,7 @@ class CompanyController extends Controller
     {
         $messages = $this->chat->getMessages($id);
         $messagesJsonData = ["messages" => $messages];
-        $this->chat->setMessageNum($id, 0, $request->input('company_id'));
+        $this->chat->setMessageNum($id, null, $request->input('company_id'));
         return response()->json($messagesJsonData);
     }
 
@@ -192,9 +192,9 @@ class CompanyController extends Controller
      */
     public function postMessage(Request $request)
     {
-        $this->chat->postMessage($request->room_id, 0, Auth::user()->id, $request->message);
-        $this->chat->setMessageNum($request->room_id, 0, Auth::user()->id);
-        $this->chat->setCheckedStatus($request->room_id, 0, Auth::user()->id);
+        $this->chat->postMessage($request->room_id, null, Auth::user()->id, $request->message);
+        $this->chat->setMessageNum($request->room_id, null, Auth::user()->id);
+        $this->chat->setCheckedStatus($request->room_id, null, Auth::user()->id);
     }
 
     /**

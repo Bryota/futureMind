@@ -39,7 +39,7 @@ class CompanyChatTest extends TestCase
 
         $this->user = $this->loginAsUser();
 
-        $this->post('search/company/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('search/company/' . $this->company->id, ['company_id' => $this->company->id]);
     }
 
     /**
@@ -50,10 +50,10 @@ class CompanyChatTest extends TestCase
     {
         $this->company = $this->loginAsCompany($this->company);
 
-        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id])
-            ->assertRedirect('company/student/'.$this->user->id);
+        $this->from('company/student/' . $this->user->id)->post('company/chat', ['student_id' => $this->user->id])
+            ->assertRedirect('company/student/' . $this->user->id);
 
-        $this->get('company/student/'.$this->user->id)
+        $this->get('company/student/' . $this->user->id)
             ->assertSee('チャット');
 
         $this->assertCount(1, ChatRoom::all());
@@ -68,11 +68,11 @@ class CompanyChatTest extends TestCase
     {
         $this->company = $this->loginAsCompany($this->company);
 
-        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->from('company/student/' . $this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
 
         $chat_room = ChatRoom::first();
 
-        $this->get('company/chat/'.$chat_room->id.'?student_id='.$this->user->id)
+        $this->get('company/chat/' . $chat_room->id . '?student_id=' . $this->user->id)
             ->assertOk()
             ->assertSee($this->user->name)
             ->assertSee('あなた');
@@ -86,19 +86,21 @@ class CompanyChatTest extends TestCase
     {
         $this->company = $this->loginAsCompany($this->company);
 
-        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->from('company/student/' . $this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
 
         $chat_room = ChatRoom::first();
 
-        $this->post('company/chat/'.$chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
+        $this->post('company/chat/' . $chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
 
         $this->assertCount(1, Message::all());
-        $this->assertDatabaseHas('messages', [
-                                                'student_user' => 0,
-                                                'company_user' => $chat_room->company_id,
-                                                'room_id' => $chat_room->id,
-                                                'message' => 'テストメッセージ'
-                                            ]
+        $this->assertDatabaseHas(
+            'messages',
+            [
+                'user_id' => null,
+                'company_id' => $chat_room->company_id,
+                'room_id' => $chat_room->id,
+                'message' => 'テストメッセージ'
+            ]
         );
     }
 
@@ -109,14 +111,14 @@ class CompanyChatTest extends TestCase
     public function チャット情報取得()
     {
         $this->company = $this->loginAsCompany($this->company);
-        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->from('company/student/' . $this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
 
         $chat_room = ChatRoom::first();
 
-        $this->post('company/chat/'.$chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
+        $this->post('company/chat/' . $chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
 
-        $this->get('company/chat/ajax/'.$chat_room->id.'?company_id='.$this->user->id)
-        ->assertJsonFragment(['company_user' => $this->company->id, 'message' => "テストメッセージ", "student_user" => 0]);
+        $this->get('company/chat/ajax/' . $chat_room->id . '?company_id=' . $this->company->id)
+            ->assertJsonFragment(['company_id' => $this->company->id, 'message' => "テストメッセージ", "user_id" => null]);
     }
 
     /**
@@ -126,12 +128,12 @@ class CompanyChatTest extends TestCase
     public function 新着チャットアラート()
     {
         $this->company = $this->loginAsCompany($this->company);
-        $this->from('company/student/'.$this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
+        $this->from('company/student/' . $this->user->id)->post('company/chat', ['student_id' => $this->user->id]);
         $this->delete('company/logout');
 
         $this->loginAsUser($this->user);
         $chat_room = ChatRoom::first();
-        $this->post('user/chat/'.$chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
+        $this->post('user/chat/' . $chat_room->id, ['message' => 'テストメッセージ', 'room_id' => $chat_room->id]);
 
         $this->company = $this->loginAsCompany($this->company);
         $this->get('company')
@@ -139,7 +141,7 @@ class CompanyChatTest extends TestCase
         $this->get('company/student')
             ->assertSee('<span>1</span>', false);
 
-        $this->get('company/chat/'.$chat_room->id.'?student_id='.$this->user->id);
+        $this->get('company/chat/' . $chat_room->id . '?student_id=' . $this->user->id);
 
         $this->get('company')
             ->assertDontSee('<span></span>', false);

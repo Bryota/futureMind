@@ -281,7 +281,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getCompanyDiagnosisData(int $company_id): object
     {
-        $companyDiagnosisData = $this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first();
+        $companyDiagnosisData = $this->eloquentCompanyDiagnosisData::where('company_id', $company_id)->first();
         return $companyDiagnosisData;
     }
 

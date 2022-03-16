@@ -1,4 +1,5 @@
 <?php
+
 /**
  * チャット用のデータリポジトリインターフェース
  *
@@ -8,6 +9,7 @@
  * @version 1.0
  * @copyright 2021 Ryota Segawa
  */
+
 namespace App\DataProvider\RepositoryInterface;
 
 use App\DataProvider\Eloquent\Message as EloquentMessage;
@@ -108,22 +110,22 @@ interface ChatRepositoryInterface
      * メッセージ情報設定
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @param int $message_num メッセージ数
      * @return void
      */
-    public function setMessageInfo(int $room_id, int $student_id, int $company_id, int $message_num): void;
+    public function setMessageInfo(int $room_id, mixed $student_id, mixed $company_id, int $message_num): void;
 
     /**
      * 確認済みメッセージ数取得
      *
      * @param int $room_id チャットルームID
-     * @param int $student_id 学生ID
-     * @param int $company_id 企業ID
+     * @param int|null $student_id 学生ID
+     * @param int|null $company_id 企業ID
      * @return int|null 確認済みメッセージ数
      */
-    public function getCheckedMessageNum(int $room_id, int $student_id, int $company_id): mixed;
+    public function getCheckedMessageNum(int $room_id, mixed $student_id, mixed $company_id): mixed;
 
     /**
      * メッセージ確認有無の設定（学生用）

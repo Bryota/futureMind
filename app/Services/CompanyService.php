@@ -167,7 +167,7 @@ class CompanyService
             if ($this->chat->checkChatRoom($student->id, $company_id)) {
                 $room_id = $this->chat->getChatRoomId($student->id, $company_id);
                 $messageNum = $this->chat->getMessageNum($room_id);
-                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, 0, $company_id);
+                $checkedMessageNum = $this->chat->getCheckedMessageNum($room_id, null, $company_id);
                 if (is_null($checkedMessageNum)) {
                     $checkedMessageNum = 0;
                 }

@@ -12,6 +12,6 @@ class MessageInfo extends Model
     protected $table = 'message_info';
 
     protected $fillable = [
-        'room_id', 'student_user', 'company_user', 'message_num', 'checked_status'
+        'room_id', 'user_id', 'company_id', 'message_num', 'checked_status'
     ];
 }

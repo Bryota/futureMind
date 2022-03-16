@@ -123,17 +123,17 @@ class CompanyRepository implements CompanyRepositoryInterface
      */
     public function setCompanyDiagnosisData(CompanyDiagnosisData $companyDiagnosisData, int $company_id): void
     {
-        if ($this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first() === null) {
+        if ($this->eloquentCompanyDiagnosisData::where('company_id', $company_id)->first() === null) {
             $eloquent = $this->eloquentCompanyDiagnosisData->newInstance();
             $eloquent->developmentvalue = (int)$companyDiagnosisData->getDevelopmentValue() / 3;
             $eloquent->socialvalue = (int)$companyDiagnosisData->getSocialValue() / 3;
             $eloquent->stablevalue = (int)$companyDiagnosisData->getStableValue() / 3;
             $eloquent->teammatevalue = (int)$companyDiagnosisData->getTeammateValue() / 3;
             $eloquent->futurevalue = (int)$companyDiagnosisData->getFutureValue() / 3;
-            $eloquent->user_id = $companyDiagnosisData->getCompanyId();
+            $eloquent->company_id = $companyDiagnosisData->getCompanyId();
             $eloquent->save();
         } else {
-            $eloquent = $this->eloquentCompanyDiagnosisData::where('user_id', $company_id)->first();
+            $eloquent = $this->eloquentCompanyDiagnosisData::where('company_id', $company_id)->first();
             $eloquent->developmentvalue = (int)$companyDiagnosisData->getDevelopmentValue() / 3;
             $eloquent->socialvalue = (int)$companyDiagnosisData->getSocialValue() / 3;
             $eloquent->stablevalue = (int)$companyDiagnosisData->getStableValue() / 3;
