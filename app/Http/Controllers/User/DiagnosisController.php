@@ -76,7 +76,8 @@ class DiagnosisController extends Controller
      */
     public function future()
     {
-        return view('diagnosis.future');
+        $questions = $this->diagnosis->getAllDiagnosisQuestions();
+        return view('diagnosis.future', compact('questions'));
     }
 
     /**
@@ -105,7 +106,8 @@ class DiagnosisController extends Controller
      */
     public function self()
     {
-        return view('diagnosis.self');
+        $questions = $this->diagnosis->getAllDiagnosisQuestions();
+        return view('diagnosis.self', compact('questions'));
     }
 
     /**

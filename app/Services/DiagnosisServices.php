@@ -43,6 +43,16 @@ class DiagnosisServices
     }
 
     /**
+     * 診断質問一覧取得
+     *
+     * @return object 診断質問一覧
+     */
+    public function getAllDiagnosisQuestions(): object
+    {
+        return $this->diagnosis->getAllDiagnosisQuestions();
+    }
+
+    /**
      * 理想分析のデータ追加or更新
      *
      * @param int $student_id 学生ID
