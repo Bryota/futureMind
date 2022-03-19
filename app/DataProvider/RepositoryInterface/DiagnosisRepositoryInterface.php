@@ -24,6 +24,12 @@ use App\Domain\Entity\SelfDiagnosisData;
 interface DiagnosisRepositoryInterface
 {
     /**
+     * 診断質問一覧の取得
+     * 
+     * @return object 診断質問一覧
+     */
+    public function getAllDiagnosisQuestions(): object;
+    /**
      * 理想分析データの追加or更新
      *
      * @param int $student_id 学生ID

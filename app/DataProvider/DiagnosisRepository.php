@@ -22,6 +22,7 @@ use App\DataProvider\Eloquent\Company as EloquentCompany;
 use App\DataProvider\Eloquent\CompanyDiagnosisData as EloquentCompanyDiagnosisData;
 use App\DataProvider\Eloquent\FutureSingleCompanyComment as EloquentFutureSingleCompanyComment;
 use App\DataProvider\Eloquent\SelfSingleCompanyComment as EloquentSelfSingleCompanyComment;
+use App\DataProvider\Eloquent\DiagnosisQuestion as EloquentDiagnosisQuestion;
 use App\Domain\Entity\FutureDiagnosisData;
 use App\Domain\Entity\SelfDiagnosisData;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +72,10 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      * @var EloquentSelfSingleCompanyComment $eloquentSelfSingleCompanyComment SelfSingleCompanyCommentEloquentModel
      */
     private $eloquentSelfSingleCompanyComment;
+    /**
+     * @var EloquentDiagnosisQuestion $eloquentDiagnosisQuestion DiagnosisQuestionEloquentModel
+     */
+    private $eloquentDiagnosisQuestion;
 
     /**
      * コンストラクタ
@@ -84,6 +89,7 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      * @param EloquentCompanyDiagnosisData $companyDiagnosisData CompanyDiagnosisDataEloquentModel
      * @param EloquentFutureSingleCompanyComment $futureSingleCompanyComment FutureSingleCompanyCommentEloquentModel
      * @param EloquentSelfSingleCompanyComment $selfSingleCompanyComment SelfSingleCompanyCommentEloquentModel
+     * @param EloquentDiagnosisQuestion $diagnosisQuestion DiagnosisQuestionEloquentModel
      * @return void
      */
     public function __construct(
@@ -95,7 +101,8 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
         EloquentCompany $company,
         EloquentCompanyDiagnosisData $companyDiagnosisData,
         EloquentFutureSingleCompanyComment $futureSingleCompanyComment,
-        EloquentSelfSingleCompanyComment $selfSingleCompanyComment
+        EloquentSelfSingleCompanyComment $selfSingleCompanyComment,
+        EloquentDiagnosisQuestion $diagnosisQuestion
     ) {
         $this->eloquentFutureDiagnosis = $futureDiagnosis;
         $this->eloquentSelfDiagnosis = $selfDiagnosis;
@@ -106,6 +113,17 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
         $this->eloquentCompanyDiagnosisData = $companyDiagnosisData;
         $this->eloquentFutureSingleCompanyComment = $futureSingleCompanyComment;
         $this->eloquentSelfSingleCompanyComment = $selfSingleCompanyComment;
+        $this->eloquentDiagnosisQuestion = $diagnosisQuestion;
+    }
+
+    /**
+     * 診断質問一覧の取得
+     * 
+     * @return object 診断質問一覧
+     */
+    public function getAllDiagnosisQuestions(): object
+    {
+        return $this->eloquentDiagnosisQuestion::all();
     }
 
     /**
