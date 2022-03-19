@@ -18,6 +18,8 @@ jobs:
         run: sudo composer self-update 2.1.11
       - name: composer version
         run: composer --version
+      - name: composer update
+        run: composer update
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Generate key
