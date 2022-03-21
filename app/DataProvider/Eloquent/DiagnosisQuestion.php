@@ -8,6 +8,11 @@ use Robbo\Presenter\PresentableInterface;
 
 class DiagnosisQuestion extends Model implements PresentableInterface
 {
+
+    protected $fillable = [
+        'diagnosis_type', 'question'
+    ];
+
     /**
      * get dignosis data type
      * 
