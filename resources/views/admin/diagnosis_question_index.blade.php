@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="width: 5%">id</th>
-                        <th scope="col" style="width: 50%">コメント</th>
+                        <th scope="col" style="width: 50%">質問</th>
                         <th scope="col" style="width: 10%">タイプ</th>
                         <th scope="col" style="width: 5%">順番</th>
                         <th scope="col" style="width: 30%"></th>
