@@ -66,7 +66,7 @@ class AdminController extends Controller
     /**
      * 理想分析コメント編集画面表示
      *
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function futureEdit(int $id)
@@ -78,6 +78,8 @@ class AdminController extends Controller
     /**
      * 理想分析コメント更新画面表示
      *
+     * @param CommentRequest $request コメントリクエスト
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function futureUpdate(CommentRequest $request, $id)
@@ -98,7 +100,7 @@ class AdminController extends Controller
         return redirect('admin');
     }
 
-    /**å
+    /**
      * 自己分析コメント一覧画面表示
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -112,7 +114,7 @@ class AdminController extends Controller
     /**
      * 自己分析コメント編集画面表示
      * 
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function selfEdit(int $id)
@@ -124,6 +126,8 @@ class AdminController extends Controller
     /**
      * 自己分析コメント更新画面表示
      *
+     * @param CommentRequest $request コメントリクエスト
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function selfUpdate(CommentRequest $request, $id)
@@ -158,7 +162,7 @@ class AdminController extends Controller
     /**
      * 分析結果コメント編集画面表示
      * 
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function diagnosisEdit(int $id)
@@ -170,7 +174,7 @@ class AdminController extends Controller
     /**
      * 分析結果コメント更新画面表示
      *
-     * @param CommentRequest コメントリクエスト
+     * @param CommentRequest $request コメントリクエスト
      * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -206,7 +210,7 @@ class AdminController extends Controller
     /**
      * 理想分析会社コメント編集画面表示
      * 
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function futureCompanyEdit(int $id)
@@ -218,7 +222,7 @@ class AdminController extends Controller
     /**
      * 理想分析会社コメント更新画面表示
      *
-     * @param CommentRequest コメントリクエスト
+     * @param CommentRequest $request コメントリクエスト
      * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -254,7 +258,7 @@ class AdminController extends Controller
     /**
      * 自己分析会社コメント編集画面表示
      * 
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function selfCompanyEdit(int $id)
@@ -266,7 +270,7 @@ class AdminController extends Controller
     /**
      * 自己分析会社コメント更新画面表示
      *
-     * @param CommentRequest コメントリクエスト
+     * @param CommentRequest $request コメントリクエスト
      * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -302,7 +306,7 @@ class AdminController extends Controller
     /**
      * 診断質問コメント編集画面表示
      * 
-     * @param int コメントID
+     * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function diagnosisQuestionEdit(int $id)
@@ -314,7 +318,7 @@ class AdminController extends Controller
     /**
      * 診断質問コメント更新画面表示
      *
-     * @param DiagnosisQuestionRequest コメントリクエスト
+     * @param DiagnosisQuestionRequest $request コメントリクエスト
      * @param int $id コメントID
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

@@ -516,7 +516,7 @@ class DiagnosisServices
     /**
      * 理想診断コメント更新
      * 
-     * @param Request コメントリクエスト
+     * @param Request $request コメントリクエスト
      * @param int $id コメントID
      * @return void
      */
@@ -560,7 +560,7 @@ class DiagnosisServices
     /**
      * 自己診断コメント更新
      * 
-     * @param Request コメントリクエスト
+     * @param Request $request コメントリクエスト
      * @param int $id コメントID
      * @return void
      */
@@ -604,7 +604,7 @@ class DiagnosisServices
     /**
      * 診断結果コメント更新
      * 
-     * @param Request コメントリクエスト
+     * @param Request $request コメントリクエスト
      * @param int $id コメントID
      * @return void
      */
@@ -648,7 +648,7 @@ class DiagnosisServices
     /**
      * 理想分析会社コメント更新
      * 
-     * @param Request コメントリクエスト
+     * @param Request $request コメントリクエスト
      * @param int $id コメントID
      * @return void
      */
@@ -692,7 +692,7 @@ class DiagnosisServices
     /**
      * 自己分析会社コメント更新
      * 
-     * @param Request コメントリクエスト
+     * @param Request $request コメントリクエスト
      * @param int $id コメントID
      * @return void
      */

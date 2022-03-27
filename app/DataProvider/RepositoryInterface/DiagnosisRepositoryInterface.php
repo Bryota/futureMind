@@ -42,7 +42,7 @@ interface DiagnosisRepositoryInterface
     /**
      * 診断質問更新
      * 
-     * @param Requestu $requset 診断結果リクエスト
+     * @param Request $request 診断結果リクエスト
      * @param int $id 診断質問ID
      * @return void
      */
