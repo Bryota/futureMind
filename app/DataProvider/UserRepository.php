@@ -113,4 +113,14 @@ class UserRepository implements UserRepositoryInterface
             return false;
         }
     }
+
+    /**
+     * 全学生数取得
+     * 
+     * @return int 全学生数
+     */
+    public function getStudentNum(): int
+    {
+        return $this->eloquentUser->count();
+    }
 }

@@ -57,4 +57,11 @@ interface UserRepositoryInterface
      * @return bool
      */
     public function checkIsLiked(int $user_id, int $company_id): bool;
+
+    /**
+     * 全学生数取得
+     * 
+     * @return int 全学生数
+     */
+    public function getStudentNum(): int;
 }

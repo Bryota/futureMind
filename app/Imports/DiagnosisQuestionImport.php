@@ -18,7 +18,8 @@ class DiagnosisQuestionImport implements ToModel
         $diagnosisTypeEnum = DiagnosisType::fromKey($row[0]);
         return new DiagnosisQuestion([
             'diagnosis_type' => $diagnosisTypeEnum->value,
-            'question' => $row[1]
+            'question' => $row[1],
+            'weight' => $row[2]
         ]);
     }
 }

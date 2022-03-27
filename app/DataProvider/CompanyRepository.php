@@ -154,4 +154,14 @@ class CompanyRepository implements CompanyRepositoryInterface
         $students = $this->eloquentCompany::find($company_id)->likesStudent()->paginate(6);
         return $students;
     }
+
+    /**
+     * 全企業数取得
+     * 
+     * @return int 全企業数
+     */
+    public function getCompanyNum(): int
+    {
+        return $this->eloquentCompany::count();
+    }
 }

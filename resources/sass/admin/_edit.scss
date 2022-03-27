@@ -1,0 +1,24 @@
+.admin_edit_form {
+    .btn {
+        background-color: #FDFF83;
+        border-radius: 30px;
+        box-shadow: 0px 8px 4px rgb(209 211 39 / 25%);
+        display: block;
+        text-align: center;
+        font-size: 15px;
+        padding: 10px 5px;
+        margin: 10px auto;
+        width: 30%;
+    }
+
+    .btn:active {
+        transform: translateY(8px);
+        box-shadow: none;
+        outline: none !important;
+    }
+
+    .btn_edit {
+        background-color: #FDFF83;
+        box-shadow: 0px 8px 4px rgb(209 211 39 / 25%);
+    }
+}

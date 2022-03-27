@@ -43,6 +43,9 @@ header {
                 padding: 0 13px;
             }
         }
+        ul.admin_header {
+            font-size: 15px;
+        }
         @include tab_iPad {
             display: none;
         }

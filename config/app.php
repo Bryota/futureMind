@@ -237,6 +237,7 @@ return [
         'GraduateYearsConst' => App\Consts\GraduateYearsConst::class,
         'IndustryConst' => App\Consts\IndustryConst::class,
         'PrefectureConst' => App\Consts\PrefectureConst::class,
+        'CommentTypeConst' => App\Consts\CommentTypeConst::class,
 
     ],
 

@@ -16,6 +16,7 @@ use App\DataProvider\RepositoryInterface\DiagnosisRepositoryInterface;
 use App\Domain\Entity\FutureDiagnosisData;
 use App\Domain\Entity\SelfDiagnosisData;
 use App\models\FutureSingleCompanyComment;
+use Illuminate\Http\Request;
 
 /**
  * 学生診断用のサービスクラス
@@ -50,6 +51,40 @@ class DiagnosisServices
     public function getAllDiagnosisQuestions(): object
     {
         return $this->diagnosis->getAllDiagnosisQuestions();
+    }
+
+    /**
+     * 診断質問の1つ取得
+     *
+     * @param int $id 診断質問ID
+     * @return object 診断質問一覧
+     */
+    public function getDiagnosisQuestionByID(int $id): object
+    {
+        return $this->diagnosis->getDiagnosisQuestionByID($id);
+    }
+
+    /**
+     * 診断質問更新
+     *
+     * @param Request $request 診断質問リクエスト
+     * @param int $id 診断質問ID
+     * @return void
+     */
+    public function updateDiagnosisQuestion(Request $request, int $id): void
+    {
+        $this->diagnosis->updateDiagnosisQuestion($request, $id);
+    }
+
+    /**
+     * 診断質問削除
+     * 
+     * @param int $id 質問ID
+     * @return void
+     */
+    public function deleteDiagnosisQuestion(int $id): void
+    {
+        $this->diagnosis->deleteDiagnosisQuestion($id);
     }
 
     /**
@@ -455,5 +490,225 @@ class DiagnosisServices
     public function addLikedCompany(int $student_id, int $company_id): void
     {
         $this->diagnosis->addLikedCompany($student_id, $company_id);
+    }
+
+    /**
+     * 理想診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureDiagnosisComments(): object
+    {
+        return $this->diagnosis->getAllFutureDiagnosisComments();
+    }
+
+    /**
+     * 理想診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureDiagnosisCommentByID(int $id): object
+    {
+        return $this->diagnosis->getFutureDiagnosisCommentByID($id);
+    }
+
+    /**
+     * 理想診断コメント更新
+     * 
+     * @param Request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureComment(Request $request, int $id): void
+    {
+        $this->diagnosis->updateFutureComment($request, $id);
+    }
+
+    /**
+     * 理想診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureComment(int $id): void
+    {
+        $this->diagnosis->deleteFutureComment($id);
+    }
+
+    /**
+     * 自己診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfDiagnosisComments(): object
+    {
+        return $this->diagnosis->getAllSelfDiagnosisComments();
+    }
+
+    /**
+     * 自己診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfDiagnosisCommentByID(int $id): object
+    {
+        return $this->diagnosis->getSelfDiagnosisCommentByID($id);
+    }
+
+    /**
+     * 自己診断コメント更新
+     * 
+     * @param Request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfComment(Request $request, int $id): void
+    {
+        $this->diagnosis->updateSelfComment($request, $id);
+    }
+
+    /**
+     * 自己診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfComment(int $id): void
+    {
+        $this->diagnosis->deleteSelfComment($id);
+    }
+
+    /**
+     * 診断結果全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllDiagnosisComments(): object
+    {
+        return $this->diagnosis->getAllDiagnosisComments();
+    }
+
+    /**
+     * 診断結果1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getDiagnosisCommentByID(int $id): object
+    {
+        return $this->diagnosis->getDiagnosisCommentByID($id);
+    }
+
+    /**
+     * 診断結果コメント更新
+     * 
+     * @param Request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateDiagnosisComment(Request $request, int $id): void
+    {
+        $this->diagnosis->updateDiagnosisComment($request, $id);
+    }
+
+    /**
+     * 診断結果コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteDiagnosisComment(int $id): void
+    {
+        $this->diagnosis->deleteDiagnosisComment($id);
+    }
+
+    /**
+     * 理想分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureCompanyComments(): object
+    {
+        return $this->diagnosis->getAllFutureCompanyComments();
+    }
+
+    /**
+     * 理想分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureCompanyCommentByID(int $id): object
+    {
+        return $this->diagnosis->getFutureCompanyCommentByID($id);
+    }
+
+    /**
+     * 理想分析会社コメント更新
+     * 
+     * @param Request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureCompanyComment(Request $request, int $id): void
+    {
+        $this->diagnosis->updateFutureCompanyComment($request, $id);
+    }
+
+    /**
+     * 理想分析会社コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureCompanyComment(int $id): void
+    {
+        $this->diagnosis->deleteFutureCompanyComment($id);
+    }
+
+    /**
+     * 自己分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfCompanyComments(): object
+    {
+        return $this->diagnosis->getAllSelfCompanyComments();
+    }
+
+    /**
+     * 自己分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfCompanyCommentByID(int $id): object
+    {
+        return $this->diagnosis->getSelfCompanyCommentByID($id);
+    }
+
+    /**
+     * 自己分析会社コメント更新
+     * 
+     * @param Request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfCompanyComment(Request $request, int $id): void
+    {
+        $this->diagnosis->updateSelfCompanyComment($request, $id);
+    }
+
+    /**
+     * 自己分析コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfCompanyComment(int $id): void
+    {
+        $this->diagnosis->deleteSelfCompanyComment($id);
     }
 }

@@ -22,13 +22,13 @@ class ImportCSVController extends Controller
     /**
      * 診断質問追加
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
         $file = $request->file('file');
 
         Excel::import(new DiagnosisQuestionImport, $file);
-        return view('admin.importCSV.import_diagnosis_question');
+        return redirect('admin');
     }
 }

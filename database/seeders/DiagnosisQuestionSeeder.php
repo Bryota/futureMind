@@ -17,63 +17,78 @@ class DiagnosisQuestionSeeder extends Seeder
         DB::table('diagnosis_questions')->insert([
             [
                 'diagnosis_type' => 0,
-                'question' => "質問1（成長）"
+                'question' => "質問1（成長）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 1,
-                'question' => "質問2（社会）"
+                'question' => "質問2（社会）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 2,
-                'question' => "質問3（安定）"
+                'question' => "質問3（安定）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 3,
-                'question' => "質問4（仲間）"
+                'question' => "質問4（仲間）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 4,
-                'question' => "質問5（将来）"
+                'question' => "質問5（将来）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 0,
-                'question' => "質問6（成長）"
+                'question' => "質問6（成長）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 1,
-                'question' => "質問7（社会）"
+                'question' => "質問7（社会）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 2,
-                'question' => "質問8（安定）"
+                'question' => "質問8（安定）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 3,
-                'question' => "質問9（仲間）"
+                'question' => "質問9（仲間）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 4,
-                'question' => "質問10（将来）"
+                'question' => "質問10（将来）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 0,
-                'question' => "質問11（成長）"
+                'question' => "質問11（成長）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 1,
-                'question' => "質問12（社会）"
+                'question' => "質問12（社会）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 2,
-                'question' => "質問13（安定）"
+                'question' => "質問13（安定）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 3,
-                'question' => "質問14（仲間）"
+                'question' => "質問14（仲間）",
+                'weight' => 0
             ],
             [
                 'diagnosis_type' => 4,
-                'question' => "質問15（将来）"
+                'question' => "質問15（将来）",
+                'weight' => 0
             ],
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\DataProvider\Eloquent\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class createAdminUserCommand extends Command
 {
@@ -40,7 +41,7 @@ class createAdminUserCommand extends Command
     {
         $admin = new Admin();
         $admin->email = config('auth.admin_email');
-        $admin->password = config('auth.admin_password');
+        $admin->password = Hash::make(config('auth.admin_password'));
         $admin->save();
         $this->info('adminユーザーが登録されました');
         return 0;

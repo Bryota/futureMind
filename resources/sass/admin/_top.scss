@@ -1,0 +1,39 @@
+.data_wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+
+    .user_data, .company_data {
+        background-color: white;
+        height: 60vh;
+        width: 45%;
+    }
+
+    .data_header {
+        align-items: center;
+        height: 15%;
+        text-align: center;
+
+        p {
+            padding-top: 15px;
+            font-size: 25px;
+        }
+    }
+
+    .user_data .data_header {
+        background-color: #FDFF83;
+    }
+
+    .company_data .data_header {
+        background-color: #BAF5F4;
+    }
+
+    .data_body {
+        margin: 30px 40px;
+
+        li {
+            font-size: 20px;
+            list-style: disc;
+        }
+    }
+}
