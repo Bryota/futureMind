@@ -1,0 +1,45 @@
+.btn_add {
+    background-color: #FC7676;
+    border-radius: 30px;
+    box-shadow: 0px 8px 4px rgba(211, 59, 39, 0.25);
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 5px;
+    margin: 10px 5px;
+    width: 15%;
+}
+.btn:active {
+    transform: translateY(8px);
+    box-shadow: none;
+    outline: none !important;
+}
+
+.admin_comment_list_table {
+    .btn {
+        background-color: #FDFF83;
+        border-radius: 30px;
+        box-shadow: 0px 8px 4px rgb(209 211 39 / 25%);
+        display: block;
+        text-align: center;
+        font-size: 15px;
+        padding: 10px 5px;
+        margin: 10px 5px;
+    }
+
+    .btn:active {
+        transform: translateY(8px);
+        box-shadow: none;
+        outline: none !important;
+    }
+
+    .btn_edit {
+        background-color: #FDFF83;
+        box-shadow: 0px 8px 4px rgb(209 211 39 / 25%);
+    }
+
+    .btn_delete {
+        background-color: #8CBAFF;
+        box-shadow: 0px 8px 4px rgb(209 211 39 / 25%);
+        width: 95%;
+    }
+}

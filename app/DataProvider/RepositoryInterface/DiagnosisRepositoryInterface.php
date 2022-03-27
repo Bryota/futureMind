@@ -14,6 +14,7 @@ namespace App\DataProvider\RepositoryInterface;
 
 use App\Domain\Entity\FutureDiagnosisData;
 use App\Domain\Entity\SelfDiagnosisData;
+use Illuminate\Http\Request;
 
 /**
  * 診断データリポジトリ用のインターフェース
@@ -29,6 +30,32 @@ interface DiagnosisRepositoryInterface
      * @return object 診断質問一覧
      */
     public function getAllDiagnosisQuestions(): object;
+
+    /**
+     * 診断質問の1つ取得
+     * 
+     * @param int $id 診断質問ID
+     * @return object 診断質問一覧
+     */
+    public function getDiagnosisQuestionByID(int $id): object;
+
+    /**
+     * 診断質問更新
+     * 
+     * @param Request $request 診断結果リクエスト
+     * @param int $id 診断質問ID
+     * @return void
+     */
+    public function updateDiagnosisQuestion(Request $request, int $id): void;
+
+    /**
+     * 診断質問削除
+     * 
+     * @param int $id 診断質問ID
+     * @return void
+     */
+    public function deleteDiagnosisQuestion(int $id): void;
+
     /**
      * 理想分析データの追加or更新
      *
@@ -156,4 +183,164 @@ interface DiagnosisRepositoryInterface
      * @return void
      */
     public function addLikedCompany(int $student_id, int $company_id): void;
+
+    /**
+     * 理想診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureDiagnosisComments(): object;
+
+    /**
+     * 理想診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureDiagnosisCommentByID(int $id): object;
+
+    /**
+     * 理想診断コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureComment(Request $request, int $id): void;
+
+    /**
+     * 理想診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureComment(int $id): void;
+
+    /**
+     * 自己診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfDiagnosisComments(): object;
+
+    /**
+     * 自己診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfDiagnosisCommentByID(int $id): object;
+
+    /**
+     * 自己診断コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfComment(Request $request, int $id): void;
+
+    /**
+     * 自己診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfComment(int $id): void;
+
+    /**
+     * 診断結果全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllDiagnosisComments(): object;
+
+    /**
+     * 診断結果1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getDiagnosisCommentByID(int $id): object;
+
+    /**
+     * 診断結果コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateDiagnosisComment(Request $request, int $id): void;
+
+    /**
+     * 診断結果コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteDiagnosisComment(int $id): void;
+
+    /**
+     * 理想分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureCompanyComments(): object;
+
+    /**
+     * 理想分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureCompanyCommentByID(int $id): object;
+
+    /**
+     * 理想分析会社コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureCompanyComment(Request $request, int $id): void;
+
+    /**
+     * 理想分析会社コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureCompanyComment(int $id): void;
+
+    /**
+     * 自己分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfCompanyComments(): object;
+
+    /**
+     * 自己分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfCompanyCommentByID(int $id): object;
+
+    /**
+     * 自己分析会社コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfCompanyComment(Request $request, int $id): void;
+
+    /**
+     * 自己分析会社コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfCompanyComment(int $id): void;
 }

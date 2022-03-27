@@ -177,4 +177,14 @@ class CompanyService
         }
         return $students;
     }
+
+    /**
+     * 全企業数取得
+     * 
+     * @return int 全企業数
+     */
+    public function getCompanyNum(): int
+    {
+        return $this->company->getCompanyNum();
+    }
 }

@@ -10,7 +10,7 @@ class DiagnosisQuestion extends Model implements PresentableInterface
 {
 
     protected $fillable = [
-        'diagnosis_type', 'question'
+        'diagnosis_type', 'question', 'weight'
     ];
 
     /**

@@ -134,4 +134,14 @@ class UserService
         $isLiked = $this->user->checkIsLiked($user_id, $company_id);
         return $isLiked;
     }
+
+    /**
+     * 全学生数取得
+     * 
+     * @return int 全学生数
+     */
+    public function getStudentNum(): int
+    {
+        return $this->user->getStudentNum();
+    }
 }

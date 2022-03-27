@@ -73,4 +73,11 @@ interface CompanyRepositoryInterface
      * @return object お気に入りされた学生一覧データ
      */
     public function getLikedStudents(int $company_id): object;
+
+    /**
+     * 全企業数取得
+     * 
+     * @return int 全企業数
+     */
+    public function getCompanyNum(): int;
 }

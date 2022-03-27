@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'companies',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -77,6 +81,10 @@ return [
         'companies' => [
             'driver' => 'eloquent',
             'model' => App\DataProvider\Eloquent\Company::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\DataProvider\Eloquent\Admin::class,
         ],
 
         // 'users' => [
@@ -122,4 +130,12 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin User
+    |--------------------------------------------------------------------------
+    |
+    */
+    'admin_email' => env('ADMIN_EMAIL'),
+    'admin_password' => env('ADMIN_PASSWORD')
 ];

@@ -26,6 +26,7 @@ use App\DataProvider\Eloquent\DiagnosisQuestion as EloquentDiagnosisQuestion;
 use App\Domain\Entity\FutureDiagnosisData;
 use App\Domain\Entity\SelfDiagnosisData;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
@@ -124,6 +125,45 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
     public function getAllDiagnosisQuestions(): object
     {
         return $this->eloquentDiagnosisQuestion::all();
+    }
+
+    /**
+     * 診断質問の1つ取得
+     * 
+     * @param int $id 診断質問ID
+     * @return object 診断質問一覧
+     */
+    public function getDiagnosisQuestionByID(int $id): object
+    {
+        return $this->eloquentDiagnosisQuestion::find($id);
+    }
+
+    /**
+     * 診断質問更新
+     * 
+     * @param Request $request 診断結果リクエスト
+     * @param int $id 診断質問ID
+     * @return void
+     */
+    public function updateDiagnosisQuestion(Request $request, int $id): void
+    {
+        $diagnosis = $this->eloquentDiagnosisQuestion->find($id);
+        $diagnosis->question = $request->question;
+        $diagnosis->diagnosis_type = $request->diagnosis_type;
+        $diagnosis->weight = $request->weight;
+        $diagnosis->save();
+    }
+
+    /**
+     *  診断質問削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteDiagnosisQuestion(int $id): void
+    {
+        $comment = $this->eloquentDiagnosisQuestion->find($id);
+        $comment->delete();
     }
 
     /**
@@ -356,5 +396,245 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
         DB::table('likes')->insert(
             ['user_id' => $student_id, 'company_id' => $company_id]
         );
+    }
+
+    /**
+     * 理想診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureDiagnosisComments(): object
+    {
+        return $this->eloquentFutureDiagnosisComment->all();
+    }
+
+    /**
+     * 理想診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureDiagnosisCommentByID(int $id): object
+    {
+        return $this->eloquentFutureDiagnosisComment->find($id);
+    }
+
+    /**
+     * 理想診断コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureComment(Request $request, int $id): void
+    {
+        $comment = $this->eloquentFutureDiagnosisComment->find($id);
+        $comment->comment = $request->comment;
+        $comment->comment_type = $request->comment_type;
+        $comment->save();
+    }
+
+    /**
+     *  理想診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureComment(int $id): void
+    {
+        $comment = $this->eloquentFutureDiagnosisComment->find($id);
+        $comment->delete();
+    }
+
+    /**
+     * 自己診断全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfDiagnosisComments(): object
+    {
+        return $this->eloquentSelfDiagnosisComment->all();
+    }
+
+    /**
+     * 自己診断1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfDiagnosisCommentByID(int $id): object
+    {
+        return $this->eloquentSelfDiagnosisComment->find($id);
+    }
+
+    /**
+     * 自己診断コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfComment(Request $request, int $id): void
+    {
+        $comment = $this->eloquentSelfDiagnosisComment->find($id);
+        $comment->comment = $request->comment;
+        $comment->comment_type = $request->comment_type;
+        $comment->save();
+    }
+
+    /**
+     * 自己診断コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfComment(int $id): void
+    {
+        $comment = $this->eloquentSelfDiagnosisComment->find($id);
+        $comment->delete();
+    }
+
+    /**
+     * 診断結果全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllDiagnosisComments(): object
+    {
+        return $this->eloquentToFutureComment->all();
+    }
+
+    /**
+     * 診断結果1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getDiagnosisCommentByID(int $id): object
+    {
+        return $this->eloquentToFutureComment->find($id);
+    }
+
+    /**
+     * 診断結果コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateDiagnosisComment(Request $request, int $id): void
+    {
+        $comment = $this->eloquentToFutureComment->find($id);
+        $comment->comment = $request->comment;
+        $comment->comment_type = $request->comment_type;
+        $comment->save();
+    }
+
+    /**
+     * 診断結果コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteDiagnosisComment(int $id): void
+    {
+        $comment = $this->eloquentToFutureComment->find($id);
+        $comment->delete();
+    }
+
+    /**
+     * 理想分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllFutureCompanyComments(): object
+    {
+        return $this->eloquentFutureSingleCompanyComment->all();
+    }
+
+    /**
+     * 理想分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getFutureCompanyCommentByID(int $id): object
+    {
+        return $this->eloquentFutureSingleCompanyComment->find($id);
+    }
+
+    /**
+     * 理想分析会社コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateFutureCompanyComment(Request $request, int $id): void
+    {
+        $comment = $this->eloquentFutureSingleCompanyComment->find($id);
+        $comment->comment = $request->comment;
+        $comment->comment_type = $request->comment_type;
+        $comment->save();
+    }
+
+    /**
+     * 理想分析会社コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteFutureCompanyComment(int $id): void
+    {
+        $comment = $this->eloquentFutureSingleCompanyComment->find($id);
+        $comment->delete();
+    }
+
+    /**
+     * 自己分析会社全てのコメント取得
+     * 
+     * @return object
+     */
+    public function getAllSelfCompanyComments(): object
+    {
+        return $this->eloquentSelfSingleCompanyComment->all();
+    }
+
+    /**
+     * 自己分析会社1つのコメント取得
+     * 
+     * @param int $id コメントID
+     * @return object
+     */
+    public function getSelfCompanyCommentByID(int $id): object
+    {
+        return $this->eloquentSelfSingleCompanyComment->find($id);
+    }
+
+    /**
+     * 自己分析会社コメント更新
+     * 
+     * @param Request $request コメントリクエスト
+     * @param int $id コメントID
+     * @return void
+     */
+    public function updateSelfCompanyComment(Request $request, int $id): void
+    {
+        $comment = $this->eloquentSelfSingleCompanyComment->find($id);
+        $comment->comment = $request->comment;
+        $comment->comment_type = $request->comment_type;
+        $comment->save();
+    }
+
+    /**
+     * 自己分析会社コメント削除
+     * 
+     * @param int $id コメントID
+     * @return void
+     */
+    public function deleteSelfCompanyComment(int $id): void
+    {
+        $comment = $this->eloquentSelfSingleCompanyComment->find($id);
+        $comment->delete();
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CompanyLoginRequest;
+use App\Http\Requests\AdminLoginRequest;
 
 class LoginController extends Controller
 {
@@ -49,7 +50,7 @@ class LoginController extends Controller
      */
     public function showCompanyLoginForm()
     {
-        return view('company.login',['authgroup'=> 'company']);
+        return view('company.login', ['authgroup' => 'company']);
     }
 
     /**
@@ -60,9 +61,33 @@ class LoginController extends Controller
      */
     public function CompanyLogin(CompanyLoginRequest $request)
     {
-        if (Auth::guard('company')->attempt(['email' => $request->email,'password'=>$request->password],$request->get('remember'))) {
+        if (Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             return redirect('/company');
         }
-        return back()->withInput($request->only('email','remember'));
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+    /**
+     * adminログインページ用
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showAdminLogin()
+    {
+        return view('admin.login', ['authgroup' => 'admin']);
+    }
+
+    /**
+     * adminログイン用
+     *
+     * @param AdminLoginRequest $request 企業ログインリクエスト
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function AdminLogin(AdminLoginRequest $request)
+    {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            return redirect('/admin');
+        }
+        return back()->withInput($request->only('email', 'remember'));
     }
 }
