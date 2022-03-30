@@ -17652,6 +17652,22 @@ main .main_wrap .future_color:active {
     margin-bottom: 30px;
   }
 }
+.singleCompany_content .btn_start {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 15px;
+  width: 10%;
+}
+.singleCompany_content .btn_stop {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 15px;
+  width: 10%;
+}
 .singleCompany_content .toEdit_btn {
   display: block;
   width: 20%;

@@ -53,9 +53,10 @@ interface CompanyRepositoryInterface
      * @param Company $company 企業データ
      * @param int $company_id 企業ID
      * @param UploadedFile $file 画像データ
+     * @param string $voice 音声データ
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file): void;
+    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file, ?string $voice): void;
 
     /**
      * 企業診断データの追加or更新

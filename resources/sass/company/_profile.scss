@@ -21,6 +21,22 @@
         }
     }
 
+    .btn_start {
+        background-color: red;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        margin: 0 15px;
+        width: 10%;
+    }
+    .btn_stop {
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        margin: 0 15px;
+        width: 10%;
+    }
     .toEdit_btn {
         display: block;
         width: 20%;
