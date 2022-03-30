@@ -2072,6 +2072,8 @@ __webpack_require__(/*! ./range */ "./resources/js/range.js");
 
 __webpack_require__(/*! ./hum */ "./resources/js/hum.js");
 
+__webpack_require__(/*! ./company_voice */ "./resources/js/company_voice.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -2181,6 +2183,46 @@ window.onload = function () {
     }
   });
 };
+
+/***/ }),
+
+/***/ "./resources/js/company_voice.js":
+/*!***************************************!*\
+  !*** ./resources/js/company_voice.js ***!
+  \***************************************/
+/***/ (() => {
+
+if (document.URL.match(/company\/edit/)) {
+  var startBtn = $('#start');
+  var stopBtn = $('#stop');
+  var recoder;
+  navigator.mediaDevices.getUserMedia({
+    audio: true
+  }).then(function (stream) {
+    recoder = new MediaRecorder(stream);
+    startBtn.on('click', startRecording);
+    stopBtn.on('click', stopRecording);
+    recoder.addEventListener('dataavailable', setRecoding);
+  });
+
+  startRecording = function startRecording() {
+    recoder.start();
+    startBtn.prop('disabled', true);
+    stopBtn.prop('disabled', false);
+  };
+
+  stopRecording = function stopRecording() {
+    recoder.stop();
+    startBtn.prop('disabled', false);
+    stopBtn.prop('disabled', true);
+  };
+
+  setRecoding = function setRecoding(e) {
+    var audio = document.getElementById("audio");
+    audio.src = URL.createObjectURL(e.data);
+    audio.play();
+  };
+}
 
 /***/ }),
 

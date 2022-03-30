@@ -39,10 +39,26 @@ interface S3Interface
     public function getProfilePath(string $img_name): string;
 
     /**
+     * 音声メッセージを取得
+     *
+     * @param string $voice 音声メッセージ
+     * @return string
+     */
+    public function getVoicePath(string $voice): string;
+
+    /**
      * 企業プロフィール画像を保存
      *
      * @param UploadedFile $file プロフィール画像
      * @return void
      */
     public function putFileToCompany(UploadedFile $file): void;
+
+    /**
+     * 企業音声メッセージを保存
+     * 
+     * @param object $voice 音声メッセージ
+     * @return string 音声ファイル名
+     */
+    public function putVoiceToCompany(object $voice): string;
 }

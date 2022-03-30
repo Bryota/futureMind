@@ -70,6 +70,11 @@ class CompanyService
         } else {
             $companyData['profilePath'] = null;
         }
+        if (isset($companyData->voice)) {
+            $companyData['voicePath'] = $this->storage->getVoicePath($companyData->voice);
+        } else {
+            $companyData['voicePath'] = null;
+        }
         return $companyData;
     }
 
@@ -116,10 +121,12 @@ class CompanyService
      * @param Request $request リクエスト
      * @param int $company_id 企業ID
      * @param UploadedFile $file 画像データ
+     * @param object $voice 音声メッセージ
      * @return void
      */
-    public function updateCompanyData(Request $request, int $company_id, ?UploadedFile $file): void
+    public function updateCompanyData(Request $request, int $company_id, ?UploadedFile $file, ?object $voice): void
     {
+        $voice_file = null;
         $company = new Company(
             $request->name,
             $request->industry,
@@ -131,7 +138,10 @@ class CompanyService
         if (isset($file)) {
             $this->storage->putFileToCompany($file);
         }
-        $this->company->updateCompanydata($company, $company_id, $file);
+        if (isset($voice)) {
+            $voice_file = $this->storage->putvoiceToCompany($voice);
+        }
+        $this->company->updateCompanydata($company, $company_id, $file, $voice_file);
     }
 
     /**

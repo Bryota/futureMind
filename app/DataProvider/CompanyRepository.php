@@ -97,9 +97,10 @@ class CompanyRepository implements CompanyRepositoryInterface
      * @param Company $company 企業データ
      * @param int $company_id 企業ID
      * @param UploadedFile $file 画像データ
+     * @param string $voice 音声データ
      * @return void
      */
-    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file): void
+    public function updateCompanyData(Company $company, int $company_id, ?UploadedFile $file, ?string $voice): void
     {
         $eloquent = $this->eloquentCompany::find($company_id);
         $eloquent->name = $company->getName();
@@ -110,6 +111,9 @@ class CompanyRepository implements CompanyRepositoryInterface
         $eloquent->comment = $company->getComment();
         if (isset($file)) {
             $eloquent->company_icon = 'companies/' . $file->getClientOriginalName();
+        }
+        if (isset($voice)) {
+            $eloquent->voice = $voice;
         }
         $eloquent->save();
     }
