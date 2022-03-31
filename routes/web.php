@@ -67,9 +67,9 @@ Route::group(['namespace' => 'company', 'prefix' => 'company', 'middleware' => [
     Route::post('chat/{id}', [App\Http\Controllers\company\CompanyController::class, 'postMessage'])->name('company.postMessage');
 });
 
-Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLogin'])->name('admin.login');
-Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin']);
-Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLogin'])->name('admin.login')->middleware(['firewall']);
+Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->middleware(['firewall']);
+Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'middleware' => ['auth:admin', 'firewall']], function () {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.home');
     Route::get('/future_comment', [App\Http\Controllers\Admin\AdminController::class, 'futureIndex'])->name('admin.future_index');
     Route::get('/future_comment/edit/{id}', [App\Http\Controllers\Admin\AdminController::class, 'futureEdit'])->name('admin.future_edit');

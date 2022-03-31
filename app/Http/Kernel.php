@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'diagnosisData' => \App\Http\Middleware\DiagnosisDataMiddleware::class,
         'uncheckedMessage.user' => \App\Http\Middleware\UserUncheckedMessageMiddleware::class,
         'uncheckedMessage.company' => \App\Http\Middleware\CompanyUncheckedMessageMiddleware::class,
+        'firewall' => \App\Http\Middleware\AdminFirewall::class,
     ];
 }
