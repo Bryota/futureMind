@@ -21,6 +21,7 @@ class UserChatTest extends TestCase
         $this->seed('ToFutureCommentSeeder');
         $this->seed('FutureSingleCompanySeeder');
         $this->seed('SelfSingleCompanySeeder');
+        $this->seed('DiagnosisQuestionSeeder');
 
         $this->company = $this->loginAsCompany();
         $diagnosisPostData = [

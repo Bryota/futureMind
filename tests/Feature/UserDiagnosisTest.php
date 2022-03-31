@@ -22,6 +22,7 @@ class UserDiagnosisTest extends TestCase
         $this->seed('ToFutureCommentSeeder');
         $this->seed('FutureSingleCompanySeeder');
         $this->seed('SelfSingleCompanySeeder');
+        $this->seed('DiagnosisQuestionSeeder');
     }
     /**
      * @test
@@ -321,7 +322,7 @@ class UserDiagnosisTest extends TestCase
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
 
-        $this->get('diagnosis/futureSingleCompany/'.$company->id)
+        $this->get('diagnosis/futureSingleCompany/' . $company->id)
             ->assertOk()
             ->assertOk('なし')
             ->assertOk($company->name)
@@ -372,7 +373,7 @@ class UserDiagnosisTest extends TestCase
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
 
-        $this->get('diagnosis/selfSingleCompany/'.$company->id)
+        $this->get('diagnosis/selfSingleCompany/' . $company->id)
             ->assertOk()
             ->assertOk('成長意欲')
             ->assertOk('社会貢献')
