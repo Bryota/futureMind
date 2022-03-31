@@ -22,7 +22,7 @@ class DiagnosisQuestionPresenter extends Presenter
                 $diagnosis_type =  'socialvalue';
                 break;
             case 2:
-                $diagnosis_type =  '安定';
+                $diagnosis_type =  'stablevalue';
                 break;
             case 3:
                 $diagnosis_type =  'teammatevalue';

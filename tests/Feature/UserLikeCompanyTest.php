@@ -23,6 +23,7 @@ class UserLikeCompanyTest extends TestCase
         $this->seed('ToFutureCommentSeeder');
         $this->seed('FutureSingleCompanySeeder');
         $this->seed('SelfSingleCompanySeeder');
+        $this->seed('DiagnosisQuestionSeeder');
 
         $this->company = $this->loginAsCompany();
         $diagnosisPostData = [
@@ -98,7 +99,7 @@ class UserLikeCompanyTest extends TestCase
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
 
-        $this->post('diagnosis/futureSingleCompany/'.$this->company->id, ['company_id' => $this->company->id])
+        $this->post('diagnosis/futureSingleCompany/' . $this->company->id, ['company_id' => $this->company->id])
             ->assertOk()
             ->assertSee('お気に入りに追加済み');
 
@@ -137,7 +138,7 @@ class UserLikeCompanyTest extends TestCase
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
 
-        $this->post('diagnosis/selfSingleCompany/'.$this->company->id, ['company_id' => $this->company->id])
+        $this->post('diagnosis/selfSingleCompany/' . $this->company->id, ['company_id' => $this->company->id])
             ->assertOk()
             ->assertSee('お気に入りに追加済み');
 
@@ -156,7 +157,7 @@ class UserLikeCompanyTest extends TestCase
     {
         $user = $this->loginAsUser();
 
-        $this->post('search/company/'.$this->company->id, ['company_id' => $this->company->id])
+        $this->post('search/company/' . $this->company->id, ['company_id' => $this->company->id])
             ->assertOk()
             ->assertSee('お気に入りに追加済み');
 

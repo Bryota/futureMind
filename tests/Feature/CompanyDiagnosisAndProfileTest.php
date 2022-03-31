@@ -20,6 +20,7 @@ class CompanyDiagnosisAndProfileTest extends TestCase
         $this->seed('ToFutureCommentSeeder');
         $this->seed('FutureSingleCompanySeeder');
         $this->seed('SelfSingleCompanySeeder');
+        $this->seed('DiagnosisQuestionSeeder');
     }
     /**
      * @test
@@ -88,8 +89,8 @@ class CompanyDiagnosisAndProfileTest extends TestCase
             'futurevalue' => 15
         ];
 
-    $this->post('/company/diagnosis', $diagnosisPostData)
-        ->assertRedirect('/company');
+        $this->post('/company/diagnosis', $diagnosisPostData)
+            ->assertRedirect('/company');
 
         $this->get('/company')
             ->assertOk()
@@ -113,7 +114,7 @@ class CompanyDiagnosisAndProfileTest extends TestCase
         $postData = Company::factory()->ValidUpdateData();
 
         $this->post('/company/edit', $postData)
-        ->assertRedirect('/company');
+            ->assertRedirect('/company');
 
         unset($postData['company_icon']);
 
@@ -121,12 +122,12 @@ class CompanyDiagnosisAndProfileTest extends TestCase
         $this->assertCount(1, Company::all());
 
         $this->get('/company')
-        ->assertSee($postData['name'])
-        ->assertSee($postData['industry'])
-        ->assertSee($postData['office'])
-        ->assertSee($postData['employee'])
-        ->assertSee($postData['homepage'])
-        ->assertSee($postData['comment']);
+            ->assertSee($postData['name'])
+            ->assertSee($postData['industry'])
+            ->assertSee($postData['office'])
+            ->assertSee($postData['employee'])
+            ->assertSee($postData['homepage'])
+            ->assertSee($postData['comment']);
     }
 
     /**
@@ -143,18 +144,18 @@ class CompanyDiagnosisAndProfileTest extends TestCase
         $this->from($url)->post($url, [])
             ->assertRedirect($url);
 
-            $this->post($url, ['industry' => ''])->assertSessionHasErrors(['industry' => '志望業界は必須です。']);
+        $this->post($url, ['industry' => ''])->assertSessionHasErrors(['industry' => '志望業界は必須です。']);
 
-            $this->post($url, ['name' => ''])->assertSessionHasErrors(['name' => '氏名は必須です。']);
+        $this->post($url, ['name' => ''])->assertSessionHasErrors(['name' => '氏名は必須です。']);
 
-            $this->post($url, ['office' => ''])->assertSessionHasErrors(['office' => '場所は必須です。']);
+        $this->post($url, ['office' => ''])->assertSessionHasErrors(['office' => '場所は必須です。']);
 
-            $this->post($url, ['employee' => ''])->assertSessionHasErrors(['employee' => '社員数は必須です。']);
-            $this->post($url, ['employee' => 'あああ'])->assertSessionHasErrors(['employee' => '社員数には整数を指定してください。']);
+        $this->post($url, ['employee' => ''])->assertSessionHasErrors(['employee' => '社員数は必須です。']);
+        $this->post($url, ['employee' => 'あああ'])->assertSessionHasErrors(['employee' => '社員数には整数を指定してください。']);
 
-            $this->post($url, ['homepage' => ''])->assertSessionHasErrors(['homepage' => 'ホームページは必須です。']);
-            $this->post($url, ['homepage' => 'あああ'])->assertSessionHasErrors(['homepage' => 'ホームページには正しい形式のURLを指定してください。']);
+        $this->post($url, ['homepage' => ''])->assertSessionHasErrors(['homepage' => 'ホームページは必須です。']);
+        $this->post($url, ['homepage' => 'あああ'])->assertSessionHasErrors(['homepage' => 'ホームページには正しい形式のURLを指定してください。']);
 
-            $this->post($url, ['comment' => ''])->assertSessionHasErrors(['comment' => '企業からのコメントは必須です。']);
+        $this->post($url, ['comment' => ''])->assertSessionHasErrors(['comment' => '企業からのコメントは必須です。']);
     }
 }

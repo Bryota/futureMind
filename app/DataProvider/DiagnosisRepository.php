@@ -124,7 +124,20 @@ class DiagnosisRepository implements DiagnosisRepositoryInterface
      */
     public function getAllDiagnosisQuestions(): object
     {
-        return $this->eloquentDiagnosisQuestion::all();
+        return $this->eloquentDiagnosisQuestion::orderBy('weight', 'desc')
+            ->orderBy('diagnosis_type', 'asc')
+            ->get();
+    }
+
+    /**
+     * 特定のタイプの診断質問数の取得
+     * 
+     * @param int $diagnosis_type 診断タイプ
+     * @return int 質問数
+     */
+    public function getDiagnosisQuestionsByDiagnosisType(int $diagnosis_type): int
+    {
+        return $this->eloquentDiagnosisQuestion::where('diagnosis_type', $diagnosis_type)->count();
     }
 
     /**

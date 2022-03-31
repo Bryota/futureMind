@@ -32,6 +32,14 @@ interface DiagnosisRepositoryInterface
     public function getAllDiagnosisQuestions(): object;
 
     /**
+     * 特定のタイプの診断質問数の取得
+     * 
+     * @param int $diagnosis_type 診断タイプ
+     * @return int 質問数
+     */
+    public function getDiagnosisQuestionsByDiagnosisType(int $diagnosis_type): int;
+
+    /**
      * 診断質問の1つ取得
      * 
      * @param int $id 診断質問ID

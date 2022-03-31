@@ -21,6 +21,7 @@ class CompanyLikeUserTest extends TestCase
         $this->seed('ToFutureCommentSeeder');
         $this->seed('FutureSingleCompanySeeder');
         $this->seed('SelfSingleCompanySeeder');
+        $this->seed('DiagnosisQuestionSeeder');
 
         $this->company = $this->loginAsCompany();
         $diagnosisPostData = [
@@ -53,7 +54,7 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @student
      */
     public function 学生を見る理想分析からのお気に入り一覧()
-    {        
+    {
         $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
@@ -75,7 +76,7 @@ class CompanyLikeUserTest extends TestCase
 
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('diagnosis/futureSingleCompany/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('diagnosis/futureSingleCompany/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
@@ -89,7 +90,7 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @student
      */
     public function 学生を見る自己分析からのお気に入り一覧()
-    {        
+    {
         $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
@@ -111,7 +112,7 @@ class CompanyLikeUserTest extends TestCase
 
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('diagnosis/selfSingleCompany/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('diagnosis/selfSingleCompany/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
@@ -125,10 +126,10 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @student
      */
     public function 学生を見る検索結果からのお気に入り一覧()
-    {        
+    {
         $user = $this->loginAsUser();
 
-        $this->post('search/company/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('search/company/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
@@ -142,7 +143,7 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @singleStudent
      */
     public function 学生個人ページ理想分析からのお気に入り()
-    {        
+    {
         $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
@@ -164,11 +165,11 @@ class CompanyLikeUserTest extends TestCase
 
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('diagnosis/futureSingleCompany/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('diagnosis/futureSingleCompany/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
-        $this->get('company/student/'.$user->id)
+        $this->get('company/student/' . $user->id)
             ->assertOk()
             ->assertSee($user->name)
             ->assertSee($user->year)
@@ -182,7 +183,7 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @singleStudent
      */
     public function 学生個人ページ自己分析からのお気に入り()
-    {        
+    {
         $user = $this->loginAsUser();
 
         $futureDiagnosisPostData = [
@@ -204,11 +205,11 @@ class CompanyLikeUserTest extends TestCase
 
         $this->post('/diagnosis/future', $futureDiagnosisPostData);
         $this->post('/diagnosis/self', $selfDiagnosisPostData);
-        $this->post('diagnosis/selfSingleCompany/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('diagnosis/selfSingleCompany/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
-        $this->get('company/student/'.$user->id)
+        $this->get('company/student/' . $user->id)
             ->assertOk()
             ->assertSee($user->name)
             ->assertSee($user->year)
@@ -222,14 +223,14 @@ class CompanyLikeUserTest extends TestCase
      * App\Http\Controllers\company\CompanyController @singleStudent
      */
     public function 学生個人ページ検索結果からのお気に入り()
-    {        
+    {
         $user = $this->loginAsUser();
 
-        $this->post('search/company/'.$this->company->id, ['company_id' => $this->company->id]);
+        $this->post('search/company/' . $this->company->id, ['company_id' => $this->company->id]);
 
         $this->loginAsCompany($this->company);
 
-        $this->get('company/student/'.$user->id)
+        $this->get('company/student/' . $user->id)
             ->assertOk()
             ->assertSee($user->name)
             ->assertSee($user->year)
